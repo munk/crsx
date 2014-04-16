@@ -418,8 +418,8 @@ public class Completer
 		for (StandardizedRule q : dispatchifyResult)
 		{
 			Constructor name = q.three();
-			//if (name.symbol().contains("Code-lift-13"))
-			//	System.out.println("Had rule");
+			if (name.symbol().contains("SortNameList2"))
+				System.out.println("Had rule");
 			GenericTerm pattern = unstandardize(q.one());
 			GenericTerm contraction = unstandardize(q.two());
 			Map<String,List<Term>> options = new HashMap<String, List<Term>>();

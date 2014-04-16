@@ -9,7 +9,7 @@
 class net.sf.crsx.hoacs.bootstrap.Raw : <Module>, <ModuleName>, <EmbeddedModule>,
 <Declaration>, <Declarations>, <SortAbstraction>, <Rule>, <Sort>, <SortParam>, <SortName>, <SortNames>, <SimpleSort>, <SimpleSorts>, <SubstituteSorts>, <SubstituteSort>, <Tagging>,
 <SortAlternative>, <SortAlternatives>, <Form>, <FormPrec>, <InheritedRefs>, <InheritedRef>, <SynthesizedRef>, <AttributeKind>, <AttributeForm>, <AttributeOptions>, <AttributeOption>,
-<ScopeSorts>, <ScopeSort>, <ParsedForm>, <Repeat>, <Priority>,
+<BindersScopeSorts>, <BindersScopeSort>, <ScopeSorts>, <ScopeSort>, <ParsedForm>, <Repeat>, <Priority>,
 <FragmentName>, <FragmentRef>, <RegExp>, <RegExpChoice>, <RegExpUnits>, <RegExpUnit>, <RegExpSimple>, <RegExpLeaf>, <Word>,
 <Term>, <NotVariableTerm>, <Attributes>, <Attribute>, <AttributeValue>, <Scopes>, <Scope>, <Terms>, <Parsed>,
 <Literal>, <Constructor>, <MetaVariable>, <MetaVariables>, <Variable>, <Variables>, <AttributeName>,
@@ -122,14 +122,20 @@ inject[<Embedded>]  ::=  '%<PRODUCTION_NAME>', '', '' .
 <Form> ::=
   <Constructor>:#C
     ( {FormParsedSorted}:raw {{#C}} CONCRETESTART <ParsedForm> CONCRETEEND <FormPrec> <InheritedRefs>
-    | {FormConstruction}:raw {{#C}} ( LPAREN (<ScopeSorts> | {$Nil}) RPAREN | {$Nil} ) <InheritedRefs>
+    | {FormConstruction}:raw {{#C}} ( LPAREN (<BindersScopeSorts> | {$Nil}) RPAREN | {$Nil} ) <InheritedRefs>
     )
 | {FormParsedUnsorted}:raw CONCRETESTART <ParsedForm> CONCRETEEND <FormPrec> <InheritedRefs>
 .
-<ScopeSorts> ::= {$Cons} <ScopeSort> (COMMA <ScopeSorts> | {$Nil}) . 
-<ScopeSort> ::=
+
+<BindersScopeSorts> ::= {$Cons} <BindersScopeSort> (COMMA <BindersScopeSorts> | {$Nil}) . 
+<BindersScopeSort> ::=
   {ScopeSort}:raw <Sort> <Repeat> (LBRACKET (<SubstituteSorts> | {$Nil}) RBRACKET | {$Nil})
-| {ScopeSortBinder}:raw LBRACKET <Variable> COLON <Sort> RBRACKET
+| {BinderScopeSort}:raw LBRACKET <Variable> COLON <Sort> <BindersScopeSortTail>
+.
+
+<BindersScopeSortTail> ::=
+  {ScopeSort}:raw RBRACKET <Sort> <Repeat> (LBRACKET (<SubstituteSorts> | {$Nil}) RBRACKET | {$Nil})
+| {BinderScopeSort}:raw COMMA <Variable> COLON <Sort> <BindersScopeSortTail>
 .
 
 <SubstituteSorts> ::= {$Cons} <SubstituteSort> (COMMA <SubstituteSorts> | {$Nil}) . 
@@ -152,6 +158,12 @@ inject[<Embedded>]  ::=  '%<PRODUCTION_NAME>', '', '' .
 | {ParsedFormWord}:raw <ConcreteWord> <ParsedForm>
 | CONCRETEPUSH {ParsedFormTerm}:raw <ScopeSort> <FormPrec> <Repeat> CONCRETEPOP <ParsedForm>
 | {ParsedFormDone}:raw
+.
+
+<ScopeSorts> ::= {$Cons} <ScopeSort> (COMMA <ScopeSorts> | {$Nil}) . 
+<ScopeSort> ::=
+  {ScopeSort}:raw <Sort> <Repeat> (LBRACKET (<SubstituteSorts> | {$Nil}) RBRACKET | {$Nil})
+| {ScopeSortBinder}:raw LBRACKET <Variable> COLON <Sort> RBRACKET
 .
 
 <FormPrec> ::= ( AT <Natural> | {"0"} ) .

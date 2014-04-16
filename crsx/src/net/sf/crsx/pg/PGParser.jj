@@ -142,9 +142,11 @@ class PGParser
 			case 'u' : case 'x' :
 				// Fall through to do hexadecimal code
 			}
-		case '#' :
-			// Two character unicode prefix (#x or escape-u or escape-x) followed by hexadecimal code.
-			return PlainJavaSink.unicode(Integer.parseInt(code.substring(2), 16));
+		case '#' : {			// Two character unicode prefix (#x or escape-u or escape-x) followed by hexadecimal code.
+			if (code.length() >= 2)			{				int c = Integer.parseInt(code.substring(2), 16);
+				if (c >= 0) return PlainJavaSink.unicode(c);
+			}
+		}
 		}
 		return code; // sic
 	}
@@ -902,6 +904,12 @@ void ClassDirective(List<String> comments, String jjcrs, String sourcePrefix,
 			"\t\t"+BUFFER+" buffer = new "+BUFFER+"(maker);\n"+
 			"\t\tparse(buffer.sink(), category, reader, null, 1, 1, bound);\n"+
 			"\t\treturn buffer.term(true);\n"+
+			"\t}\n\n"+
+			"\tpublic "+TERM+" parseTerm("+MAKER+" maker, String category, java.io.Reader reader, String unit, int line, int col, "+EXTENSIBLE_STRING_TO_VARIABLE+" bound) throws "+CRS_EXCEPTION+", java.io.IOException\n"+
+			"\t{\n"+
+			"\t\t"+BUFFER+" buffer = new "+BUFFER+"(maker);\n"+
+			"\t\tparse(buffer.sink(), category, reader, unit, line, col, bound);\n"+
+			"\t\treturn buffer.term(true);\n"+
 			"\t}\n\n");
 		
 		// User additions.
@@ -1056,16 +1064,19 @@ void Structural(String comment, Appendable javacc, Appendable html, Appendable s
 	  }
 	  // Optional argument to production.
 	  [
-		[ t=Name() {arg = t.toString();} ] t=MetaVar() {arg = arg + t.toString();}
-		{{
+		[ t=Name() {arg = t.toString();} ]
+		(		 t=MetaVar() {arg = arg + t.toString();}
+		 {{
 			String b = "b_" + arg.replace("#", "_");
 			extraArgs = extraArgs + ", " + BUFFER + " " + b;
 			htmlArgs = htmlArgs + HTML_START_A + arg + HTML_END_A;
 			// Use of the argument in subsequent embedded terms should copy the buffer.
 			globalMetavariables.put(arg, new Triple<String, String, String>("", ".copy("+b+", false)", null));
-		}}
+		 }}
+		)
 		(
-			[ t=Name() {arg = t.toString();} ] t=MetaVar() {arg = arg + t.toString();}
+			[ t=Name() {arg = t.toString();} ]
+			t=MetaVar() {arg = arg + t.toString();}
 			{{
 				String b = "b_" + arg.replace("#", "_");
 				extraArgs = extraArgs + ", " + BUFFER + " " + b;

@@ -1,7 +1,7 @@
 // $Id: first.hx,v 1.16 2014/01/06 03:11:28 krisrose Exp $
 // First HACS sample compiler (inspired by Dragonbook Fig.7).
 
-module "net.sf.crsx.samples.gentle.First" {
+module "org.crsx.samples.gentle.First" {
 
 
 // LEXICAL ANALYSIS.
@@ -12,9 +12,9 @@ space [ \t\n] ;                                 // white space convention
 
 // Ex.2.2
 
-token Int    | ⟨Digit⟩+ ;                       // tokens
-token Float  | ⟨Int⟩ "." ⟨Int⟩ ;
-token Id     | ⟨Lower⟩+ ('_'? ⟨Int⟩)* ;
+token INT    | ⟨Digit⟩+ ;                       // tokens
+token FLOAT  | ⟨INT⟩ "." ⟨INT⟩ ;
+token ID     | ⟨Lower⟩+ ('_'? ⟨INT⟩)* ;
 
 token fragment Digit  | [0-9] ;
 token fragment Lower  | [a-z] ;
@@ -26,17 +26,17 @@ token fragment Lower  | [a-z] ;
 
 sort Exp   | ⟦ ⟨Exp@1⟩ + ⟨Exp@2⟩ ⟧@1            // addition
            | ⟦ ⟨Exp@2⟩ * ⟨Exp@3⟩ ⟧@2            // multiplication
-           | ⟦ ⟨Int⟩ ⟧@3                        // integer
-           | ⟦ ⟨Float⟩ ⟧@3                      // floating point number
+           | ⟦ ⟨INT⟩ ⟧@3                        // integer
+           | ⟦ ⟨FLOAT⟩ ⟧@3                      // floating point number
            | ⟦ ⟨Name⟩ ⟧@3                       // assigned value
            | sugar ⟦ (⟨Exp#⟩) ⟧@3 → #           // parenthesis
            ;
 
-sort Name  | symbol ⟦ ⟨Id⟩ ⟧ ;                  // assigned symbols
+sort Name  | symbol ⟦ ⟨ID⟩ ⟧ ;                  // assigned symbols
 
 // Ex.3.3
 
-sort Stat  | ⟦ ⟨[x:Id]⟩ := ⟨Exp⟩ ; ⟨Stat[x:Id]⟩ ⟧	    // assignment statement (with newline)
+sort Stat  | ⟦ ⟨[x:Name]⟩ := ⟨Exp⟩ ; ⟨Stat[x:Name]⟩ ⟧  // assignment statement (with newline)
            | ⟦ { ⟨Stat⟩ } ⟨Stat⟩ ⟧		    // block statement
            | ⟦ ⟧                    		    // block statement
            ;
@@ -53,6 +53,8 @@ Unif(Int, Int) → Int;
 Unif(#t1, Float) → Float;
 Unif(Float, #t2) → Float;
 
+| scheme Test([x:Variable]Type[x:Variable]);
+Test(x.#[x]) → Int;
 
 // SEMANTIC ANALYSIS.
 
@@ -63,8 +65,8 @@ sort Exp | ↑t;
 
 ⟦ (⟨Exp#1 ↑t(#t1)⟩ + ⟨Exp#2 ↑t(#t2)⟩) ⟧ ↑t(Unif(#t1,#t2));
 ⟦ (⟨Exp#1 ↑t(#t1)⟩ * ⟨Exp#2 ↑t(#t2)⟩) ⟧ ↑t(Unif(#t1,#t2));
-⟦ ⟨Int#⟩ ⟧ ↑t(Int);
-⟦ ⟨Float#⟩ ⟧ ↑t(Float);
+⟦ ⟨INT#⟩ ⟧ ↑t(Int);
+⟦ ⟨FLOAT#⟩ ⟧ ↑t(Float);
 
 // Ex.5.3
 
@@ -75,8 +77,8 @@ sort Exp | scheme ⟦ TA ⟨Exp⟩ ⟧ ↓e ;
 ⟦ TA id ⟧ ↓e{⟦id⟧ : #t} → ⟦ id ⟧ ↑t(#t);
 ⟦ TA id ⟧ ↓e{¬⟦id⟧} → error⟦Undefined identifier ⟨id⟩⟧;
 
-⟦ TA ⟨Int#⟩ ⟧ → ⟦ ⟨Int#⟩ ⟧;
-⟦ TA ⟨Float#⟩ ⟧ → ⟦ ⟨Float#⟩ ⟧;
+⟦ TA ⟨INT#⟩ ⟧ → ⟦ ⟨INT#⟩ ⟧;
+⟦ TA ⟨FLOAT#⟩ ⟧ → ⟦ ⟨FLOAT#⟩ ⟧;
 ⟦ TA (⟨Exp#1⟩ + ⟨Exp#2⟩) ⟧ → ⟦ (TA ⟨Exp#1⟩) + (TA ⟨Exp#2⟩) ⟧;
 ⟦ TA (⟨Exp#1⟩ * ⟨Exp#2⟩) ⟧ → ⟦ (TA ⟨Exp#1⟩) * (TA ⟨Exp#2⟩) ⟧;
 
@@ -100,7 +102,7 @@ sort Stat | scheme ⟦ TA { ⟨Stat⟩ } ⟧ ↓e ;
 
 // Ex.6.1
 
-token T | T ('_' ⟨Int⟩)* ; // temporary
+token T | T ('_' ⟨INT⟩)* ; // temporary
 
 // Concrete syntax & abstract syntax sorts.
 
@@ -113,8 +115,8 @@ sort I_Instr  | ⟦⟨Tmp⟩ = ⟨I_Arg⟩ + ⟨I_Arg⟩;¶⟧
 	      ;
 
 sort I_Arg    | ⟦⟨Name⟩⟧
-     	      | ⟦⟨Float⟩⟧
-     	      | ⟦⟨Int⟩⟧
+     	      | ⟦⟨FLOAT⟩⟧
+     	      | ⟦⟨INT⟩⟧
 	      | ⟦⟨Tmp⟩⟧
 	      ;
 
@@ -135,8 +137,8 @@ sort I_Progr;
 
 | scheme ⟦ ICGExp ⟨Tmp⟩ ⟨Exp⟩ ⟧ ;
 
-⟦ ICGExp T ⟨Int#1⟩ ⟧ → ⟦ T = ⟨Int#1⟩; ⟧ ;
-⟦ ICGExp T ⟨Float#1⟩ ⟧ → ⟦ T = ⟨Float#1⟩; ⟧ ;
+⟦ ICGExp T ⟨INT#1⟩ ⟧ → ⟦ T = ⟨INT#1⟩; ⟧ ;
+⟦ ICGExp T ⟨FLOAT#1⟩ ⟧ → ⟦ T = ⟨FLOAT#1⟩; ⟧ ;
 ⟦ ICGExp T id ⟧ → ⟦ T = id; ⟧ ;
 
 ⟦ ICGExp T ⟨Exp#1⟩ + ⟨Exp#2⟩ ⟧
@@ -165,7 +167,7 @@ sort A_Instr | ⟦ LDF ⟨Tmp⟩, ⟨A_Arg⟩¶⟧
      	     | ⟦ MULF ⟨A_Arg⟩, ⟨A_Arg⟩, ⟨A_Arg⟩¶⟧
 	     ;
 
-sort A_Arg | ⟦ #⟨Float⟩ ⟧ | ⟦ #⟨Int⟩ ⟧ | ⟦ ⟨Name⟩ ⟧ | ⟦ ⟨Tmp⟩ ⟧ ;
+sort A_Arg | ⟦ #⟨FLOAT⟩ ⟧ | ⟦ #⟨INT⟩ ⟧ | ⟦ ⟨Name⟩ ⟧ | ⟦ ⟨Tmp⟩ ⟧ ;
 
 // Schemes.
 
@@ -190,8 +192,8 @@ sort A_Arg ;
 | scheme ⟦ [⟨I_Arg⟩] ⟧ ;
 ⟦ [T] ⟧ → ⟦ T ⟧ ;
 ⟦ [name] ⟧ → ⟦ name ⟧ ;
-⟦ [⟨Float#1⟩] ⟧ → ⟦ #⟨Float#1⟩ ⟧ ;
-⟦ [⟨Int#1⟩] ⟧ → ⟦ #⟨Int#1⟩ ⟧ ;
+⟦ [⟨FLOAT#1⟩] ⟧ → ⟦ #⟨FLOAT#1⟩ ⟧ ;
+⟦ [⟨INT#1⟩] ⟧ → ⟦ #⟨INT#1⟩ ⟧ ;
 
 
 /* 7. MAIN. */

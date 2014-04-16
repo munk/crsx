@@ -75,6 +75,8 @@ public class Raw implements net.sf.crsx.Parser
 		categoryCall.put("rawAttributeForm", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_AttributeForm$WithEOF(sink, bound);} });
 		categoryCall.put("rawAttributeOptions", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_AttributeOptions$WithEOF(sink, bound);} });
 		categoryCall.put("rawAttributeOption", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_AttributeOption$WithEOF(sink, bound);} });
+		categoryCall.put("rawBindersScopeSorts", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_BindersScopeSorts$WithEOF(sink, bound);} });
+		categoryCall.put("rawBindersScopeSort", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_BindersScopeSort$WithEOF(sink, bound);} });
 		categoryCall.put("rawScopeSorts", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_ScopeSorts$WithEOF(sink, bound);} });
 		categoryCall.put("rawScopeSort", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_ScopeSort$WithEOF(sink, bound);} });
 		categoryCall.put("rawParsedForm", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_ParsedForm$WithEOF(sink, bound);} });
@@ -1623,7 +1625,7 @@ TOKEN : {<MT_Form : "#Form" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWE
 TOKEN : {<IT_Form : "%Form">}
 
 /**
- * <em>Form</em> ::=  <a href="#N_Constructor">&lang;Constructor&rang;</a> <font color="red">:#C</font>   (  <font color="red">{FormParsedSorted}</font><font color="red">:raw</font>   <font color="red">{{#C}}</font>    <a href="#T_CONCRETESTART">CONCRETESTART</a>   <a href="#N_ParsedForm">&lang;ParsedForm&rang;</a>     <a href="#T_CONCRETEEND">CONCRETEEND</a>   <a href="#N_FormPrec">&lang;FormPrec&rang;</a>    <a href="#N_InheritedRefs">&lang;InheritedRefs&rang;</a>   |  <font color="red">{FormConstruction}</font><font color="red">:raw</font>   <font color="red">{{#C}}</font>   (   <a href="#T_LPAREN">LPAREN</a>   (  <a href="#N_ScopeSorts">&lang;ScopeSorts&rang;</a>   |  <font color="red">{$Nil}</font>  )    <a href="#T_RPAREN">RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_InheritedRefs">&lang;InheritedRefs&rang;</a>   )  <br>
+ * <em>Form</em> ::=  <a href="#N_Constructor">&lang;Constructor&rang;</a> <font color="red">:#C</font>   (  <font color="red">{FormParsedSorted}</font><font color="red">:raw</font>   <font color="red">{{#C}}</font>    <a href="#T_CONCRETESTART">CONCRETESTART</a>   <a href="#N_ParsedForm">&lang;ParsedForm&rang;</a>     <a href="#T_CONCRETEEND">CONCRETEEND</a>   <a href="#N_FormPrec">&lang;FormPrec&rang;</a>    <a href="#N_InheritedRefs">&lang;InheritedRefs&rang;</a>   |  <font color="red">{FormConstruction}</font><font color="red">:raw</font>   <font color="red">{{#C}}</font>   (   <a href="#T_LPAREN">LPAREN</a>   (  <a href="#N_BindersScopeSorts">&lang;BindersScopeSorts&rang;</a>   |  <font color="red">{$Nil}</font>  )    <a href="#T_RPAREN">RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_InheritedRefs">&lang;InheritedRefs&rang;</a>   )  <br>
  *  |  <font color="red">{FormParsedUnsorted}</font><font color="red">:raw</font>    <a href="#T_CONCRETESTART">CONCRETESTART</a>   <a href="#N_ParsedForm">&lang;ParsedForm&rang;</a>     <a href="#T_CONCRETEEND">CONCRETEEND</a>   <a href="#N_FormPrec">&lang;FormPrec&rang;</a>    <a href="#N_InheritedRefs">&lang;InheritedRefs&rang;</a>  
  */
 net.sf.crsx.Sink N_Form(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
@@ -1689,7 +1691,7 @@ net.sf.crsx.Sink N_Form(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<St
 			 ) 
 			 ( 
 				 ( 
-				sink=N_ScopeSorts(sink, env)
+				sink=N_BindersScopeSorts(sink, env)
 				 ) 
 			|
 				 ( 
@@ -1748,28 +1750,28 @@ net.sf.crsx.Sink N_Form(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<St
 	}
 }
 
-/** <em>ScopeSorts$WithEOF</em> ::= <em>ScopeSorts</em> EOF . */
-net.sf.crsx.Sink N_ScopeSorts$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+/** <em>BindersScopeSorts$WithEOF</em> ::= <em>BindersScopeSorts</em> EOF . */
+net.sf.crsx.Sink N_BindersScopeSorts$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
 {}
-{ sink=N_ScopeSorts(sink, env) <EOF> {return sink;} }
+{ sink=N_BindersScopeSorts(sink, env) <EOF> {return sink;} }
 
-/** Special meta-variable for ScopeSorts production. */
-TOKEN : {<MT_ScopeSorts : "#ScopeSorts" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
+/** Special meta-variable for BindersScopeSorts production. */
+TOKEN : {<MT_BindersScopeSorts : "#BindersScopeSorts" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
 
-/** Special inject token ScopeSorts production. */
-TOKEN : {<IT_ScopeSorts : "%ScopeSorts">}
+/** Special inject token BindersScopeSorts production. */
+TOKEN : {<IT_BindersScopeSorts : "%BindersScopeSorts">}
 
 /**
- * <em>ScopeSorts</em> ::=  <font color="red">{$Cons}</font>   <a href="#N_ScopeSort">&lang;ScopeSort&rang;</a>    (   <a href="#T_COMMA">COMMA</a>   <a href="#N_ScopeSorts">&lang;ScopeSorts&rang;</a>   |  <font color="red">{$Nil}</font>  ) 
+ * <em>BindersScopeSorts</em> ::=  <font color="red">{$Cons}</font>   <a href="#N_BindersScopeSort">&lang;BindersScopeSort&rang;</a>    (   <a href="#T_COMMA">COMMA</a>   <a href="#N_BindersScopeSorts">&lang;BindersScopeSorts&rang;</a>   |  <font color="red">{$Nil}</font>  ) 
  */
-net.sf.crsx.Sink N_ScopeSorts(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+net.sf.crsx.Sink N_BindersScopeSorts(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
 {
 	Token t = null;
 }
 {
-	t=<MT_ScopeSorts> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
+	t=<MT_BindersScopeSorts> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
 |
-	<IT_ScopeSorts>  {sink=N_Embedded(sink, env);}  {return sink;}
+	<IT_BindersScopeSorts>  {sink=N_Embedded(sink, env);}  {return sink;}
 |
 	 ( 
 	{
@@ -1777,14 +1779,14 @@ net.sf.crsx.Sink N_ScopeSorts(net.sf.crsx.Sink sink, net.sf.crsx.util.Extensible
 	}
 	 ) 
 	 ( 
-	sink=N_ScopeSort(sink, env)
+	sink=N_BindersScopeSort(sink, env)
 	 ) 
 	 ( 
 		 ( 
 		 <T_COMMA>
 		 ) 
 		 ( 
-		sink=N_ScopeSorts(sink, env)
+		sink=N_BindersScopeSorts(sink, env)
 		 ) 
 	|
 		 ( 
@@ -1801,29 +1803,29 @@ net.sf.crsx.Sink N_ScopeSorts(net.sf.crsx.Sink sink, net.sf.crsx.util.Extensible
 	}
 }
 
-/** <em>ScopeSort$WithEOF</em> ::= <em>ScopeSort</em> EOF . */
-net.sf.crsx.Sink N_ScopeSort$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+/** <em>BindersScopeSort$WithEOF</em> ::= <em>BindersScopeSort</em> EOF . */
+net.sf.crsx.Sink N_BindersScopeSort$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
 {}
-{ sink=N_ScopeSort(sink, env) <EOF> {return sink;} }
+{ sink=N_BindersScopeSort(sink, env) <EOF> {return sink;} }
 
-/** Special meta-variable for ScopeSort production. */
-TOKEN : {<MT_ScopeSort : "#ScopeSort" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
+/** Special meta-variable for BindersScopeSort production. */
+TOKEN : {<MT_BindersScopeSort : "#BindersScopeSort" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
 
-/** Special inject token ScopeSort production. */
-TOKEN : {<IT_ScopeSort : "%ScopeSort">}
+/** Special inject token BindersScopeSort production. */
+TOKEN : {<IT_BindersScopeSort : "%BindersScopeSort">}
 
 /**
- * <em>ScopeSort</em> ::=  <font color="red">{ScopeSort}</font><font color="red">:raw</font>   <a href="#N_Sort">&lang;Sort&rang;</a>    <a href="#N_Repeat">&lang;Repeat&rang;</a>    (   <a href="#T_LBRACKET">LBRACKET</a>   (  <a href="#N_SubstituteSorts">&lang;SubstituteSorts&rang;</a>   |  <font color="red">{$Nil}</font>  )    <a href="#T_RBRACKET">RBRACKET</a>  |  <font color="red">{$Nil}</font>  )  <br>
- *  |  <font color="red">{ScopeSortBinder}</font><font color="red">:raw</font>    <a href="#T_LBRACKET">LBRACKET</a>   <a href="#N_Variable">&lang;Variable&rang;</a>     <a href="#T_COLON">COLON</a>   <a href="#N_Sort">&lang;Sort&rang;</a>     <a href="#T_RBRACKET">RBRACKET</a> 
+ * <em>BindersScopeSort</em> ::=  <font color="red">{ScopeSort}</font><font color="red">:raw</font>   <a href="#N_Sort">&lang;Sort&rang;</a>    <a href="#N_Repeat">&lang;Repeat&rang;</a>    (   <a href="#T_LBRACKET">LBRACKET</a>   (  <a href="#N_SubstituteSorts">&lang;SubstituteSorts&rang;</a>   |  <font color="red">{$Nil}</font>  )    <a href="#T_RBRACKET">RBRACKET</a>  |  <font color="red">{$Nil}</font>  )  <br>
+ *  |  <font color="red">{BinderScopeSort}</font><font color="red">:raw</font>    <a href="#T_LBRACKET">LBRACKET</a>   <a href="#N_Variable">&lang;Variable&rang;</a>     <a href="#T_COLON">COLON</a>   <a href="#N_Sort">&lang;Sort&rang;</a>    <a href="#N_BindersScopeSortTail">&lang;BindersScopeSortTail&rang;</a>  
  */
-net.sf.crsx.Sink N_ScopeSort(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+net.sf.crsx.Sink N_BindersScopeSort(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
 {
 	Token t = null;
 }
 {
-	t=<MT_ScopeSort> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
+	t=<MT_BindersScopeSort> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
 |
-	<IT_ScopeSort>  {sink=N_Embedded(sink, env);}  {return sink;}
+	<IT_BindersScopeSort>  {sink=N_Embedded(sink, env);}  {return sink;}
 |
 	 ( 
 	{
@@ -1873,7 +1875,7 @@ net.sf.crsx.Sink N_ScopeSort(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleM
  |
 	 ( 
 	{
-		sink = sink .start(makeTConstructor(sink, t, raw("ScopeSortBinder"), null)) ;
+		sink = sink .start(makeTConstructor(sink, t, raw("BinderScopeSort"), null)) ;
 	}
 	 ) 
 	 ( 
@@ -1889,7 +1891,100 @@ net.sf.crsx.Sink N_ScopeSort(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleM
 	sink=N_Sort(sink, env)
 	 ) 
 	 ( 
+	sink=N_BindersScopeSortTail(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** Special meta-variable for BindersScopeSortTail production. */
+TOKEN : {<MT_BindersScopeSortTail : "#BindersScopeSortTail" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
+
+/** Special inject token BindersScopeSortTail production. */
+TOKEN : {<IT_BindersScopeSortTail : "%BindersScopeSortTail">}
+
+/**
+ * <em>BindersScopeSortTail</em> ::=  <font color="red">{ScopeSort}</font><font color="red">:raw</font>    <a href="#T_RBRACKET">RBRACKET</a>   <a href="#N_Sort">&lang;Sort&rang;</a>    <a href="#N_Repeat">&lang;Repeat&rang;</a>    (   <a href="#T_LBRACKET">LBRACKET</a>   (  <a href="#N_SubstituteSorts">&lang;SubstituteSorts&rang;</a>   |  <font color="red">{$Nil}</font>  )    <a href="#T_RBRACKET">RBRACKET</a>  |  <font color="red">{$Nil}</font>  )  <br>
+ *  |  <font color="red">{BinderScopeSort}</font><font color="red">:raw</font>    <a href="#T_COMMA">COMMA</a>   <a href="#N_Variable">&lang;Variable&rang;</a>     <a href="#T_COLON">COLON</a>   <a href="#N_Sort">&lang;Sort&rang;</a>    <a href="#N_BindersScopeSortTail">&lang;BindersScopeSortTail&rang;</a>  
+ */
+net.sf.crsx.Sink N_BindersScopeSortTail(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	t=<MT_BindersScopeSortTail> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
+|
+	<IT_BindersScopeSortTail>  {sink=N_Embedded(sink, env);}  {return sink;}
+|
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, raw("ScopeSort"), null)) ;
+	}
+	 ) 
+	 ( 
 	 <T_RBRACKET>
+	 ) 
+	 ( 
+	sink=N_Sort(sink, env)
+	 ) 
+	 ( 
+	sink=N_Repeat(sink, env)
+	 ) 
+	 ( 
+		 ( 
+		 <T_LBRACKET>
+		 ) 
+		 ( 
+			 ( 
+			sink=N_SubstituteSorts(sink, env)
+			 ) 
+		|
+			 ( 
+			{
+				sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+			}
+			 ) 
+			{
+				sink = sink .end() ;
+			}
+		 ) 
+		 ( 
+		 <T_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, raw("BinderScopeSort"), null)) ;
+	}
+	 ) 
+	 ( 
+	 <T_COMMA>
+	 ) 
+	 ( 
+	sink=N_Variable(sink, env)
+	 ) 
+	 ( 
+	 <T_COLON>
+	 ) 
+	 ( 
+	sink=N_Sort(sink, env)
+	 ) 
+	 ( 
+	sink=N_BindersScopeSortTail(sink, env)
 	 ) 
 	{
 		return sink .end() ;
@@ -2325,6 +2420,154 @@ net.sf.crsx.Sink N_ParsedForm(net.sf.crsx.Sink sink, net.sf.crsx.util.Extensible
 	{
 		sink = sink .start(makeTConstructor(sink, t, raw("ParsedFormDone"), null)) ;
 	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>ScopeSorts$WithEOF</em> ::= <em>ScopeSorts</em> EOF . */
+net.sf.crsx.Sink N_ScopeSorts$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{ sink=N_ScopeSorts(sink, env) <EOF> {return sink;} }
+
+/** Special meta-variable for ScopeSorts production. */
+TOKEN : {<MT_ScopeSorts : "#ScopeSorts" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
+
+/** Special inject token ScopeSorts production. */
+TOKEN : {<IT_ScopeSorts : "%ScopeSorts">}
+
+/**
+ * <em>ScopeSorts</em> ::=  <font color="red">{$Cons}</font>   <a href="#N_ScopeSort">&lang;ScopeSort&rang;</a>    (   <a href="#T_COMMA">COMMA</a>   <a href="#N_ScopeSorts">&lang;ScopeSorts&rang;</a>   |  <font color="red">{$Nil}</font>  ) 
+ */
+net.sf.crsx.Sink N_ScopeSorts(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	t=<MT_ScopeSorts> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
+|
+	<IT_ScopeSorts>  {sink=N_Embedded(sink, env);}  {return sink;}
+|
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_ScopeSort(sink, env)
+	 ) 
+	 ( 
+		 ( 
+		 <T_COMMA>
+		 ) 
+		 ( 
+		sink=N_ScopeSorts(sink, env)
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>ScopeSort$WithEOF</em> ::= <em>ScopeSort</em> EOF . */
+net.sf.crsx.Sink N_ScopeSort$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{ sink=N_ScopeSort(sink, env) <EOF> {return sink;} }
+
+/** Special meta-variable for ScopeSort production. */
+TOKEN : {<MT_ScopeSort : "#ScopeSort" ((<T_DIGIT>)* | "_" (<T_DIGIT> | <T_UPPER> | <T_LOWER>)*) "#">}
+
+/** Special inject token ScopeSort production. */
+TOKEN : {<IT_ScopeSort : "%ScopeSort">}
+
+/**
+ * <em>ScopeSort</em> ::=  <font color="red">{ScopeSort}</font><font color="red">:raw</font>   <a href="#N_Sort">&lang;Sort&rang;</a>    <a href="#N_Repeat">&lang;Repeat&rang;</a>    (   <a href="#T_LBRACKET">LBRACKET</a>   (  <a href="#N_SubstituteSorts">&lang;SubstituteSorts&rang;</a>   |  <font color="red">{$Nil}</font>  )    <a href="#T_RBRACKET">RBRACKET</a>  |  <font color="red">{$Nil}</font>  )  <br>
+ *  |  <font color="red">{ScopeSortBinder}</font><font color="red">:raw</font>    <a href="#T_LBRACKET">LBRACKET</a>   <a href="#N_Variable">&lang;Variable&rang;</a>     <a href="#T_COLON">COLON</a>   <a href="#N_Sort">&lang;Sort&rang;</a>     <a href="#T_RBRACKET">RBRACKET</a> 
+ */
+net.sf.crsx.Sink N_ScopeSort(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	t=<MT_ScopeSort> {sink = sink .startMetaApplication(t.toString());} [ "\u2983" sink=N_SortParam(sink, env)( "\u2225" sink=N_SortParam(sink, env))* "\u2984" ] {return sink.endMetaApplication();}
+|
+	<IT_ScopeSort>  {sink=N_Embedded(sink, env);}  {return sink;}
+|
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, raw("ScopeSort"), null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_Sort(sink, env)
+	 ) 
+	 ( 
+	sink=N_Repeat(sink, env)
+	 ) 
+	 ( 
+		 ( 
+		 <T_LBRACKET>
+		 ) 
+		 ( 
+			 ( 
+			sink=N_SubstituteSorts(sink, env)
+			 ) 
+		|
+			 ( 
+			{
+				sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+			}
+			 ) 
+			{
+				sink = sink .end() ;
+			}
+		 ) 
+		 ( 
+		 <T_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, raw("ScopeSortBinder"), null)) ;
+	}
+	 ) 
+	 ( 
+	 <T_LBRACKET>
+	 ) 
+	 ( 
+	sink=N_Variable(sink, env)
+	 ) 
+	 ( 
+	 <T_COLON>
+	 ) 
+	 ( 
+	sink=N_Sort(sink, env)
+	 ) 
+	 ( 
+	 <T_RBRACKET>
 	 ) 
 	{
 		return sink .end() ;

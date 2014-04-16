@@ -238,7 +238,7 @@ grammars such as this follow these conventions:\footnote{As before the details o
     in this way; in the example we establish that "*" binds tighter than "+", and that both
     operators are left recursive. Note that we specify the precedence of both the entire expression,
     after the "⟦⟧"s, and of each component, inside the "⟨⟩". (In fact where the precedence is
-    omitted we could have written "@0".)
+    omitted we could have written "@0".)  A precedence cannot be combined with a repetition marker.
 
   \item The special "sugar" declaration expresses that the concrete syntax can use parentheses to
     raise the precedence of the enclosed expression to~3: it is the first example of a \emph{rewrite

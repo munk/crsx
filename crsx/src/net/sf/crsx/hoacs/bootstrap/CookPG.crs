@@ -103,7 +103,7 @@ TOKEN_MGR_DECLS : { int nested_counter; } /* Used by all nesting constructs. */
 {$String<!--SortName--> : SortEntry} ProductionNames4[RawForm, $List[Define], $String, $List[$String]] :: $List[$String];
 {#ND} ProductionNames4[RAW-FormParsedSorted[#Sort1, #ParsedForm1, #Prec1, #InheritedRefs], #Defines, #1, #s] → (#1; {#ND}ProductionNames[#s]) ;
 {#ND} ProductionNames4[RAW-FormParsedUnsorted[#ParsedForm1, #Prec1, #InheritedRefs], #Defines, #1, #s] → (#1; {#ND}ProductionNames[#s]) ;
-{#ND} ProductionNames4[RAW-FormConstruction[#Constructor, #ScopeSortList, #InheritedRefs], #Defines, #1, #s] → {#ND} ProductionNames3[#Defines, #1, #s] ;
+{#ND} ProductionNames4[RAW-FormConstruction[#Constructor, #ScopeSorts, #InheritedRefs], #Defines, #1, #s] → {#ND} ProductionNames3[#Defines, #1, #s] ;
 
 
 /////////////////////////////////////////////////////////////////////
@@ -211,7 +211,7 @@ PFK_SORT ::=( PFK[RawParsedForm, FormKind]; );
 {#ND} PG-Production-Defines3[#ParsedForm1, #Prec1, #Kind1, #Defines, #SortName, #Prec, #PrecPFKs]
 ;
 
-{#ND} PG-Production-Defines2[RAW-FormConstruction[#Constructor, #ScopeSortList, #InheritedRefs], #Kind1, #Defines, #SortName, #Prec, #PrecPFKs]
+{#ND} PG-Production-Defines2[RAW-FormConstruction[#Constructor, #ScopeSorts, #InheritedRefs], #Kind1, #Defines, #SortName, #Prec, #PrecPFKs]
 →
 {#ND} PG-Production-Defines[#Defines, #SortName, #Prec, #PrecPFKs]
 ;

@@ -110,6 +110,7 @@ RawForm ::=(
 RawScopeSort ::=(
  %rawScopeSort⟪ %Sort«RawSort» %Repeat«RawRepeat» [ %SubstituteSorts«$List[RawSubstituteSort]» ] ⟫;
  %rawScopeSort⟪ [ %Variable«$String» : %Sort«RawSort» ] ⟫;
+ %rawBindersScopeSort⟪ [ %Variable«$String» : %Sort«RawSort» ] %BindersScopeSort« RawScopeSort » ⟫;
 );
 
 {$String : $StringEntrySort}

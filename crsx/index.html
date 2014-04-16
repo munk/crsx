@@ -1,60 +1,115 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-15">
-<title></title>
-</head>
+  <head>
+    <title>CRSX - Combinatory Reduction Systems with Extensions</title>
+  </head>
 <body>
-<h1>CRSX&mdash;Combinatory Reduction Systems with Extensions.</h1>
 
-CRSX implements higher-order rewriting based on <em>Combinatory Reduction Systems</em> (CRS) with some extensions.
-<blockquote>Copyright (c) 2006, 2013 IBM Corporation.  All rights reserved.
-	<p>
-	This program and the accompanying materials are made available under the terms of the Common Public License v1.0,
-	which accompanies this distribution, and is available at <a href="http://www.opensource.org/licenses/cpl1.0.txt">http://www.opensource.org/licenses/cpl1.0.txt</a>.
-	<p>
-	For further details (including the full source code) see the <a href="http://sourceforge.net/projects/crsx">CRSX SourceForge project page</a>.
-</blockquote>
+<h2>CRSX - Combinatory Reduction Systems with Extensions</h2>
 
 <p>
-The purpose of CRSX is to implement an extended higher-order rewriting
-formalism to facilitate writing compilers and other syntax-directed
-transformation systems, specifically:
+  <b>CRSX</b> is the <em>Combinatory Reduction Systems with Extensions</em>
+  framework.
 
-<ul>
-  <li>Special notations for using <em>embedded syntax</em>, even <em>higher order abstract syntax</em>.
-  <li>Special support for <em>symbol tables</em>, <em>environments</em>, and <em>attributes</em>, as used in compilers.
-  <li>A <em>polymorphic sort system</em> (which in practice means that CRSX systems are <em>contraction schemes</em>).
-  <li>CRSX systems can be compiled directly to <em>native code</em> (so far in C or Java (experimental)) for effective execution.
-</ul>
+  It is an implementation of higher order rewriting based on Klop's
+  Combinatory Reduction System (CRS) formalism, with a sort system
+  that allows working with fully sorted <em>Contraction Systems</em>.
 
-<h3>Downloads</h3>
+  <b>CRSX</b> is especially suited for developing compilers, and comes with a
+  frontend called <b>HACS</b>, <em>Higher-order Attribute Contraction
+  Systems</em> with special support for teaching and developing
+  compilers.
 
-CRSX releases come in two flavors:
-<ul>
-  
-  <li><strong>HACS</strong> is a packaging of CRSX intended as an <em>introduction to compiler generation</em>.
-    The package, including a manual, is distributed as <a href="http://cs.nyu.edu/courses/fall13/CSCI-GA.2130-001/hacs.zip">hacs.zip</a>.
+  For the moment, <b>CRSX</b> has been used to develop compilers for medium
+  sized languages
+  (<a href="http://www.slideshare.net/ibmdatapower/ibm-datapower-appliances-whats-new-in-2013">XQuery and JSONiq</a>)
+  whereas <b>HACS</b> is used to
+  <a href="http://cs.nyu.edu/courses/spring14/CSCI-GA.2130-001/">teach</a>
+  as well as implement small experimental language compilers.
+<p>
+  <b>CRSX</b> is maintained in two locations:
+  <ul>
 
-  <li>The <strong>full CRSX</strong> release contains the low level engine with several examples but very sketchy documentation;
-    it is available from the <a href="sourceforge.net/projects/crsx/files/">SourceForge CRSX download page</a>.
-  
-</ul>
-If in doubt get the HACS release.
+    <li>The main development of <b>CRSX</b> and <b>HACS</b> happens in the
+      <a href="http://github.com/crsx">GitHub crsx organization</a>.
+
+    <li>Historical versions as well as crsx-related publications can be found on the
+      <a href="http://sourceforge.net/projects/crsx">SourceForge project page</a>.
+
+  </ul>
+</p>
+
+<h3>Goals</h3>
+
+<p>
+  The goals of the CRSX project (not all have been reached) are to
+  <ul>
+    <li>provide a <em>generic higher-order rewrite engine</em> that
+    <li>is easy to <em>embed</em> in and <em>integrate with</em> other projects, specifically optimizing compiler,
+    <li>is simple to <em>extend</em> with experimental features,
+    <li>runs on the universally available Java 5+ platform, and
+    <li>can generate executables for any platform.
+  </ul>
+  Everyone can use the code but if you wish to contribute then please contact the project admins.
+</p>
 
 <h3>History</h3>
 
-CRS was invented by <A HREF="http://www.cs.vu.nl/%7Ejwk/">J. W. Klop</A> in
-1980 based on ideas in a <A HREF="http://www.ens-lyon.fr/LIP/REWRITING/MISC/AGeneralChurch-RosserTheorem.pdf">note by Peter Aczel</A>.
-The foundational idea of CRS was to allow rewriting rules that
-allow for matching binding constructs and performing substitution
-as part of rewrite steps.  The seminal paper on CRS is:
+<p>
+  Combinatory Reduction Systems (CRS) were invented by
+  <a href="http://www.cs.vu.nl/%7Ejwk/">J. W. Klop</a> in 1980 based
+  on ideas in a
+  <a href="http://www.ens-lyon.fr/LIP/REWRITING/MISC/AGeneralChurch-RosserTheorem.pdf">note by Peter Aczel</a>.
 
-<blockquote>Jan Willem Klop, Vincent van Oostrom, and Femke van Raamsdonk,
-"Combinatory Reduction Systems: Introduction and Survey,"
-<I>Theoretical Computer Science</I> <B>121</B>, pp. 271-308 (1993).
-</blockquote>
+  The motivating idea of CRS was to allow rewriting rules that can match
+  binding constructs and perform substitutions as part of rewrite
+  steps.  The seminal paper on CRS is:
+  <blockquote>Jan Willem Klop, Vincent van Oostrom, and Femke van Raamsdonk,
+    <q>Combinatory Reduction Systems: Introduction and Survey,</q>
+    <em>Theoretical Computer Science</em> <strong>121</strong>,
+    pp. 271-308 (1993).
+  </blockquote>
+<p>
+  The <b>CRSX</b> project is an extended reimplementation of the Haskell
+  program (<q>CRSX 1</q>) in chapter 6 of
+  <blockquote>
+    Kristoffer H. Rose,
+    <em>Operational Reduction Models for Functional Programming Languages</em>,
+    Ph.D. thesis, DIKU, University of Copenhagen, 1996
+    (<a href="http://krisrose.net/thesis.pdf">pdf</a>).
+  </blockquote>
+  The second version (<q>CRSX 2</q>) was part of the XQuery optimizer used in the
+  <a href="http://www.research.ibm.com/virtualxml">Virtual XML
+  project</a> at IBM Research from 2005.  The current production
+  version (<q>CRSX 3</q>) was a full rewrite starting in 2007 with a
+  compiler generator to native code used to implement the IBM
+  DataPower appliance
+  <a href="http://www.slideshare.net/ibmdatapower/ibm-datapower-appliances-whats-new-in-2013">XQuery and JSONiq</a>
+  compilers.
+<p>
+  Since 2013, <b>CRSX</b> development centers on <q>CRSX 4</q>, which
+  integrates the <b>HACS</b> compiler generator frontend with the goal
+  of supporting larger compilers.
+</p>
 
+<h3>License</h3>
+<p>
+  The code is
+  <blockquote>
+    Copyright (c) 2006, 2014 IBM Corporation.<br>
+    Copyright (c) 2014, Kristoffer H. Rose.
+  </blockquote>
+  The program and the accompanying materials are made available under
+  the terms of the
+  <a href="http://opensource.org/licenses/EPL-1.0"><b>Eclipse Public License v1.0</b></a>,
+  which is included with the distribution and is available at
+  <a href="http://opensource.org/licenses/EPL-1.0">http://opensource.org/licenses/EPL-1.0</a>.
+  (Older versions on SourceForge were distributed under the terms of
+  the Common Public License v1.0,
+  <a href="http://www.opensource.org/licenses/cpl1.0.php">http://www.opensource.org/licenses/cpl1.0.php</a>.)
+<p>
 <hr>
-<!-- hhmts start -->Last modified: Thu Dec 12 03:13:45 EST 2013 <!-- hhmts end -->
+<address>
+<a gref="http://kristofferrose.com">Kristoffer H. Rose</a>, April 6, 2014.
+</address>
 </body> </html>

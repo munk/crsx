@@ -559,31 +559,19 @@ TextFold[Map[a.%n⟪; "†«a»" : {#InheritedMap_†«a»}«InheritedName[a]»�
 ;
 
 {$String : SortEntry} CRS-FormScopeSorts[$List[RawScopeSort], $String, $Boolean, ok::Ok s::RawSort p::$Numeric q::Text r::RawRepeat.Text, Text, Text, $Numeric] :: Text;
-{#ND}CRS-FormScopeSorts[(), #Name, #makeForm, ok s p q r.#Wrap[ok,s,p,q,r], #pre, #post, #n] → #post ;
 -[Data[#makeForm]]:
 {#ND}CRS-FormScopeSorts[(%rawScopeSort⟪ #Sort1# [ #SubstituteSorts1# ] ⟫; #ScopeSorts), #Name, #makeForm, ok s p q r.#Wrap[ok,s,p,q,r], #pre, #post, #n]
 →
 %n⟪«#pre»«
-  {#ND}CRS-Binders-SubstituteSorts[#SubstituteSorts1#, 1, %n⟨⟩, #makeForm]
+  {#ND}CRS--SubstituteSorts[#SubstituteSorts1#, 1, %n⟨⟩, #makeForm]
 » «
   $[If, #makeForm, %n⟨†‹ SortName1[#Name] ›⟩, #Wrap[OK, #Sort1#, 0, CRS-FormScopeMetaApplication[CRS-SortMetaVar[#Sort1#, #n], #SubstituteSorts1#, $True<!--vN-->], %rawRepeat⟪ ⟫]]
 »«
   {#ND}CRS-FormScopeSorts[#ScopeSorts, #Name, #makeForm, ok s p q r.#Wrap[ok,s,p,q,r], %n⟨,⟩, %n⟨]⟩, $[Plus,#n,1]]
 »⟫
 ;
+{#ND}CRS-FormScopeSorts[(), #Name, #makeForm, ok s p q r.#Wrap[ok,s,p,q,r], #pre, #post, #n] → #post ;
 
-// Helper for form or pattern binders. 
-{$String : SortEntry} CRS-Binders-SubstituteSorts[$List[RawSubstituteSort], $Numeric, Text, $Boolean] :: Text;
-{#ND}CRS-Binders-SubstituteSorts[(), #n, #post, #makeForm] → #post ;
-{#ND; #Variable1# : #Sort1#}
-CRS-Binders-SubstituteSorts[(%rawSubstituteSort⟪ #Variable1# : #Sort2# ⟫; #SubstituteSorts), #n, #post, #makeForm]
-→
-%n⟪«
-  $[If, #makeForm, %n⟨ v†‹$[FormatNumber,#n]›::†‹ SortName[#Sort1#] ›⟩, %n⟨ v†‹$[FormatNumber,#n]›⟩]
-»«
-  {#ND}CRS-Binders-SubstituteSorts[#SubstituteSorts, $[Plus,#n,1], %n⟨ .⟩, #makeForm]
-»⟫
-;
 
 // Helper for pattern meta-application arguments.
 CRS-FormScopeMetaApplication[Text, $List[RawSubstituteSort], $Boolean] :: Text;
@@ -963,6 +951,22 @@ CRS-SortMetaVar[#Sort, #n] → %n⟨†‹SortMetaVar[#Sort, #n]›⟩ ;
 ///   »⟫ ;
 ///   {#ND}CRS-ArgList-ParsedForm[#ParsedForm1, ok s p q r.#Wrap[ok,s,p,q,r], $[Plus,#n,1]] )
 /// ;
+/// 
+/// // Helper for form or pattern binders. 
+/// {$String : SortEntry} CRS-Binders-SubstituteSorts[$List[RawSubstituteSort], $Numeric, Text, $Boolean] :: Text;
+/// {#ND; #Variable1# : #Sort1#}
+/// CRS-Binders-SubstituteSorts[(%rawSubstituteSort⟪ #Variable1# : #Sort2# ⟫; #SubstituteSorts), #n, #post, #makeForm]
+/// →
+/// %n⟪«
+///   $[If, #makeForm, %n⟨ v†‹$[FormatNumber,#n]›::†‹ SortName[#Sort1#] ›⟩, %n⟨ v†‹$[FormatNumber,#n]›⟩]
+/// »«
+///   {#ND}CRS-Binders-SubstituteSorts[#SubstituteSorts, $[Plus,#n,1], %n⟨ .⟩, #makeForm]
+/// »⟫
+/// ;
+/// ///// TODO !!!!!
+/// {#ND}CRS-Binders-SubstituteSorts[(), #n, #post, #makeForm] → #post ;
+
+
 
 {$String : SortEntry} CRS-Rules-Rule[RawRule, $String, Boolean, $String] :: Text;
 {#ND}CRS-Rules-Rule[%rawRule⟪ #Priority# #Construction1# : #Construction2# → %Term«OMITTED» ⟫, #SortName, #IsData, #ParsePrefix] 

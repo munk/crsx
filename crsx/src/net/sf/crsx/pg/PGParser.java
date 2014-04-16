@@ -120,9 +120,14 @@ class PGParser implements PGParserConstants {
                         case 'u' : case 'x' :
                                 // Fall through to do hexadecimal code
                         }
-                case '#' :
+                case '#' : {
                         // Two character unicode prefix (#x or escape-u or escape-x) followed by hexadecimal code.
-                        return PlainJavaSink.unicode(Integer.parseInt(code.substring(2), 16));
+                        if (code.length() >= 2)
+                        {
+                                int c = Integer.parseInt(code.substring(2), 16);
+                                if (c >= 0) return PlainJavaSink.unicode(c);
+                        }
+                }
                 }
                 return code; // sic
         }
@@ -980,6 +985,12 @@ class PGParser implements PGParserConstants {
                         "\u005ct\u005ct"+BUFFER+" buffer = new "+BUFFER+"(maker);\u005cn"+
                         "\u005ct\u005ctparse(buffer.sink(), category, reader, null, 1, 1, bound);\u005cn"+
                         "\u005ct\u005ctreturn buffer.term(true);\u005cn"+
+                        "\u005ct}\u005cn\u005cn"+
+                        "\u005ctpublic "+TERM+" parseTerm("+MAKER+" maker, String category, java.io.Reader reader, String unit, int line, int col, "+EXTENSIBLE_STRING_TO_VARIABLE+" bound) throws "+CRS_EXCEPTION+", java.io.IOException\u005cn"+
+                        "\u005ct{\u005cn"+
+                        "\u005ct\u005ct"+BUFFER+" buffer = new "+BUFFER+"(maker);\u005cn"+
+                        "\u005ct\u005ctparse(buffer.sink(), category, reader, unit, line, col, bound);\u005cn"+
+                        "\u005ct\u005ctreturn buffer.term(true);\u005cn"+
                         "\u005ct}\u005cn\u005cn");
 
                 // User additions.
@@ -1214,14 +1225,14 @@ class PGParser implements PGParserConstants {
           ;
         }
         t = MetaVar();
-                                                                arg = arg + t.toString();
-                 {
+                              arg = arg + t.toString();
+                  {
                         String b = "b_" + arg.replace("#", "_");
                         extraArgs = extraArgs + ", " + BUFFER + " " + b;
                         htmlArgs = htmlArgs + HTML_START_A + arg + HTML_END_A;
                         // Use of the argument in subsequent embedded terms should copy the buffer.
                         globalMetavariables.put(arg, new Triple<String, String, String>("", ".copy("+b+", false)", null));
-                }
+                 }
         label_7:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -1246,7 +1257,7 @@ class PGParser implements PGParserConstants {
             ;
           }
           t = MetaVar();
-                                                                        arg = arg + t.toString();
+                                     arg = arg + t.toString();
                          {
                                 String b = "b_" + arg.replace("#", "_");
                                 extraArgs = extraArgs + ", " + BUFFER + " " + b;

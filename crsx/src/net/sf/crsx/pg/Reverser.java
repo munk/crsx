@@ -15,7 +15,7 @@ import net.sf.crsx.util.Util;
  * 
  * @author <a href="mailto:krisrose@us.ibm.com">Kristoffer Rose</a>
  */
-class Reverser
+public class Reverser
 {
     // Static.
     
@@ -23,7 +23,7 @@ class Reverser
     final private static String SERIALIZE = "$S$"; 
 
     /** Quote string. */
-    static String q(String s)
+    public static String q(String s)
     {
         return Util.quoteJava(s);
     }
@@ -96,7 +96,7 @@ class Reverser
     // Constructing new reversers.
 
     /** Create new reverser with all possible concatenations of this and that reverser (in order). */
-    Reverser concatenate(Reverser that)
+    public Reverser concatenate(Reverser that)
     {
         List<Pair<List<String>, String>> combinedRules = new LinkedList<Pair<List<String>, String>>();
         for (Pair<List<String>, String> rule1 : rules)
@@ -111,7 +111,7 @@ class Reverser
     }
 
     /** Create new reverser with the union of this and that reverser. */
-    Reverser union(Reverser that)
+    public Reverser union(Reverser that)
     {
         List<Pair<List<String>, String>> combinedRules = new LinkedList<Pair<List<String>, String>>();
         combinedRules.addAll(rules);
@@ -124,7 +124,7 @@ class Reverser
      * @param termPrefix to add as new first parameter, or null if none
      * @param resultPrefix expression to prepend to result of all rules, or null if none
      */
-    Reverser prepend(String termPrefix, String resultPrefix)
+    public Reverser prepend(String termPrefix, String resultPrefix)
     {
         List<Pair<List<String>, String>> newRules = new LinkedList<Pair<List<String>, String>>();
         for (Pair<List<String>, String> rule : rules)
@@ -151,7 +151,7 @@ class Reverser
      * @param wrapperEnd text (as used in term), usually just "]"
      * @param resultPrefix expression to prepend to result of all rules, or null if none
      */
-    Reverser prependWrap(String wrapperStart, String wrapperSeparator, String wrapperEnd, String resultPrefix)
+    public Reverser prependWrap(String wrapperStart, String wrapperSeparator, String wrapperEnd, String resultPrefix)
     {
         List<Pair<List<String>, String>> newRules = new LinkedList<Pair<List<String>, String>>();
         for (Pair<List<String>, String> rule : rules)
