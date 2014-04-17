@@ -554,7 +554,7 @@ void Grammar(Maker maker, String jjcrs, String sourcePrefix, boolean makeHtml,
 				javacc.append("\n/** "+userName+" top level. */\n" +
 					SINK + " N_" + derived + "$WithEOF(" + SINK + " sink, " + EXTENSIBLE_STRING_TO_VARIABLE + " env) :\n" +
 					"{}\n" +
-					"{ sink=N_" + derived + "(sink, env) <EOF> {return sink;} }\n");
+					"{ sink=N_" + derived + "(sink, env)  <EOF> {return sink;} }\n");
 			// Production.
 			javacc.append("\n/** "+userName+". */\n" +
 				SINK + " N_" + derived + "(" + SINK + " sink, " + EXTENSIBLE_STRING_TO_VARIABLE + " env) :\n" +
@@ -1117,8 +1117,8 @@ void Structural(String comment, Appendable javacc, Appendable html, Appendable s
 				"/** <em>" + name + "$WithEOF</em> ::= <em>" + name + "</em> EOF . */\n" +
 				SINK + " N_" + name + "$WithEOF(" + SINK + " sink, " + EXTENSIBLE_STRING_TO_VARIABLE + " env) :\n" +
 				"{}\n" +
-				"{"+stateset+" sink=N_" + name + "(sink, env) <EOF> {return sink;} }\n");
-		}
+				"{{int savedState = token_source.curLexState;} "+stateset+" sink=N_" + name + "(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }\n");
+		} 
 	  
 		// If needed then create meta-variable and inject tokens.
 		decls.put("t", "Token t = null;");

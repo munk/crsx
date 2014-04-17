@@ -526,7 +526,7 @@ class PGParser implements PGParserConstants {
                                 javacc.append("\u005cn/** "+userName+" top level. */\u005cn" +
                                         SINK + " N_" + derived + "$WithEOF(" + SINK + " sink, " + EXTENSIBLE_STRING_TO_VARIABLE + " env) :\u005cn" +
                                         "{}\u005cn" +
-                                        "{ sink=N_" + derived + "(sink, env) <EOF> {return sink;} }\u005cn");
+                                        "{ sink=N_" + derived + "(sink, env)  <EOF> {return sink;} }\u005cn");
 
                         // Production.
                         javacc.append("\u005cn/** "+userName+". */\u005cn" +
@@ -1363,7 +1363,7 @@ class PGParser implements PGParserConstants {
                                 "/** <em>" + name + "$WithEOF</em> ::= <em>" + name + "</em> EOF . */\u005cn" +
                                 SINK + " N_" + name + "$WithEOF(" + SINK + " sink, " + EXTENSIBLE_STRING_TO_VARIABLE + " env) :\u005cn" +
                                 "{}\u005cn" +
-                                "{"+stateset+" sink=N_" + name + "(sink, env) <EOF> {return sink;} }\u005cn");
+                                "{{int savedState = token_source.curLexState;} "+stateset+" sink=N_" + name + "(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }\u005cn");
                 }
 
                 // If needed then create meta-variable and inject tokens.

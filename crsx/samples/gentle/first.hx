@@ -36,7 +36,7 @@ sort Name  | symbol ⟦ ⟨ID⟩ ⟧ ;                  // assigned symbols
 
 // Ex.3.3
 
-sort Stat  | ⟦ ⟨[x:Name]⟩ := ⟨Exp⟩ ; ⟨Stat[x:Name]⟩ ⟧  // assignment statement (with newline)
+sort Stat  | ⟦ ⟨[x:Name]⟩ := ⟨Exp⟩ ; ⟨ Stat[x:Name] ⟩ ⟧  // assignment statement (with newline)
            | ⟦ { ⟨Stat⟩ } ⟨Stat⟩ ⟧		    // block statement
            | ⟦ ⟧                    		    // block statement
            ;
@@ -106,7 +106,7 @@ token T | T ('_' ⟨INT⟩)* ; // temporary
 
 // Concrete syntax & abstract syntax sorts.
 
-sort I_Progr  | ⟦⟨I_Instr⟩ ⟨I_Progr⟩⟧ | ⟦⟧ ;
+sort I_Progr  | ⟦⟨I_Instr⟩ ⟨I_Progr⟩ ⟧ | ⟦ ⟧ ;
 
 sort I_Instr  | ⟦⟨Tmp⟩ = ⟨I_Arg⟩ + ⟨I_Arg⟩;¶⟧
    	      | ⟦⟨Tmp⟩ = ⟨I_Arg⟩ * ⟨I_Arg⟩;¶⟧
