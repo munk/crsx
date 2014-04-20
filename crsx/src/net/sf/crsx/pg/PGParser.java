@@ -983,13 +983,13 @@ class PGParser implements PGParserConstants {
                         "\u005ctpublic "+TERM+" parseTerm("+MAKER+" maker, String category, java.io.Reader reader, "+EXTENSIBLE_STRING_TO_VARIABLE+" bound) throws "+CRS_EXCEPTION+", java.io.IOException\u005cn"+
                         "\u005ct{\u005cn"+
                         "\u005ct\u005ct"+BUFFER+" buffer = new "+BUFFER+"(maker);\u005cn"+
-                        "\u005ct\u005ctparse(buffer.sink(), category, reader, null, 1, 1, bound);\u005cn"+
+                        "\u005ct\u005ctfactory.parse(buffer.sink(), category, reader, null, 1, 1, bound);\u005cn"+
                         "\u005ct\u005ctreturn buffer.term(true);\u005cn"+
                         "\u005ct}\u005cn\u005cn"+
                         "\u005ctpublic "+TERM+" parseTerm("+MAKER+" maker, String category, java.io.Reader reader, String unit, int line, int col, "+EXTENSIBLE_STRING_TO_VARIABLE+" bound) throws "+CRS_EXCEPTION+", java.io.IOException\u005cn"+
                         "\u005ct{\u005cn"+
                         "\u005ct\u005ct"+BUFFER+" buffer = new "+BUFFER+"(maker);\u005cn"+
-                        "\u005ct\u005ctparse(buffer.sink(), category, reader, unit, line, col, bound);\u005cn"+
+                        "\u005ct\u005ctfactory.parse(buffer.sink(), category, reader, unit, line, col, bound);\u005cn"+
                         "\u005ct\u005ctreturn buffer.term(true);\u005cn"+
                         "\u005ct}\u005cn\u005cn");
 
@@ -1645,7 +1645,7 @@ class PGParser implements PGParserConstants {
                         (statearg.length() > 0 ? HTML_START_A+" ("+statearg+")"+HTML_END_A : "") +
                         " ::= "+ localHtml.toString().replace("\u005cn", "\u005cn * ").replace("*/", "*&zwj;/") +
                         "\u005cn */\u005cn" +
-                        pre + "SKIP : { <" + body + "> " + post + "}\u005cn");
+                        pre + "SKIP : { <" + body + "| \u005c"\u005c\u005c001\u005c" > " + post + "}\u005cn");
         }
   }
 

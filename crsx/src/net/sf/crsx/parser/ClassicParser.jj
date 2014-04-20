@@ -872,7 +872,7 @@ void Property(Maker maker, ExtensibleMap<String, Variable> bound, Map<String, Te
 }
 
 /* Spaces and line comments. */
-SKIP : { " " | "\t" | "\n" | "\r" | < "//" (["\t"," "-"~","\u0080"-"\uFFF0"])* > }
+SKIP : { " " | "\t" | "\n" | "\r" | < "//" (["\t"," "-"~","\u0080"-"\uFFF0"])* | "\001" > }
 
 /* Comments. */
 SKIP : { "/*" : IN_JAVA_COMMENT }
