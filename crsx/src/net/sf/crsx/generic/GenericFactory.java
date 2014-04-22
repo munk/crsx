@@ -635,8 +635,6 @@ public class GenericFactory implements Factory<GenericTerm>
 	 */
 	protected Parser getParser(String category) throws CRSException
 	{
-		if (category != null && category.contains("_"))
-			System.out.println("Boo");
 		Parser p = categoryParser.get(category);
 		return p != null ? p.parser(this) : classicParser.parser(this);
 	}
