@@ -34,15 +34,15 @@ extern struct _ConstructionDescriptor descriptor_M__sTryFailure;
 extern struct _SortDescriptor sort_M__sTryResult;
 
 /* DATA SORT Binder-State HEADER DECLARATIONS. */
-typedef enum {FunOf_M_Binder_State = 0, VarOf_M_Binder_State = 1, Data_M_REUSING, Data_M_OUTER, Data_M_NO_xREUSE, Data_M_COPYING} EnumOf_M_Binder_State;
-#define STRUCT_Con_M_REUSING struct _ConstantConstruction
-extern struct _ConstructionDescriptor descriptor_M_REUSING;
-#define STRUCT_Con_M_OUTER struct _ConstantConstruction
-extern struct _ConstructionDescriptor descriptor_M_OUTER;
+typedef enum {FunOf_M_Binder_State = 0, VarOf_M_Binder_State = 1, Data_M_NO_xREUSE, Data_M_OUTER, Data_M_COPYING, Data_M_REUSING} EnumOf_M_Binder_State;
 #define STRUCT_Con_M_NO_xREUSE struct _ConstantConstruction
 extern struct _ConstructionDescriptor descriptor_M_NO_xREUSE;
+#define STRUCT_Con_M_OUTER struct _ConstantConstruction
+extern struct _ConstructionDescriptor descriptor_M_OUTER;
 #define STRUCT_Con_M_COPYING struct _ConstantConstruction
 extern struct _ConstructionDescriptor descriptor_M_COPYING;
+#define STRUCT_Con_M_REUSING struct _ConstantConstruction
+extern struct _ConstructionDescriptor descriptor_M_REUSING;
 extern struct _SortDescriptor sort_M_Binder_State;
 
 /* DATA SORT Meta-Occurrence HEADER DECLARATIONS. */
@@ -69,15 +69,15 @@ extern struct _ConstructionDescriptor descriptor_M_SECOND;
 extern struct _SortDescriptor sort_M_PASS;
 
 /* DATA SORT Pattern-Stage HEADER DECLARATIONS. */
-typedef enum {FunOf_M_Pattern_Stage = 0, VarOf_M_Pattern_Stage = 1, Data_M_MATCH, Data_M_CASE, Data_M_DISPATCH, Data_M_SUBMATCH} EnumOf_M_Pattern_Stage;
+typedef enum {FunOf_M_Pattern_Stage = 0, VarOf_M_Pattern_Stage = 1, Data_M_MATCH, Data_M_DISPATCH, Data_M_CASE, Data_M_SUBMATCH} EnumOf_M_Pattern_Stage;
 #define STRUCT_Con_M_MATCH struct _ConstantConstruction
 extern struct _ConstructionDescriptor descriptor_M_MATCH;
-#define STRUCT_Con_M_CASE struct _Con_M_CASE
-struct _Con_M_CASE {struct _Construction construction; Term sub[3]; Variable binder[0];};
-extern struct _ConstructionDescriptor descriptor_M_CASE;
 #define STRUCT_Con_M_DISPATCH struct _Con_M_DISPATCH
 struct _Con_M_DISPATCH {struct _Construction construction; Term sub[3]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M_DISPATCH;
+#define STRUCT_Con_M_CASE struct _Con_M_CASE
+struct _Con_M_CASE {struct _Construction construction; Term sub[3]; Variable binder[0];};
+extern struct _ConstructionDescriptor descriptor_M_CASE;
 #define STRUCT_Con_M_SUBMATCH struct _ConstantConstruction
 extern struct _ConstructionDescriptor descriptor_M_SUBMATCH;
 extern struct _SortDescriptor sort_M_Pattern_Stage;
@@ -249,7 +249,9 @@ extern struct _ConstructionDescriptor descriptor_M_CRSX;
 extern struct _SortDescriptor sort_M_Reify_xCRSX;
 
 /* DATA SORT SPrimitive HEADER DECLARATIONS. */
-typedef enum {FunOf_M_SPrimitive = 0, VarOf_M_SPrimitive = 1, Data_M_E_xHashCode, Data_M_E_xDeepEqual, Data_M_E_xForgivableError, Data_M_E_xStringLessThan, Data_M_E_xNull, Data_M_E_xNil, Data_M_E_xVariableNameIs, Data_M_E_xSplit, Data_M_E_xFromFirst, Data_M_E_xToFirst, Data_M_E_xDownCase, Data_M_E_xReplace, Data_M_E_xRescape, Data_M_E_xUpCase, Data_M_E_xParseURL, Data_M_E_xEcho, Data_M_E_xTrim, Data_M_E_xKeys, Data_M_E_xGreaterThanOrEqual, Data_M_E_xLesserVariable, Data_M_E_xIfZero, Data_M_E_xIf, Data_M_E_xGreaterThan, Data_M_E_xLessThan, Data_M_E_xSameVariable, Data_M_E_xLessThanOrEqual, Data_M_E_xC, Data_M_E_xConcat, Data_M_E_xNotEqual, Data_M_E_xEqual, Data_M_E_xPlus, Data_M_E_xMinus, Data_M_E_xTimes, Data_M_E_xAbsolute, Data_M_E_xEscape, Data_M_E_xMangle, Data_M_E_xBeforeFirst, Data_M_E_xAfterFirst, Data_M_E_xEndsWith, Data_M_E_xMatchRegex, Data_M_E_xLength, Data_M_E_xSubstring, Data_M_E_xIfEmpty, Data_M_E_xSquash, Data_M_E_xContains, Data_M_E_xStartsWith, Data_M_E_xError, Data_M_E_xNumericEqual, Data_M_E_xIsEmpty, Data_M_E_xIsZero, Data_M_E_xSaveTerm, Data_M_E_xLoadTerm, Data_M_E_xBitSubSetEq, Data_M_E_xBitMinus, Data_M_E_xBitNot, Data_M_E_xBitXOr, Data_M_E_xBitOr, Data_M_E_xBitAnd, Data_M_E_xHex, Data_M_E_xMod, Data_M_E_xDiv, Data_M_E_xDecimal, Data_M_E_xTryCall, Data_M_E_xCast, Data_M_E_xMatch, Data_M_E_xCall, Data_M_E_xUnionVariables, Data_M_E_xExceptVariables, Data_M_E_xFreeVariables, Data_M_E_xIntersectVariables, Data_M_E_xShow, Data_M_E_xFormat, Data_M_E_xGetRef, Data_M_E_xIfDef, Data_M_E_xPassLocationProperties, Data_M_E_xGet, Data_M_E_xTrace, Data_M_E_xFormatNumber} EnumOf_M_SPrimitive;
+typedef enum {FunOf_M_SPrimitive = 0, VarOf_M_SPrimitive = 1, Data_M_E_xIfData, Data_M_E_xHashCode, Data_M_E_xDeepEqual, Data_M_E_xForgivableError, Data_M_E_xStringLessThan, Data_M_E_xNull, Data_M_E_xNil, Data_M_E_xVariableNameIs, Data_M_E_xSplit, Data_M_E_xFromFirst, Data_M_E_xToFirst, Data_M_E_xDownCase, Data_M_E_xReplace, Data_M_E_xRescape, Data_M_E_xUpCase, Data_M_E_xParseURL, Data_M_E_xEcho, Data_M_E_xTrim, Data_M_E_xKeys, Data_M_E_xGreaterThanOrEqual, Data_M_E_xLesserVariable, Data_M_E_xIfZero, Data_M_E_xIf, Data_M_E_xGreaterThan, Data_M_E_xLessThan, Data_M_E_xSameVariable, Data_M_E_xLessThanOrEqual, Data_M_E_xC, Data_M_E_xConcat, Data_M_E_xNotEqual, Data_M_E_xEqual, Data_M_E_xPlus, Data_M_E_xMinus, Data_M_E_xTimes, Data_M_E_xAbsolute, Data_M_E_xEscape, Data_M_E_xMangle, Data_M_E_xBeforeFirst, Data_M_E_xAfterFirst, Data_M_E_xEndsWith, Data_M_E_xMatchRegex, Data_M_E_xLength, Data_M_E_xSubstring, Data_M_E_xIfEmpty, Data_M_E_xSquash, Data_M_E_xContains, Data_M_E_xStartsWith, Data_M_E_xError, Data_M_E_xNumericEqual, Data_M_E_xIsEmpty, Data_M_E_xIsZero, Data_M_E_xSaveTerm, Data_M_E_xLoadTerm, Data_M_E_xBitSubSetEq, Data_M_E_xBitMinus, Data_M_E_xBitNot, Data_M_E_xBitXOr, Data_M_E_xBitOr, Data_M_E_xBitAnd, Data_M_E_xHex, Data_M_E_xMod, Data_M_E_xDiv, Data_M_E_xDecimal, Data_M_E_xTryCall, Data_M_E_xCast, Data_M_E_xMatch, Data_M_E_xCall, Data_M_E_xUnionVariables, Data_M_E_xExceptVariables, Data_M_E_xFreeVariables, Data_M_E_xIntersectVariables, Data_M_E_xShow, Data_M_E_xFormat, Data_M_E_xGetRef, Data_M_E_xIfDef, Data_M_E_xPassLocationProperties, Data_M_E_xGet, Data_M_E_xTrace, Data_M_E_xFormatNumber} EnumOf_M_SPrimitive;
+#define STRUCT_Con_M_E_xIfData struct _ConstantConstruction
+extern struct _ConstructionDescriptor descriptor_M_E_xIfData;
 #define STRUCT_Con_M_E_xHashCode struct _ConstantConstruction
 extern struct _ConstructionDescriptor descriptor_M_E_xHashCode;
 #define STRUCT_Con_M_E_xDeepEqual struct _ConstantConstruction
@@ -441,7 +443,7 @@ extern struct _ConstructionDescriptor descriptor_M_T_xNO_xREUSE;
 extern struct _SortDescriptor sort_M_T_xREUSE_xSORT;
 
 /* DATA SORT Text-Part HEADER DECLARATIONS. */
-typedef enum {FunOf_M_Text_Part = 0, VarOf_M_Text_Part = 1, Data_M__sTextString, Data_M__sTextBreak, Data_M__sTextEmbed, Data_M__sTextGroup, Data_M__sTextSeparator, Data_M__sTextIndent, Data_M__sTextChars} EnumOf_M_Text_Part;
+typedef enum {FunOf_M_Text_Part = 0, VarOf_M_Text_Part = 1, Data_M__sTextString, Data_M__sTextBreak, Data_M__sTextEmbed, Data_M__sTextSeparator, Data_M__sTextIndent, Data_M__sTextGroup, Data_M__sTextChars} EnumOf_M_Text_Part;
 #define STRUCT_Con_M__sTextString struct _Con_M__sTextString
 struct _Con_M__sTextString {struct _Construction construction; Term sub[1]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M__sTextString;
@@ -451,14 +453,14 @@ extern struct _ConstructionDescriptor descriptor_M__sTextBreak;
 #define STRUCT_Con_M__sTextEmbed struct _Con_M__sTextEmbed
 struct _Con_M__sTextEmbed {struct _Construction construction; Term sub[1]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M__sTextEmbed;
-#define STRUCT_Con_M__sTextGroup struct _Con_M__sTextGroup
-struct _Con_M__sTextGroup {struct _Construction construction; Term sub[1]; Variable binder[0];};
-extern struct _ConstructionDescriptor descriptor_M__sTextGroup;
 #define STRUCT_Con_M__sTextSeparator struct _ConstantConstruction
 extern struct _ConstructionDescriptor descriptor_M__sTextSeparator;
 #define STRUCT_Con_M__sTextIndent struct _Con_M__sTextIndent
 struct _Con_M__sTextIndent {struct _Construction construction; Term sub[1]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M__sTextIndent;
+#define STRUCT_Con_M__sTextGroup struct _Con_M__sTextGroup
+struct _Con_M__sTextGroup {struct _Construction construction; Term sub[1]; Variable binder[0];};
+extern struct _ConstructionDescriptor descriptor_M__sTextGroup;
 #define STRUCT_Con_M__sTextChars struct _Con_M__sTextChars
 struct _Con_M__sTextChars {struct _Construction construction; Term sub[1]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M__sTextChars;

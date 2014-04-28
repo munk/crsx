@@ -54,7 +54,7 @@ Unif(#t1, Float) → Float;
 Unif(Float, #t2) → Float;
 
 | scheme Test([x:Variable]Type[x:Variable]);
-Test(x.#[x]) → Int;
+Test([y]#[y]) → Int;
 
 // SEMANTIC ANALYSIS.
 

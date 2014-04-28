@@ -354,13 +354,13 @@ struct _Con_M_F__variableOption4_s4 {struct _Construction construction; Term sub
 extern struct _ConstructionDescriptor descriptor_M_F__variableOption4_s4;
 extern int step_M_F__variableOption4_s4(Sink,Term);
 
-/* FUNCTION RULES-Pattern-Variable-Free$vFree HEADER DECLARATIONS. */
+/* FUNCTION RULES-Pattern-Variable-Bound$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_Pattern_s73 struct _Con_M_F_Pattern_s73
 struct _Con_M_F_Pattern_s73 {struct _Construction construction; Term sub[8]; Variable binder[1];};
 extern struct _ConstructionDescriptor descriptor_M_F_Pattern_s73;
 extern int step_M_F_Pattern_s73(Sink,Term);
 
-/* FUNCTION RULES-Pattern-Variable-Bound$vFree HEADER DECLARATIONS. */
+/* FUNCTION RULES-Pattern-Variable-Free$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_Pattern_s71 struct _Con_M_F_Pattern_s71
 struct _Con_M_F_Pattern_s71 {struct _Construction construction; Term sub[8]; Variable binder[1];};
 extern struct _ConstructionDescriptor descriptor_M_F_Pattern_s71;
@@ -390,7 +390,7 @@ struct _Con_M_F_Pattern_s76 {struct _Construction construction; Term sub[9]; Var
 extern struct _ConstructionDescriptor descriptor_M_F_Pattern_s76;
 extern int step_M_F_Pattern_s76(Sink,Term);
 
-/* FUNCTION RULES-Pattern-Variable-Bound$F-Pattern$74 HEADER DECLARATIONS. */
+/* FUNCTION RULES-Pattern-Variable-Free$F-Pattern$74 HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_Pattern_s74 struct _Con_M_F_Pattern_s74
 struct _Con_M_F_Pattern_s74 {struct _Construction construction; Term sub[8]; Variable binder[1];};
 extern struct _ConstructionDescriptor descriptor_M_F_Pattern_s74;
@@ -660,17 +660,17 @@ struct _Con_M_F_Pattern_Variable_Case_s1 {struct _Construction construction; Ter
 extern struct _ConstructionDescriptor descriptor_M_F_Pattern_Variable_Case_s1;
 extern int step_M_F_Pattern_Variable_Case_s1(Sink,Term);
 
-/* FUNCTION RULES-F-Freshes-1 HEADER DECLARATIONS. */
-#define STRUCT_Con_M_F_Freshes_s4 struct _Con_M_F_Freshes_s4
-struct _Con_M_F_Freshes_s4 {struct _Construction construction; Term sub[4]; Variable binder[0];};
-extern struct _ConstructionDescriptor descriptor_M_F_Freshes_s4;
-extern int step_M_F_Freshes_s4(Sink,Term);
-
 /* FUNCTION RULES-F-PatternSub-8$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_PatternSub_s19 struct _Con_M_F_PatternSub_s19
 struct _Con_M_F_PatternSub_s19 {struct _Construction construction; Term sub[12]; Variable binder[1];};
 extern struct _ConstructionDescriptor descriptor_M_F_PatternSub_s19;
 extern int step_M_F_PatternSub_s19(Sink,Term);
+
+/* FUNCTION RULES-F-Freshes-1 HEADER DECLARATIONS. */
+#define STRUCT_Con_M_F_Freshes_s4 struct _Con_M_F_Freshes_s4
+struct _Con_M_F_Freshes_s4 {struct _Construction construction; Term sub[4]; Variable binder[0];};
+extern struct _ConstructionDescriptor descriptor_M_F_Freshes_s4;
+extern int step_M_F_Freshes_s4(Sink,Term);
 
 /* FUNCTION RULES-F-Freshes-1$F-Freshes$3$OPTION HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_Freshes_s3 struct _Con_M_F_Freshes_s3
@@ -690,17 +690,17 @@ struct _Con_M_F_PatternSub_s15 {struct _Construction construction; Term sub[13];
 extern struct _ConstructionDescriptor descriptor_M_F_PatternSub_s15;
 extern int step_M_F_PatternSub_s15(Sink,Term);
 
-/* FUNCTION RULES-F-Freshes- HEADER DECLARATIONS. */
-#define STRUCT_Con_M_F_Freshes_s2 struct _Con_M_F_Freshes_s2
-struct _Con_M_F_Freshes_s2 {struct _Construction construction; Term sub[2]; Variable binder[0];};
-extern struct _ConstructionDescriptor descriptor_M_F_Freshes_s2;
-extern int step_M_F_Freshes_s2(Sink,Term);
-
 /* FUNCTION RULES-F-PatternSub-8$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_PatternSub_s17 struct _Con_M_F_PatternSub_s17
 struct _Con_M_F_PatternSub_s17 {struct _Construction construction; Term sub[12]; Variable binder[1];};
 extern struct _ConstructionDescriptor descriptor_M_F_PatternSub_s17;
 extern int step_M_F_PatternSub_s17(Sink,Term);
+
+/* FUNCTION RULES-F-Freshes- HEADER DECLARATIONS. */
+#define STRUCT_Con_M_F_Freshes_s2 struct _Con_M_F_Freshes_s2
+struct _Con_M_F_Freshes_s2 {struct _Construction construction; Term sub[2]; Variable binder[0];};
+extern struct _ConstructionDescriptor descriptor_M_F_Freshes_s2;
+extern int step_M_F_Freshes_s2(Sink,Term);
 
 /* FUNCTION RULES-F-PatternSub-5$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_PatternSub_s10 struct _Con_M_F_PatternSub_s10
@@ -882,17 +882,17 @@ struct _Con_M_F_Dispatch_s1 {struct _Construction construction; Term sub[7]; Var
 extern struct _ConstructionDescriptor descriptor_M_F_Dispatch_s1;
 extern int step_M_F_Dispatch_s1(Sink,Term);
 
-/* FUNCTION RULES-F-Dispatch-1 HEADER DECLARATIONS. */
-#define STRUCT_Con_M_F_Dispatch_s2 struct _Con_M_F_Dispatch_s2
-struct _Con_M_F_Dispatch_s2 {struct _Construction construction; Term sub[8]; Variable binder[0];};
-extern struct _ConstructionDescriptor descriptor_M_F_Dispatch_s2;
-extern int step_M_F_Dispatch_s2(Sink,Term);
-
 /* FUNCTION RULES-F-PatternBinders- HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_PatternBinders_s1 struct _Con_M_F_PatternBinders_s1
 struct _Con_M_F_PatternBinders_s1 {struct _Construction construction; Term sub[7]; Variable binder[1];};
 extern struct _ConstructionDescriptor descriptor_M_F_PatternBinders_s1;
 extern int step_M_F_PatternBinders_s1(Sink,Term);
+
+/* FUNCTION RULES-F-Dispatch-1 HEADER DECLARATIONS. */
+#define STRUCT_Con_M_F_Dispatch_s2 struct _Con_M_F_Dispatch_s2
+struct _Con_M_F_Dispatch_s2 {struct _Construction construction; Term sub[8]; Variable binder[0];};
+extern struct _ConstructionDescriptor descriptor_M_F_Dispatch_s2;
+extern int step_M_F_Dispatch_s2(Sink,Term);
 
 /* FUNCTION RULES-F-PatternBinders-1 HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_PatternBinders_s2 struct _Con_M_F_PatternBinders_s2
@@ -1356,7 +1356,7 @@ struct _Con_M_F_Fresh4 {struct _Construction construction; Term sub[2]; Variable
 extern struct _ConstructionDescriptor descriptor_M_F_Fresh4;
 extern int step_M_F_Fresh4(Sink,Term);
 
-/* FUNCTION RULES-F-Fresh2-2$vFree HEADER DECLARATIONS. */
+/* FUNCTION RULES-F-Fresh2-1$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_F_Fresh2 struct _Con_M_F_Fresh2
 struct _Con_M_F_Fresh2 {struct _Construction construction; Term sub[2]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M_F_Fresh2;

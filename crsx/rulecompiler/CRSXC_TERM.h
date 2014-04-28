@@ -511,13 +511,13 @@ struct _Con_M_T_UnlinkLastMetaUse_s2 {struct _Construction construction; Term su
 extern struct _ConstructionDescriptor descriptor_M_T_UnlinkLastMetaUse_s2;
 extern int step_M_T_UnlinkLastMetaUse_s2(Sink,Term);
 
-/* FUNCTION TERM-T-substitute2-2$vFree HEADER DECLARATIONS. */
+/* FUNCTION TERM-T-substitute2-3$vFree HEADER DECLARATIONS. */
 #define STRUCT_Con_M_T__substitute2_s7 struct _Con_M_T__substitute2_s7
 struct _Con_M_T__substitute2_s7 {struct _Construction construction; Term sub[10]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M_T__substitute2_s7;
 extern int step_M_T__substitute2_s7(Sink,Term);
 
-/* FUNCTION TERM-T-substitute2-2$T-substitute2$5$USE HEADER DECLARATIONS. */
+/* FUNCTION TERM-T-substitute2-3$T-substitute2$5$USE HEADER DECLARATIONS. */
 #define STRUCT_Con_M_T__substitute2_s5 struct _Con_M_T__substitute2_s5
 struct _Con_M_T__substitute2_s5 {struct _Construction construction; Term sub[10]; Variable binder[0];};
 extern struct _ConstructionDescriptor descriptor_M_T__substitute2_s5;

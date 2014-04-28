@@ -1,5 +1,7 @@
 # Makefile for HACS Gentle Introduction Examples.
 
+SHELL = sh -x
+
 # HACS configuration.
 HACS = $(abspath hacs)
 include $(HACS)/Makefile-hx

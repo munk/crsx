@@ -1641,7 +1641,7 @@ int step_M_T__send(Sink sink__V406, Term term__V407)
       UNLINK_NamedPropertyLink(sink__V406->context, namedP__V434); UNLINK_VariablePropertyLink(sink__V406->context, varP__V435);
       
       return 1;
-    break; } case Data_M_PROPERTY: { /* Function TERM-Send-Property-other$T-send$PROPERTY case PROPERTY */
+    break; } case Data_M_PROPERTY: { /* Function TERM-Send-Property-Literal-Key$T-send$PROPERTY case PROPERTY */
       ASSERT(sink__V406->context, !strcmp(SYMBOL(term__V407),  "T-send" ));
       Term sub__V436 = SUB(term__V407, 0); permitUnusedTerm(sub__V436); int sub__V436_count = term__V407_count*LINK_COUNT(sub__V436); permitUnusedInt(sub__V436_count);
       CRSX_CHECK_SORT(sink__V406->context, sub__V436, &sort_M_Reified_xTerm); ASSERT(sink__V406->context, !strcmp(SYMBOL(sub__V436),  "PROPERTY" ));
@@ -5249,7 +5249,7 @@ int step_M_T__substitute2_s7(Sink sink__V1436, Term term__V1437)
       do {
         ASSERT(sink__V1436->context, !strcmp(SYMBOL(term__V1437),  "T-substitute2$7" ));
         Term sub__V1440 = SUB(term__V1437, 0); permitUnusedTerm(sub__V1440); int sub__V1440_count = term__V1437_count*LINK_COUNT(sub__V1440); permitUnusedInt(sub__V1440_count);
-        CRSX_CHECK_SORT(sink__V1436->context, sub__V1440, &sort_M_Reified_xVariable); /* Function TERM-T-substitute2-2$vFree fall-back case for free variable */
+        CRSX_CHECK_SORT(sink__V1436->context, sub__V1440, &sort_M_Reified_xVariable); /* Function TERM-T-substitute2-3$vFree fall-back case for free variable */
         Variable z__V129 = VARIABLE(sub__V1440); permitUnusedVariable(z__V129);
         Term sub__V1441 = LINK(sink__V1436->context, SUB(term__V1437, 1)); int sub__V1441_count = term__V1437_count*LINK_COUNT(sub__V1441); permitUnusedInt(sub__V1441_count);
         /* sub__V1441 = &#1 */
@@ -5296,7 +5296,7 @@ int step_M_T__substitute2_s5(Sink sink__V1452, Term term__V1453)
   EnumOf_M_Reified_xUse choice__V1455 = (IS_VARIABLE_USE(sub__V1454) ? VarOf_M_Reified_xUse : (EnumOf_M_Reified_xUse) TAG(sub__V1454));
   switch (choice__V1455)
   {
-    case Data_M_USE: { /* Function TERM-T-substitute2-2$T-substitute2$5$USE case USE */
+    case Data_M_USE: { /* Function TERM-T-substitute2-3$T-substitute2$5$USE case USE */
       ASSERT(sink__V1452->context, !strcmp(SYMBOL(term__V1453),  "T-substitute2$5" ));
       Term sub__V1456 = SUB(term__V1453, 0); permitUnusedTerm(sub__V1456); int sub__V1456_count = term__V1453_count*LINK_COUNT(sub__V1456); permitUnusedInt(sub__V1456_count);
       CRSX_CHECK_SORT(sink__V1452->context, sub__V1456, &sort_M_Reified_xUse); ASSERT(sink__V1452->context, !strcmp(SYMBOL(sub__V1456),  "USE" ));

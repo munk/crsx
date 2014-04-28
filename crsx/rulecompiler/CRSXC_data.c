@@ -44,21 +44,21 @@ char *sortInt_M__sTryResult[] = {NULL, NULL, "_M__sTrySuccess", "_M__sTryFailure
 struct _SortDescriptor sort_M__sTryResult = { "$TryResult" , sortCon_M__sTryResult, sortNam_M__sTryResult, sortInt_M__sTryResult, NULL};
 
 /* SORT Binder-State CONSTANTS. */
-char *name_M_REUSING =  "REUSING" ;
-char *nameFun_M_REUSING(Term term) { return name_M_REUSING; }
-struct _ConstructionDescriptor descriptor_M_REUSING = {&sort_M_Binder_State, Data_M_REUSING, 0, sizeof(STRUCT_Con_M_REUSING), noBinderOffsets, &nameFun_M_REUSING, &dataStep};
-char *name_M_OUTER =  "OUTER" ;
-char *nameFun_M_OUTER(Term term) { return name_M_OUTER; }
-struct _ConstructionDescriptor descriptor_M_OUTER = {&sort_M_Binder_State, Data_M_OUTER, 0, sizeof(STRUCT_Con_M_OUTER), noBinderOffsets, &nameFun_M_OUTER, &dataStep};
 char *name_M_NO_xREUSE =  "NO_REUSE" ;
 char *nameFun_M_NO_xREUSE(Term term) { return name_M_NO_xREUSE; }
 struct _ConstructionDescriptor descriptor_M_NO_xREUSE = {&sort_M_Binder_State, Data_M_NO_xREUSE, 0, sizeof(STRUCT_Con_M_NO_xREUSE), noBinderOffsets, &nameFun_M_NO_xREUSE, &dataStep};
+char *name_M_OUTER =  "OUTER" ;
+char *nameFun_M_OUTER(Term term) { return name_M_OUTER; }
+struct _ConstructionDescriptor descriptor_M_OUTER = {&sort_M_Binder_State, Data_M_OUTER, 0, sizeof(STRUCT_Con_M_OUTER), noBinderOffsets, &nameFun_M_OUTER, &dataStep};
 char *name_M_COPYING =  "COPYING" ;
 char *nameFun_M_COPYING(Term term) { return name_M_COPYING; }
 struct _ConstructionDescriptor descriptor_M_COPYING = {&sort_M_Binder_State, Data_M_COPYING, 0, sizeof(STRUCT_Con_M_COPYING), noBinderOffsets, &nameFun_M_COPYING, &dataStep};
-ConstructionDescriptor sortCon_M_Binder_State[] = {NULL, NULL, &descriptor_M_REUSING, &descriptor_M_OUTER, &descriptor_M_NO_xREUSE, &descriptor_M_COPYING,  NULL};
-char *sortNam_M_Binder_State[] = {NULL, NULL,  "REUSING" ,  "OUTER" ,  "NO_REUSE" ,  "COPYING" ,  NULL};
-char *sortInt_M_Binder_State[] = {NULL, NULL, "_M_REUSING", "_M_OUTER", "_M_NO_xREUSE", "_M_COPYING",  NULL};
+char *name_M_REUSING =  "REUSING" ;
+char *nameFun_M_REUSING(Term term) { return name_M_REUSING; }
+struct _ConstructionDescriptor descriptor_M_REUSING = {&sort_M_Binder_State, Data_M_REUSING, 0, sizeof(STRUCT_Con_M_REUSING), noBinderOffsets, &nameFun_M_REUSING, &dataStep};
+ConstructionDescriptor sortCon_M_Binder_State[] = {NULL, NULL, &descriptor_M_NO_xREUSE, &descriptor_M_OUTER, &descriptor_M_COPYING, &descriptor_M_REUSING,  NULL};
+char *sortNam_M_Binder_State[] = {NULL, NULL,  "NO_REUSE" ,  "OUTER" ,  "COPYING" ,  "REUSING" ,  NULL};
+char *sortInt_M_Binder_State[] = {NULL, NULL, "_M_NO_xREUSE", "_M_OUTER", "_M_COPYING", "_M_REUSING",  NULL};
 struct _SortDescriptor sort_M_Binder_State = { "Binder-State" , sortCon_M_Binder_State, sortNam_M_Binder_State, sortInt_M_Binder_State, NULL};
 
 /* SORT Meta-Occurrence CONSTANTS. */
@@ -99,20 +99,20 @@ struct _SortDescriptor sort_M_PASS = { "PASS" , sortCon_M_PASS, sortNam_M_PASS, 
 char *name_M_MATCH =  "MATCH" ;
 char *nameFun_M_MATCH(Term term) { return name_M_MATCH; }
 struct _ConstructionDescriptor descriptor_M_MATCH = {&sort_M_Pattern_Stage, Data_M_MATCH, 0, sizeof(STRUCT_Con_M_MATCH), noBinderOffsets, &nameFun_M_MATCH, &dataStep};
-int conBindOffs_M_CASE[] = {0 , 0 , 0 , 0};
-char *name_M_CASE =  "CASE" ;
-char *nameFun_M_CASE(Term term) { return name_M_CASE; }
-struct _ConstructionDescriptor descriptor_M_CASE = {&sort_M_Pattern_Stage, Data_M_CASE, 3, sizeof(STRUCT_Con_M_CASE), conBindOffs_M_CASE, &nameFun_M_CASE, &dataStep};
 int conBindOffs_M_DISPATCH[] = {0 , 0 , 0 , 0};
 char *name_M_DISPATCH =  "DISPATCH" ;
 char *nameFun_M_DISPATCH(Term term) { return name_M_DISPATCH; }
 struct _ConstructionDescriptor descriptor_M_DISPATCH = {&sort_M_Pattern_Stage, Data_M_DISPATCH, 3, sizeof(STRUCT_Con_M_DISPATCH), conBindOffs_M_DISPATCH, &nameFun_M_DISPATCH, &dataStep};
+int conBindOffs_M_CASE[] = {0 , 0 , 0 , 0};
+char *name_M_CASE =  "CASE" ;
+char *nameFun_M_CASE(Term term) { return name_M_CASE; }
+struct _ConstructionDescriptor descriptor_M_CASE = {&sort_M_Pattern_Stage, Data_M_CASE, 3, sizeof(STRUCT_Con_M_CASE), conBindOffs_M_CASE, &nameFun_M_CASE, &dataStep};
 char *name_M_SUBMATCH =  "SUBMATCH" ;
 char *nameFun_M_SUBMATCH(Term term) { return name_M_SUBMATCH; }
 struct _ConstructionDescriptor descriptor_M_SUBMATCH = {&sort_M_Pattern_Stage, Data_M_SUBMATCH, 0, sizeof(STRUCT_Con_M_SUBMATCH), noBinderOffsets, &nameFun_M_SUBMATCH, &dataStep};
-ConstructionDescriptor sortCon_M_Pattern_Stage[] = {NULL, NULL, &descriptor_M_MATCH, &descriptor_M_CASE, &descriptor_M_DISPATCH, &descriptor_M_SUBMATCH,  NULL};
-char *sortNam_M_Pattern_Stage[] = {NULL, NULL,  "MATCH" ,  "CASE" ,  "DISPATCH" ,  "SUBMATCH" ,  NULL};
-char *sortInt_M_Pattern_Stage[] = {NULL, NULL, "_M_MATCH", "_M_CASE", "_M_DISPATCH", "_M_SUBMATCH",  NULL};
+ConstructionDescriptor sortCon_M_Pattern_Stage[] = {NULL, NULL, &descriptor_M_MATCH, &descriptor_M_DISPATCH, &descriptor_M_CASE, &descriptor_M_SUBMATCH,  NULL};
+char *sortNam_M_Pattern_Stage[] = {NULL, NULL,  "MATCH" ,  "DISPATCH" ,  "CASE" ,  "SUBMATCH" ,  NULL};
+char *sortInt_M_Pattern_Stage[] = {NULL, NULL, "_M_MATCH", "_M_DISPATCH", "_M_CASE", "_M_SUBMATCH",  NULL};
 struct _SortDescriptor sort_M_Pattern_Stage = { "Pattern-Stage" , sortCon_M_Pattern_Stage, sortNam_M_Pattern_Stage, sortInt_M_Pattern_Stage, NULL};
 
 /* SORT PropsOf$$TextCons_SORT CONSTANTS. */
@@ -351,6 +351,9 @@ char *sortInt_M_Reify_xCRSX[] = {NULL, NULL, "_M_CRSX",  NULL};
 struct _SortDescriptor sort_M_Reify_xCRSX = { "Reify_CRSX" , sortCon_M_Reify_xCRSX, sortNam_M_Reify_xCRSX, sortInt_M_Reify_xCRSX, NULL};
 
 /* SORT SPrimitive CONSTANTS. */
+char *name_M_E_xIfData =  "E_IfData" ;
+char *nameFun_M_E_xIfData(Term term) { return name_M_E_xIfData; }
+struct _ConstructionDescriptor descriptor_M_E_xIfData = {&sort_M_SPrimitive, Data_M_E_xIfData, 0, sizeof(STRUCT_Con_M_E_xIfData), noBinderOffsets, &nameFun_M_E_xIfData, &dataStep};
 char *name_M_E_xHashCode =  "E_HashCode" ;
 char *nameFun_M_E_xHashCode(Term term) { return name_M_E_xHashCode; }
 struct _ConstructionDescriptor descriptor_M_E_xHashCode = {&sort_M_SPrimitive, Data_M_E_xHashCode, 0, sizeof(STRUCT_Con_M_E_xHashCode), noBinderOffsets, &nameFun_M_E_xHashCode, &dataStep};
@@ -585,9 +588,9 @@ struct _ConstructionDescriptor descriptor_M_E_xTrace = {&sort_M_SPrimitive, Data
 char *name_M_E_xFormatNumber =  "E_FormatNumber" ;
 char *nameFun_M_E_xFormatNumber(Term term) { return name_M_E_xFormatNumber; }
 struct _ConstructionDescriptor descriptor_M_E_xFormatNumber = {&sort_M_SPrimitive, Data_M_E_xFormatNumber, 0, sizeof(STRUCT_Con_M_E_xFormatNumber), noBinderOffsets, &nameFun_M_E_xFormatNumber, &dataStep};
-ConstructionDescriptor sortCon_M_SPrimitive[] = {NULL, NULL, &descriptor_M_E_xHashCode, &descriptor_M_E_xDeepEqual, &descriptor_M_E_xForgivableError, &descriptor_M_E_xStringLessThan, &descriptor_M_E_xNull, &descriptor_M_E_xNil, &descriptor_M_E_xVariableNameIs, &descriptor_M_E_xSplit, &descriptor_M_E_xFromFirst, &descriptor_M_E_xToFirst, &descriptor_M_E_xDownCase, &descriptor_M_E_xReplace, &descriptor_M_E_xRescape, &descriptor_M_E_xUpCase, &descriptor_M_E_xParseURL, &descriptor_M_E_xEcho, &descriptor_M_E_xTrim, &descriptor_M_E_xKeys, &descriptor_M_E_xGreaterThanOrEqual, &descriptor_M_E_xLesserVariable, &descriptor_M_E_xIfZero, &descriptor_M_E_xIf, &descriptor_M_E_xGreaterThan, &descriptor_M_E_xLessThan, &descriptor_M_E_xSameVariable, &descriptor_M_E_xLessThanOrEqual, &descriptor_M_E_xC, &descriptor_M_E_xConcat, &descriptor_M_E_xNotEqual, &descriptor_M_E_xEqual, &descriptor_M_E_xPlus, &descriptor_M_E_xMinus, &descriptor_M_E_xTimes, &descriptor_M_E_xAbsolute, &descriptor_M_E_xEscape, &descriptor_M_E_xMangle, &descriptor_M_E_xBeforeFirst, &descriptor_M_E_xAfterFirst, &descriptor_M_E_xEndsWith, &descriptor_M_E_xMatchRegex, &descriptor_M_E_xLength, &descriptor_M_E_xSubstring, &descriptor_M_E_xIfEmpty, &descriptor_M_E_xSquash, &descriptor_M_E_xContains, &descriptor_M_E_xStartsWith, &descriptor_M_E_xError, &descriptor_M_E_xNumericEqual, &descriptor_M_E_xIsEmpty, &descriptor_M_E_xIsZero, &descriptor_M_E_xSaveTerm, &descriptor_M_E_xLoadTerm, &descriptor_M_E_xBitSubSetEq, &descriptor_M_E_xBitMinus, &descriptor_M_E_xBitNot, &descriptor_M_E_xBitXOr, &descriptor_M_E_xBitOr, &descriptor_M_E_xBitAnd, &descriptor_M_E_xHex, &descriptor_M_E_xMod, &descriptor_M_E_xDiv, &descriptor_M_E_xDecimal, &descriptor_M_E_xTryCall, &descriptor_M_E_xCast, &descriptor_M_E_xMatch, &descriptor_M_E_xCall, &descriptor_M_E_xUnionVariables, &descriptor_M_E_xExceptVariables, &descriptor_M_E_xFreeVariables, &descriptor_M_E_xIntersectVariables, &descriptor_M_E_xShow, &descriptor_M_E_xFormat, &descriptor_M_E_xGetRef, &descriptor_M_E_xIfDef, &descriptor_M_E_xPassLocationProperties, &descriptor_M_E_xGet, &descriptor_M_E_xTrace, &descriptor_M_E_xFormatNumber,  NULL};
-char *sortNam_M_SPrimitive[] = {NULL, NULL,  "E_HashCode" ,  "E_DeepEqual" ,  "E_ForgivableError" ,  "E_StringLessThan" ,  "E_Null" ,  "E_Nil" ,  "E_VariableNameIs" ,  "E_Split" ,  "E_FromFirst" ,  "E_ToFirst" ,  "E_DownCase" ,  "E_Replace" ,  "E_Rescape" ,  "E_UpCase" ,  "E_ParseURL" ,  "E_Echo" ,  "E_Trim" ,  "E_Keys" ,  "E_GreaterThanOrEqual" ,  "E_LesserVariable" ,  "E_IfZero" ,  "E_If" ,  "E_GreaterThan" ,  "E_LessThan" ,  "E_SameVariable" ,  "E_LessThanOrEqual" ,  "E_C" ,  "E_Concat" ,  "E_NotEqual" ,  "E_Equal" ,  "E_Plus" ,  "E_Minus" ,  "E_Times" ,  "E_Absolute" ,  "E_Escape" ,  "E_Mangle" ,  "E_BeforeFirst" ,  "E_AfterFirst" ,  "E_EndsWith" ,  "E_MatchRegex" ,  "E_Length" ,  "E_Substring" ,  "E_IfEmpty" ,  "E_Squash" ,  "E_Contains" ,  "E_StartsWith" ,  "E_Error" ,  "E_NumericEqual" ,  "E_IsEmpty" ,  "E_IsZero" ,  "E_SaveTerm" ,  "E_LoadTerm" ,  "E_BitSubSetEq" ,  "E_BitMinus" ,  "E_BitNot" ,  "E_BitXOr" ,  "E_BitOr" ,  "E_BitAnd" ,  "E_Hex" ,  "E_Mod" ,  "E_Div" ,  "E_Decimal" ,  "E_TryCall" ,  "E_Cast" ,  "E_Match" ,  "E_Call" ,  "E_UnionVariables" ,  "E_ExceptVariables" ,  "E_FreeVariables" ,  "E_IntersectVariables" ,  "E_Show" ,  "E_Format" ,  "E_GetRef" ,  "E_IfDef" ,  "E_PassLocationProperties" ,  "E_Get" ,  "E_Trace" ,  "E_FormatNumber" ,  NULL};
-char *sortInt_M_SPrimitive[] = {NULL, NULL, "_M_E_xHashCode", "_M_E_xDeepEqual", "_M_E_xForgivableError", "_M_E_xStringLessThan", "_M_E_xNull", "_M_E_xNil", "_M_E_xVariableNameIs", "_M_E_xSplit", "_M_E_xFromFirst", "_M_E_xToFirst", "_M_E_xDownCase", "_M_E_xReplace", "_M_E_xRescape", "_M_E_xUpCase", "_M_E_xParseURL", "_M_E_xEcho", "_M_E_xTrim", "_M_E_xKeys", "_M_E_xGreaterThanOrEqual", "_M_E_xLesserVariable", "_M_E_xIfZero", "_M_E_xIf", "_M_E_xGreaterThan", "_M_E_xLessThan", "_M_E_xSameVariable", "_M_E_xLessThanOrEqual", "_M_E_xC", "_M_E_xConcat", "_M_E_xNotEqual", "_M_E_xEqual", "_M_E_xPlus", "_M_E_xMinus", "_M_E_xTimes", "_M_E_xAbsolute", "_M_E_xEscape", "_M_E_xMangle", "_M_E_xBeforeFirst", "_M_E_xAfterFirst", "_M_E_xEndsWith", "_M_E_xMatchRegex", "_M_E_xLength", "_M_E_xSubstring", "_M_E_xIfEmpty", "_M_E_xSquash", "_M_E_xContains", "_M_E_xStartsWith", "_M_E_xError", "_M_E_xNumericEqual", "_M_E_xIsEmpty", "_M_E_xIsZero", "_M_E_xSaveTerm", "_M_E_xLoadTerm", "_M_E_xBitSubSetEq", "_M_E_xBitMinus", "_M_E_xBitNot", "_M_E_xBitXOr", "_M_E_xBitOr", "_M_E_xBitAnd", "_M_E_xHex", "_M_E_xMod", "_M_E_xDiv", "_M_E_xDecimal", "_M_E_xTryCall", "_M_E_xCast", "_M_E_xMatch", "_M_E_xCall", "_M_E_xUnionVariables", "_M_E_xExceptVariables", "_M_E_xFreeVariables", "_M_E_xIntersectVariables", "_M_E_xShow", "_M_E_xFormat", "_M_E_xGetRef", "_M_E_xIfDef", "_M_E_xPassLocationProperties", "_M_E_xGet", "_M_E_xTrace", "_M_E_xFormatNumber",  NULL};
+ConstructionDescriptor sortCon_M_SPrimitive[] = {NULL, NULL, &descriptor_M_E_xIfData, &descriptor_M_E_xHashCode, &descriptor_M_E_xDeepEqual, &descriptor_M_E_xForgivableError, &descriptor_M_E_xStringLessThan, &descriptor_M_E_xNull, &descriptor_M_E_xNil, &descriptor_M_E_xVariableNameIs, &descriptor_M_E_xSplit, &descriptor_M_E_xFromFirst, &descriptor_M_E_xToFirst, &descriptor_M_E_xDownCase, &descriptor_M_E_xReplace, &descriptor_M_E_xRescape, &descriptor_M_E_xUpCase, &descriptor_M_E_xParseURL, &descriptor_M_E_xEcho, &descriptor_M_E_xTrim, &descriptor_M_E_xKeys, &descriptor_M_E_xGreaterThanOrEqual, &descriptor_M_E_xLesserVariable, &descriptor_M_E_xIfZero, &descriptor_M_E_xIf, &descriptor_M_E_xGreaterThan, &descriptor_M_E_xLessThan, &descriptor_M_E_xSameVariable, &descriptor_M_E_xLessThanOrEqual, &descriptor_M_E_xC, &descriptor_M_E_xConcat, &descriptor_M_E_xNotEqual, &descriptor_M_E_xEqual, &descriptor_M_E_xPlus, &descriptor_M_E_xMinus, &descriptor_M_E_xTimes, &descriptor_M_E_xAbsolute, &descriptor_M_E_xEscape, &descriptor_M_E_xMangle, &descriptor_M_E_xBeforeFirst, &descriptor_M_E_xAfterFirst, &descriptor_M_E_xEndsWith, &descriptor_M_E_xMatchRegex, &descriptor_M_E_xLength, &descriptor_M_E_xSubstring, &descriptor_M_E_xIfEmpty, &descriptor_M_E_xSquash, &descriptor_M_E_xContains, &descriptor_M_E_xStartsWith, &descriptor_M_E_xError, &descriptor_M_E_xNumericEqual, &descriptor_M_E_xIsEmpty, &descriptor_M_E_xIsZero, &descriptor_M_E_xSaveTerm, &descriptor_M_E_xLoadTerm, &descriptor_M_E_xBitSubSetEq, &descriptor_M_E_xBitMinus, &descriptor_M_E_xBitNot, &descriptor_M_E_xBitXOr, &descriptor_M_E_xBitOr, &descriptor_M_E_xBitAnd, &descriptor_M_E_xHex, &descriptor_M_E_xMod, &descriptor_M_E_xDiv, &descriptor_M_E_xDecimal, &descriptor_M_E_xTryCall, &descriptor_M_E_xCast, &descriptor_M_E_xMatch, &descriptor_M_E_xCall, &descriptor_M_E_xUnionVariables, &descriptor_M_E_xExceptVariables, &descriptor_M_E_xFreeVariables, &descriptor_M_E_xIntersectVariables, &descriptor_M_E_xShow, &descriptor_M_E_xFormat, &descriptor_M_E_xGetRef, &descriptor_M_E_xIfDef, &descriptor_M_E_xPassLocationProperties, &descriptor_M_E_xGet, &descriptor_M_E_xTrace, &descriptor_M_E_xFormatNumber,  NULL};
+char *sortNam_M_SPrimitive[] = {NULL, NULL,  "E_IfData" ,  "E_HashCode" ,  "E_DeepEqual" ,  "E_ForgivableError" ,  "E_StringLessThan" ,  "E_Null" ,  "E_Nil" ,  "E_VariableNameIs" ,  "E_Split" ,  "E_FromFirst" ,  "E_ToFirst" ,  "E_DownCase" ,  "E_Replace" ,  "E_Rescape" ,  "E_UpCase" ,  "E_ParseURL" ,  "E_Echo" ,  "E_Trim" ,  "E_Keys" ,  "E_GreaterThanOrEqual" ,  "E_LesserVariable" ,  "E_IfZero" ,  "E_If" ,  "E_GreaterThan" ,  "E_LessThan" ,  "E_SameVariable" ,  "E_LessThanOrEqual" ,  "E_C" ,  "E_Concat" ,  "E_NotEqual" ,  "E_Equal" ,  "E_Plus" ,  "E_Minus" ,  "E_Times" ,  "E_Absolute" ,  "E_Escape" ,  "E_Mangle" ,  "E_BeforeFirst" ,  "E_AfterFirst" ,  "E_EndsWith" ,  "E_MatchRegex" ,  "E_Length" ,  "E_Substring" ,  "E_IfEmpty" ,  "E_Squash" ,  "E_Contains" ,  "E_StartsWith" ,  "E_Error" ,  "E_NumericEqual" ,  "E_IsEmpty" ,  "E_IsZero" ,  "E_SaveTerm" ,  "E_LoadTerm" ,  "E_BitSubSetEq" ,  "E_BitMinus" ,  "E_BitNot" ,  "E_BitXOr" ,  "E_BitOr" ,  "E_BitAnd" ,  "E_Hex" ,  "E_Mod" ,  "E_Div" ,  "E_Decimal" ,  "E_TryCall" ,  "E_Cast" ,  "E_Match" ,  "E_Call" ,  "E_UnionVariables" ,  "E_ExceptVariables" ,  "E_FreeVariables" ,  "E_IntersectVariables" ,  "E_Show" ,  "E_Format" ,  "E_GetRef" ,  "E_IfDef" ,  "E_PassLocationProperties" ,  "E_Get" ,  "E_Trace" ,  "E_FormatNumber" ,  NULL};
+char *sortInt_M_SPrimitive[] = {NULL, NULL, "_M_E_xIfData", "_M_E_xHashCode", "_M_E_xDeepEqual", "_M_E_xForgivableError", "_M_E_xStringLessThan", "_M_E_xNull", "_M_E_xNil", "_M_E_xVariableNameIs", "_M_E_xSplit", "_M_E_xFromFirst", "_M_E_xToFirst", "_M_E_xDownCase", "_M_E_xReplace", "_M_E_xRescape", "_M_E_xUpCase", "_M_E_xParseURL", "_M_E_xEcho", "_M_E_xTrim", "_M_E_xKeys", "_M_E_xGreaterThanOrEqual", "_M_E_xLesserVariable", "_M_E_xIfZero", "_M_E_xIf", "_M_E_xGreaterThan", "_M_E_xLessThan", "_M_E_xSameVariable", "_M_E_xLessThanOrEqual", "_M_E_xC", "_M_E_xConcat", "_M_E_xNotEqual", "_M_E_xEqual", "_M_E_xPlus", "_M_E_xMinus", "_M_E_xTimes", "_M_E_xAbsolute", "_M_E_xEscape", "_M_E_xMangle", "_M_E_xBeforeFirst", "_M_E_xAfterFirst", "_M_E_xEndsWith", "_M_E_xMatchRegex", "_M_E_xLength", "_M_E_xSubstring", "_M_E_xIfEmpty", "_M_E_xSquash", "_M_E_xContains", "_M_E_xStartsWith", "_M_E_xError", "_M_E_xNumericEqual", "_M_E_xIsEmpty", "_M_E_xIsZero", "_M_E_xSaveTerm", "_M_E_xLoadTerm", "_M_E_xBitSubSetEq", "_M_E_xBitMinus", "_M_E_xBitNot", "_M_E_xBitXOr", "_M_E_xBitOr", "_M_E_xBitAnd", "_M_E_xHex", "_M_E_xMod", "_M_E_xDiv", "_M_E_xDecimal", "_M_E_xTryCall", "_M_E_xCast", "_M_E_xMatch", "_M_E_xCall", "_M_E_xUnionVariables", "_M_E_xExceptVariables", "_M_E_xFreeVariables", "_M_E_xIntersectVariables", "_M_E_xShow", "_M_E_xFormat", "_M_E_xGetRef", "_M_E_xIfDef", "_M_E_xPassLocationProperties", "_M_E_xGet", "_M_E_xTrace", "_M_E_xFormatNumber",  NULL};
 struct _SortDescriptor sort_M_SPrimitive = { "SPrimitive" , sortCon_M_SPrimitive, sortNam_M_SPrimitive, sortInt_M_SPrimitive, NULL};
 
 /* SORT STRING_ENTRY CONSTANTS. */
@@ -648,10 +651,6 @@ int conBindOffs_M__sTextEmbed[] = {0 , 0};
 char *name_M__sTextEmbed =  "$TextEmbed" ;
 char *nameFun_M__sTextEmbed(Term term) { return name_M__sTextEmbed; }
 struct _ConstructionDescriptor descriptor_M__sTextEmbed = {&sort_M_Text_Part, Data_M__sTextEmbed, 1, sizeof(STRUCT_Con_M__sTextEmbed), conBindOffs_M__sTextEmbed, &nameFun_M__sTextEmbed, &dataStep};
-int conBindOffs_M__sTextGroup[] = {0 , 0};
-char *name_M__sTextGroup =  "$TextGroup" ;
-char *nameFun_M__sTextGroup(Term term) { return name_M__sTextGroup; }
-struct _ConstructionDescriptor descriptor_M__sTextGroup = {&sort_M_Text_Part, Data_M__sTextGroup, 1, sizeof(STRUCT_Con_M__sTextGroup), conBindOffs_M__sTextGroup, &nameFun_M__sTextGroup, &dataStep};
 char *name_M__sTextSeparator =  "$TextSeparator" ;
 char *nameFun_M__sTextSeparator(Term term) { return name_M__sTextSeparator; }
 struct _ConstructionDescriptor descriptor_M__sTextSeparator = {&sort_M_Text_Part, Data_M__sTextSeparator, 0, sizeof(STRUCT_Con_M__sTextSeparator), noBinderOffsets, &nameFun_M__sTextSeparator, &dataStep};
@@ -659,13 +658,17 @@ int conBindOffs_M__sTextIndent[] = {0 , 0};
 char *name_M__sTextIndent =  "$TextIndent" ;
 char *nameFun_M__sTextIndent(Term term) { return name_M__sTextIndent; }
 struct _ConstructionDescriptor descriptor_M__sTextIndent = {&sort_M_Text_Part, Data_M__sTextIndent, 1, sizeof(STRUCT_Con_M__sTextIndent), conBindOffs_M__sTextIndent, &nameFun_M__sTextIndent, &dataStep};
+int conBindOffs_M__sTextGroup[] = {0 , 0};
+char *name_M__sTextGroup =  "$TextGroup" ;
+char *nameFun_M__sTextGroup(Term term) { return name_M__sTextGroup; }
+struct _ConstructionDescriptor descriptor_M__sTextGroup = {&sort_M_Text_Part, Data_M__sTextGroup, 1, sizeof(STRUCT_Con_M__sTextGroup), conBindOffs_M__sTextGroup, &nameFun_M__sTextGroup, &dataStep};
 int conBindOffs_M__sTextChars[] = {0 , 0};
 char *name_M__sTextChars =  "$TextChars" ;
 char *nameFun_M__sTextChars(Term term) { return name_M__sTextChars; }
 struct _ConstructionDescriptor descriptor_M__sTextChars = {&sort_M_Text_Part, Data_M__sTextChars, 1, sizeof(STRUCT_Con_M__sTextChars), conBindOffs_M__sTextChars, &nameFun_M__sTextChars, &dataStep};
-ConstructionDescriptor sortCon_M_Text_Part[] = {NULL, NULL, &descriptor_M__sTextString, &descriptor_M__sTextBreak, &descriptor_M__sTextEmbed, &descriptor_M__sTextGroup, &descriptor_M__sTextSeparator, &descriptor_M__sTextIndent, &descriptor_M__sTextChars,  NULL};
-char *sortNam_M_Text_Part[] = {NULL, NULL,  "$TextString" ,  "$TextBreak" ,  "$TextEmbed" ,  "$TextGroup" ,  "$TextSeparator" ,  "$TextIndent" ,  "$TextChars" ,  NULL};
-char *sortInt_M_Text_Part[] = {NULL, NULL, "_M__sTextString", "_M__sTextBreak", "_M__sTextEmbed", "_M__sTextGroup", "_M__sTextSeparator", "_M__sTextIndent", "_M__sTextChars",  NULL};
+ConstructionDescriptor sortCon_M_Text_Part[] = {NULL, NULL, &descriptor_M__sTextString, &descriptor_M__sTextBreak, &descriptor_M__sTextEmbed, &descriptor_M__sTextSeparator, &descriptor_M__sTextIndent, &descriptor_M__sTextGroup, &descriptor_M__sTextChars,  NULL};
+char *sortNam_M_Text_Part[] = {NULL, NULL,  "$TextString" ,  "$TextBreak" ,  "$TextEmbed" ,  "$TextSeparator" ,  "$TextIndent" ,  "$TextGroup" ,  "$TextChars" ,  NULL};
+char *sortInt_M_Text_Part[] = {NULL, NULL, "_M__sTextString", "_M__sTextBreak", "_M__sTextEmbed", "_M__sTextSeparator", "_M__sTextIndent", "_M__sTextGroup", "_M__sTextChars",  NULL};
 struct _SortDescriptor sort_M_Text_Part = { "Text-Part" , sortCon_M_Text_Part, sortNam_M_Text_Part, sortInt_M_Text_Part, NULL};
 
 /* SORT VARIABLE_ENTRY CONSTANTS. */

@@ -367,6 +367,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
         case COLON:
         case LROUND:
         case LCURLY:
+        case LSQUARE:
         case NOT:
         case CONSTRUCTOR:
         case VARIABLE:
@@ -432,164 +433,251 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                         sink = PropertiesWrapperConstructor.start(sink, null, null, contextVariableMap, null);
                         ++starts;
                 }
-      head = BufferedSimple(sink, bound);
-                                          list.add(head);
-      label_2:
-      while (true) {
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case LSQUARE:
+        jj_consume_token(LSQUARE);
+        head = BufferedVariableUse(sink, bound);
+                                                       list.add(head);
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COLON:
-        case LROUND:
-        case LCURLY:
-        case NOT:
-        case CONSTRUCTOR:
-        case VARIABLE:
-        case METAVARIABLE:
-        case QUOTED_VARIABLE:
-        case QUOTED_METAVARIABLE:
-        case PERCENT_NAME:
-        case STRING:
-        case ATOM:
-        case NUMERIC:
-        case EMBEDDED:
-          ;
+          jj_consume_token(COLON);
+          tail = BufferedSimple(sink, bound);
+                                                                                                                    list.add(factory.literal("::")); list.add(tail);
           break;
         default:
           jj_la1[3] = jj_gen;
-          break label_2;
+          ;
         }
-        tail = BufferedSimple(sink, bound);
-                                            list.add(tail);
-      }
-      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-      case DOT:
-        // Concatenation is lambda-style abstraction.
-                        t = jj_consume_token(DOT);
-                        if (head.kind() == Kind.CONSTRUCTION && head.arity() == 0)
+        label_2:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COMMA:
+            ;
+            break;
+          default:
+            jj_la1[4] = jj_gen;
+            break label_2;
+          }
+          jj_consume_token(COMMA);
+          tail = BufferedVariableUse(sink, bound);
+                                                                 list.add(tail);
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COLON:
+            jj_consume_token(COLON);
+            tail = BufferedSimple(sink, bound);
+                                                                                                                              list.add(factory.literal("::")); list.add(tail);
+            break;
+          default:
+            jj_la1[5] = jj_gen;
+            ;
+          }
+        }
+        jj_consume_token(RSQUARE);
+                 {
+                        // Subterm with binders [v1,...,vn]t.
+                        List<Variable> bs = new ArrayList<Variable>();
+                        Variable lastVariable = null;
+                        boolean afterColon = false;
+                        for (int i = 0; i < list.size(); ++i)
                         {
-                                // Composite form: "C v1...vn . t" = C[[v1] ... C[[vn]t]...].
-                                Constructor constructor = head.constructor();
-                                Variable lastVariableWithProperty = null;
-                                Term lastVariableProperty = null;
-                                // Get the variables...but make new ones to ensure unicity!
-                                for (int i = 1; i < list.size(); ++i)
+                                Term term = list.get(i);
+                                Variable tv = term.variable();
+                                Variable v = sink.makeVariable(tv.name(), tv.promiscuous()); // vi
+                                bs.add(v);
+                                bound = bound.extend(v.name(), v);
+                                if (i+2 < list.size() && (":".equals(Util.symbol(list.get(i+1))) || "::".equals(Util.symbol(list.get(i+1))))) // got : type
                                 {
-                                        Term term = list.get(i);
-                                        if (term.kind() != Kind.VARIABLE_USE)
-                                                {if (true) throw oops("CRS error: dot abstraction must only have variables (with optional inner property) between constructor and dot", t, null);}
-                                        Variable tv = term.variable();
-                                        Variable v = sink.makeVariable(tv.name(), tv.promiscuous()); // vi
-                                        Variable[] bs = {v};
-                                        Constructor c = constructor;
-                                        if (lastVariableWithProperty != null)
-                                        {
-                                                c = Util.wrapWithProperty(sink, c, lastVariableWithProperty, lastVariableProperty);
-                                                lastVariableWithProperty = null;
-                                        }
-                                        sink = sink.start(captureLocations ? Util.copyLocation(sink, c, term.constructor()) : c).binds(bs); // emit C[vi.
-                                        ++starts;
-                                        bound = bound.extend(v.name(), v);
-                                        if (i+2 < list.size() && (":".equals(Util.symbol(list.get(i+1))) || "::".equals(Util.symbol(list.get(i+1))))) // got : type
-                                        {
-                                                lastVariableWithProperty = v;
-                                                lastVariableProperty = list.get(i += 2);
-                                        }
-                                }
-                                if (lastVariableWithProperty != null) // last variable property bleeds to contained term
-                                {
-                                        variableMap = new HashMap<Variable,Term>();
-                                        variableMap.put(lastVariableWithProperty, lastVariableProperty);
+                                        if (variableMap == null)
+                                                 variableMap = new HashMap<Variable,Term>();
+                                        variableMap.put(v, list.get(i += 2));
                                 }
                         }
-                        else if (allowBinders && head.kind() == Kind.VARIABLE_USE)
-                        {
-                                // Optional composite form: subterm with binders "v1:t1...vn:tn . t" = [v1,...,vn]t.
-                                List<Variable> bs = new ArrayList<Variable>();
-                                Variable lastVariable = null;
-                                boolean afterColon = false;
-                                for (int i = 0; i < list.size(); ++i)
-                                {
-                                        Term term = list.get(i);
-                                        if (term.kind() != Kind.VARIABLE_USE)
-                                                {if (true) throw oops("CRS error: binders for argument must only have variables (with optional inner property) before dot", t, null);}
-                                        Variable tv = term.variable();
-                                        Variable v = sink.makeVariable(tv.name(), tv.promiscuous()); // vi
-                                        bs.add(v);
-                                        bound = bound.extend(v.name(), v);
-                                        if (i+2 < list.size() && (":".equals(Util.symbol(list.get(i+1))) || "::".equals(Util.symbol(list.get(i+1))))) // got : type
-                                        {
-                                                if (variableMap == null)
-                                                         variableMap = new HashMap<Variable,Term>();
-                                                variableMap.put(v, list.get(i += 2));
-                                        }
-                                }
-                                sink = sink.binds(bs.toArray(new Variable[bs.size()]));
-                        }
-                        else
-                                {if (true) throw oops("CRS error: Dot abstraction must start with simple constructor", t, null);}
+                        sink = sink.binds(bs.toArray(new Variable[bs.size()]));
+                        allowBinders = false; // we do not allow both []  and dot binder prefix.
+                }
         sink = Application(sink, bound, false, variableMap);
+                        while (starts-- > 0)
+                                sink = sink.end();
+                        {if (true) return sink;}
+        break;
+      case COLON:
+      case LROUND:
+      case LCURLY:
+      case NOT:
+      case CONSTRUCTOR:
+      case VARIABLE:
+      case METAVARIABLE:
+      case QUOTED_VARIABLE:
+      case QUOTED_METAVARIABLE:
+      case PERCENT_NAME:
+      case STRING:
+      case ATOM:
+      case NUMERIC:
+      case EMBEDDED:
+        head = BufferedSimple(sink, bound);
+                                                  list.add(head);
+        label_3:
+        while (true) {
+          switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+          case COLON:
+          case LROUND:
+          case LCURLY:
+          case NOT:
+          case CONSTRUCTOR:
+          case VARIABLE:
+          case METAVARIABLE:
+          case QUOTED_VARIABLE:
+          case QUOTED_METAVARIABLE:
+          case PERCENT_NAME:
+          case STRING:
+          case ATOM:
+          case NUMERIC:
+          case EMBEDDED:
+            ;
+            break;
+          default:
+            jj_la1[6] = jj_gen;
+            break label_3;
+          }
+          tail = BufferedSimple(sink, bound);
+                                                    list.add(tail);
+        }
+        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+        case DOT:
+          // Concatenation is lambda-style abstraction.
+                                  t = jj_consume_token(DOT);
+                                if (head.kind() == Kind.CONSTRUCTION && head.arity() == 0)
+                                {
+                                        // Composite form: "C v1...vn . t" = C[[v1] ... C[[vn]t]...].
+                                        Constructor constructor = head.constructor();
+                                        Variable lastVariableWithProperty = null;
+                                        Term lastVariableProperty = null;
+                                        // Get the variables...but make new ones to ensure unicity!
+                                        for (int i = 1; i < list.size(); ++i)
+                                        {
+                                                Term term = list.get(i);
+                                                if (term.kind() != Kind.VARIABLE_USE)
+                                                        {if (true) throw oops("CRS error: dot abstraction must only have variables (with optional inner property) between constructor and dot", t, null);}
+                                                Variable tv = term.variable();
+                                                Variable v = sink.makeVariable(tv.name(), tv.promiscuous()); // vi
+                                                Variable[] bs = {v};
+                                                Constructor c = constructor;
+                                                if (lastVariableWithProperty != null)
+                                                {
+                                                        c = Util.wrapWithProperty(sink, c, lastVariableWithProperty, lastVariableProperty);
+                                                        lastVariableWithProperty = null;
+                                                }
+                                                sink = sink.start(captureLocations ? Util.copyLocation(sink, c, term.constructor()) : c).binds(bs); // emit C[vi.
+                                                ++starts;
+                                                bound = bound.extend(v.name(), v);
+                                                if (i+2 < list.size() && (":".equals(Util.symbol(list.get(i+1))) || "::".equals(Util.symbol(list.get(i+1))))) // got : type
+                                                {
+                                                        lastVariableWithProperty = v;
+                                                        lastVariableProperty = list.get(i += 2);
+                                                }
+                                        }
+                                        if (lastVariableWithProperty != null) // last variable property bleeds to contained term
+                                        {
+                                                variableMap = new HashMap<Variable,Term>();
+                                                variableMap.put(lastVariableWithProperty, lastVariableProperty);
+                                        }
+                                }
+                                else if (allowBinders && head.kind() == Kind.VARIABLE_USE)
+                                {
+                                        // Optional composite form: subterm with binders "v1:t1...vn:tn . t" = [v1,...,vn]t.
+                                        List<Variable> bs = new ArrayList<Variable>();
+                                        Variable lastVariable = null;
+                                        boolean afterColon = false;
+                                        for (int i = 0; i < list.size(); ++i)
+                                        {
+                                                Term term = list.get(i);
+                                                if (term.kind() != Kind.VARIABLE_USE)
+                                                        {if (true) throw oops("CRS error: binders for argument must only have variables (with optional inner property) before dot", t, null);}
+                                                Variable tv = term.variable();
+                                                Variable v = sink.makeVariable(tv.name(), tv.promiscuous()); // vi
+                                                bs.add(v);
+                                                bound = bound.extend(v.name(), v);
+                                                if (i+2 < list.size() && (":".equals(Util.symbol(list.get(i+1))) || "::".equals(Util.symbol(list.get(i+1))))) // got : type
+                                                {
+                                                        if (variableMap == null)
+                                                                 variableMap = new HashMap<Variable,Term>();
+                                                        variableMap.put(v, list.get(i += 2));
+                                                }
+                                        }
+                                        sink = sink.binds(bs.toArray(new Variable[bs.size()]));
+                                }
+                                else
+                                        {if (true) throw oops("CRS error: Dot abstraction must start with simple constructor", t, null);}
+          sink = Application(sink, bound, false, variableMap);
+                                while (starts-- > 0)
+                                        sink = sink.end(); // emit ] after start events
+                                {if (true) return sink;}
+          break;
+        default:
+          jj_la1[7] = jj_gen;
+          ;
+        }
+                    // Check for special infix form...
+                    if (list.size() > 1)
+                    {
+                                Entries : for (Map.Entry<String[], Constructor> e : infixPatterns.entrySet())
+                                {
+                                        String[] ss = e.getKey();
+                                        Constructor first = null;
+                                        if (list.size() != ss.length)
+                                                continue Entries; // length mismatch
+                                        for (int i = 0; i < ss.length; ++i)
+                                        {
+                                                if (ss[i] != null)
+                                                {
+                                                        Term term = list.get(i);
+                                                        if (term.kind() != Kind.CONSTRUCTION || term.arity() != 0 || !ss[i].equals(term.constructor().symbol()))
+                                                                continue Entries; // operator mismatch
+                                                        if (first == null)
+                                                                first = term.constructor();
+                                                }
+                                        }
+                                        // Match!
+                                        Constructor c = e.getValue();
+                                        if (captureLocations)
+                                                c = Util.copyLocation(sink, c, first);
+                                        sink = sink.start(c);
+                                        ++starts;
+                                        for (int i = 0; i < ss.length; ++i)
+                                        {
+                                                if (ss[i] == null)
+                                                {
+                                                        Term term = list.get(i);
+                                                        sink = sink.copy(term, false);
+                                                }
+                                        }
+                                        while (starts-- > 0)
+                                                sink = sink.end(); // emit ] after start events
+                                        {if (true) return sink;}
+                                }
+                    }
+
+                        // Fall back to basic applicative form "f a1...an" = @[...@[f, a1],...,an].
+                        for (int i = 1; i < list.size(); ++i)
+                                sink = sink.start(applicationConstructor); // emit @[
+                        boolean argument = false;
+                        for (Term term : list)
+                        {
+                                sink = sink.copy(term, true); // emit f or ai
+                                if (argument)
+                                        sink = sink.end(); // emit ] after ai
+                                else
+                                        argument = true;
+                        }
                         while (starts-- > 0)
                                 sink = sink.end(); // emit ] after start events
                         {if (true) return sink;}
         break;
       default:
-        jj_la1[4] = jj_gen;
-        ;
+        jj_la1[8] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
       }
-            // Check for special infix form...
-            if (list.size() > 1)
-            {
-                        Entries : for (Map.Entry<String[], Constructor> e : infixPatterns.entrySet())
-                        {
-                                String[] ss = e.getKey();
-                                Constructor first = null;
-                                if (list.size() != ss.length)
-                                        continue Entries; // length mismatch
-                                for (int i = 0; i < ss.length; ++i)
-                                {
-                                        if (ss[i] != null)
-                                        {
-                                                Term term = list.get(i);
-                                                if (term.kind() != Kind.CONSTRUCTION || term.arity() != 0 || !ss[i].equals(term.constructor().symbol()))
-                                                        continue Entries; // operator mismatch
-                                                if (first == null)
-                                                        first = term.constructor();
-                                        }
-                                }
-                                // Match!
-                                Constructor c = e.getValue();
-                                if (captureLocations)
-                                        c = Util.copyLocation(sink, c, first);
-                                sink = sink.start(c);
-                                ++starts;
-                                for (int i = 0; i < ss.length; ++i)
-                                {
-                                        if (ss[i] == null)
-                                        {
-                                                Term term = list.get(i);
-                                                sink = sink.copy(term, false);
-                                        }
-                                }
-                                while (starts-- > 0)
-                                        sink = sink.end(); // emit ] after start events
-                                {if (true) return sink;}
-                        }
-            }
-
-                // Fall back to basic applicative form "f a1...an" = @[...@[f, a1],...,an].
-                for (int i = 1; i < list.size(); ++i)
-                        sink = sink.start(applicationConstructor); // emit @[
-                boolean argument = false;
-                for (Term term : list)
-                {
-                        sink = sink.copy(term, true); // emit f or ai
-                        if (argument)
-                                sink = sink.end(); // emit ] after ai
-                        else
-                                argument = true;
-                }
-                while (starts-- > 0)
-                        sink = sink.end(); // emit ] after start events
-                {if (true) return sink;}
     throw new Error("Missing return statement in function");
     } finally {
       trace_return("Application");
@@ -611,7 +699,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
   }
 
 /**
- * Simple  ::=	"(" Sequence? ")"  |  v[Â¹]  |	[PropPrefix] C ["[" BindingList "]"]  |	 [PropPrefix] # ["[" List "]"]	|  "{{"..."}}"	|  "%" C "{{"..."}}"
+ * Simple  ::=	"(" Sequence? ")"  |  VariableUse  |	[PropPrefix] C ["[" BindingList "]"]  |	 [PropPrefix] # ["[" List "]"]	|  "{{"..."}}"	|  "%" C "{{"..."}}"
  * PropPrefix  ::=  "{" [# ";"] [PropertyList] "}" 
  */
   final public Sink Simple(Sink sink, ExtensibleMap<String, Variable> bound, Map<String, Term> properties, Map<Variable, Term> varProperties, HashMap<String,Term> metaProperties, Set<String> refs) throws ParseException {
@@ -636,6 +724,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
         case COLON:
         case LROUND:
         case LCURLY:
+        case LSQUARE:
         case NOT:
         case CONSTRUCTOR:
         case VARIABLE:
@@ -656,7 +745,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           jj_consume_token(RROUND);
           break;
         default:
-          jj_la1[5] = jj_gen;
+          jj_la1[9] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -694,7 +783,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                          s = t.toString();
           break;
         default:
-          jj_la1[6] = jj_gen;
+          jj_la1[10] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -725,6 +814,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           case COLON:
           case LROUND:
           case LCURLY:
+          case LSQUARE:
           case NOT:
           case CONSTRUCTOR:
           case VARIABLE:
@@ -739,13 +829,13 @@ public class ClassicParser implements Parser, ClassicParserConstants {
             sink = List(sink, bound, true);
             break;
           default:
-            jj_la1[7] = jj_gen;
+            jj_la1[11] = jj_gen;
             ;
           }
           jj_consume_token(RSQUARE);
           break;
         default:
-          jj_la1[8] = jj_gen;
+          jj_la1[12] = jj_gen;
           ;
         }
                 sink = sink.end();
@@ -753,32 +843,8 @@ public class ClassicParser implements Parser, ClassicParserConstants {
         break;
       case VARIABLE:
       case QUOTED_VARIABLE:
-        switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
-        case VARIABLE:
-          t = jj_consume_token(VARIABLE);
-                        s=t.toString(); linear = isLinear(s); s = unLinear(s);
-          break;
-        case QUOTED_VARIABLE:
-          t = jj_consume_token(QUOTED_VARIABLE);
-                                                                                                       s=unvar(t.toString()); linear = isLinear(s); s = unLinear(s);
-          break;
-        default:
-          jj_la1[9] = jj_gen;
-          jj_consume_token(-1);
-          throw new ParseException();
-        }
-         {
-                if (!refs.isEmpty() || properties.size() > 0 || varProperties.size() > 0 || metaProperties.size() > 0)
-                {
-                        String ref = (refs.isEmpty() ? null : refs.iterator().next());
-                        sink = PropertiesWrapperConstructor.start(sink, ref, properties, varProperties, metaProperties);
-                        wrap = true;
-                }
-                Variable v = bound.get(s);
-                if (v == null) v = factory.freeVariable(s, !linear, true);
-                sink = sink.use(v);
-                {if (true) return wrap ? sink.end() : sink;}
-        }
+        sink = VariableUse(sink, bound, properties, varProperties, metaProperties, refs);
+         {if (true) return sink;}
         break;
       case METAVARIABLE:
       case QUOTED_METAVARIABLE:
@@ -792,7 +858,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                          s=unmeta(t.toString());
           break;
         default:
-          jj_la1[10] = jj_gen;
+          jj_la1[13] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -810,6 +876,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           case COLON:
           case LROUND:
           case LCURLY:
+          case LSQUARE:
           case NOT:
           case CONSTRUCTOR:
           case VARIABLE:
@@ -824,13 +891,13 @@ public class ClassicParser implements Parser, ClassicParserConstants {
             sink = List(sink, bound, false);
             break;
           default:
-            jj_la1[11] = jj_gen;
+            jj_la1[14] = jj_gen;
             ;
           }
           jj_consume_token(RSQUARE);
           break;
         default:
-          jj_la1[12] = jj_gen;
+          jj_la1[15] = jj_gen;
           ;
         }
                 sink = sink.endMetaApplication();
@@ -858,13 +925,13 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                                               s = unquote(t.toString()); embeddedOffset = 1;
             break;
           default:
-            jj_la1[13] = jj_gen;
+            jj_la1[16] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
           break;
         default:
-          jj_la1[14] = jj_gen;
+          jj_la1[17] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -915,18 +982,18 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           Property(sink, bound, properties, varProperties, metaProperties, refs);
           break;
         default:
-          jj_la1[15] = jj_gen;
+          jj_la1[18] = jj_gen;
           ;
         }
-        label_3:
+        label_4:
         while (true) {
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
           case SEMI:
             ;
             break;
           default:
-            jj_la1[16] = jj_gen;
-            break label_3;
+            jj_la1[19] = jj_gen;
+            break label_4;
           }
           jj_consume_token(SEMI);
           switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
@@ -943,7 +1010,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
             Property(sink, bound, properties, varProperties, metaProperties, refs);
             break;
           default:
-            jj_la1[17] = jj_gen;
+            jj_la1[20] = jj_gen;
             ;
           }
         }
@@ -952,13 +1019,71 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                 {if (true) return sink;}
         break;
       default:
-        jj_la1[18] = jj_gen;
+        jj_la1[21] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
     throw new Error("Missing return statement in function");
     } finally {
       trace_return("Simple");
+    }
+  }
+
+/** Materialized simple variable use. */
+  final public Term BufferedVariableUse(Maker maker, ExtensibleMap<String, Variable> bound) throws ParseException {
+    trace_call("BufferedVariableUse");
+    try {
+        Buffer buffer = new Buffer(maker);
+        Sink sink = buffer.sink();
+      VariableUse(sink, bound, new HashMap<String, Term>(), new HashMap<Variable, Term>(), new HashMap<String,Term>(), new HashSet<String>());
+         {if (true) return buffer.term(true);}
+    throw new Error("Missing return statement in function");
+    } finally {
+      trace_return("BufferedVariableUse");
+    }
+  }
+
+/**
+ * VariableUse ::=	v[Â¹]
+ */
+  final public Sink VariableUse(Sink sink, ExtensibleMap<String, Variable> bound, Map<String, Term> properties, Map<Variable, Term> varProperties, HashMap<String,Term> metaProperties, Set<String> refs) throws ParseException {
+    trace_call("VariableUse");
+    try {
+        Token t; String sort = null, s, category; int embeddedOffset = 0;
+        boolean wrap = false, linear = false;
+        if (properties != null) for (Map.Entry<String, Term> e : properties.entrySet()) if (e.getValue() == null) wrap = true;
+        if (varProperties != null) for (Map.Entry<Variable, Term> e : varProperties.entrySet()) if (e.getValue() == null) wrap = true;
+        if (metaProperties != null && !metaProperties.isEmpty()) wrap = true;
+        if (!refs.isEmpty()) wrap = true;
+      switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
+      case VARIABLE:
+        t = jj_consume_token(VARIABLE);
+                        s=t.toString(); linear = isLinear(s); s = unLinear(s);
+        break;
+      case QUOTED_VARIABLE:
+        t = jj_consume_token(QUOTED_VARIABLE);
+                                                                                                       s=unvar(t.toString()); linear = isLinear(s); s = unLinear(s);
+        break;
+      default:
+        jj_la1[22] = jj_gen;
+        jj_consume_token(-1);
+        throw new ParseException();
+      }
+         {
+                if (!refs.isEmpty() || properties.size() > 0 || varProperties.size() > 0 || metaProperties.size() > 0)
+                {
+                        String ref = (refs.isEmpty() ? null : refs.iterator().next());
+                        sink = PropertiesWrapperConstructor.start(sink, ref, properties, varProperties, metaProperties);
+                        wrap = true;
+                }
+                Variable v = bound.get(s);
+                if (v == null) v = factory.freeVariable(s, !linear, true);
+                sink = sink.use(v);
+                {if (true) return wrap ? sink.end() : sink;}
+        }
+    throw new Error("Missing return statement in function");
+    } finally {
+      trace_return("VariableUse");
     }
   }
 
@@ -971,15 +1096,15 @@ public class ClassicParser implements Parser, ClassicParserConstants {
     try {
       // t,...,t.
               sink = Application(sink,bound, allowBinders, null);
-      label_4:
+      label_5:
       while (true) {
         switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
         case COMMA:
           ;
           break;
         default:
-          jj_la1[19] = jj_gen;
-          break label_4;
+          jj_la1[23] = jj_gen;
+          break label_5;
         }
         jj_consume_token(COMMA);
         sink = Application(sink, bound, allowBinders, null);
@@ -1027,7 +1152,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                                                                                               p = unquote(t.toString());
             break;
           default:
-            jj_la1[20] = jj_gen;
+            jj_la1[24] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -1047,7 +1172,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                                                            s=unvar(t.toString()); linear = isLinear(s); s = unLinear(s);
             break;
           default:
-            jj_la1[21] = jj_gen;
+            jj_la1[25] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -1071,7 +1196,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                                 s=unmeta(t.toString());
             break;
           default:
-            jj_la1[22] = jj_gen;
+            jj_la1[26] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -1091,7 +1216,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                           s = unquote(t.toString());
             break;
           default:
-            jj_la1[23] = jj_gen;
+            jj_la1[27] = jj_gen;
             jj_consume_token(-1);
             throw new ParseException();
           }
@@ -1122,7 +1247,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                         }
           break;
         default:
-          jj_la1[24] = jj_gen;
+          jj_la1[28] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1149,7 +1274,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                                                                                       p = unquote(t.toString());
           break;
         default:
-          jj_la1[25] = jj_gen;
+          jj_la1[29] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1159,7 +1284,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           term = BufferedSimple(maker, bound);
           break;
         default:
-          jj_la1[26] = jj_gen;
+          jj_la1[30] = jj_gen;
           ;
         }
 //			if (properties.containsKey(p))
@@ -1178,7 +1303,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                                                    s=unvar(t.toString()); linear = isLinear(s); s = unLinear(s);
           break;
         default:
-          jj_la1[27] = jj_gen;
+          jj_la1[31] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1188,7 +1313,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           term = BufferedSimple(maker, bound);
           break;
         default:
-          jj_la1[28] = jj_gen;
+          jj_la1[32] = jj_gen;
           ;
         }
          {
@@ -1213,7 +1338,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                   s = unquote(t.toString());
           break;
         default:
-          jj_la1[29] = jj_gen;
+          jj_la1[33] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1223,7 +1348,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
           term = BufferedSimple(maker, bound);
           break;
         default:
-          jj_la1[30] = jj_gen;
+          jj_la1[34] = jj_gen;
           ;
         }
                 try
@@ -1264,7 +1389,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                                                                         s=unmeta(t.toString());
           break;
         default:
-          jj_la1[31] = jj_gen;
+          jj_la1[35] = jj_gen;
           jj_consume_token(-1);
           throw new ParseException();
         }
@@ -1275,14 +1400,14 @@ public class ClassicParser implements Parser, ClassicParserConstants {
                         metaProperties.put(s, term);
           break;
         default:
-          jj_la1[32] = jj_gen;
+          jj_la1[36] = jj_gen;
                         if (!refs.isEmpty())
                                 {if (true) throw oops("CRS error: Cannot have two property collector meta-mariables in property pattern", t, null);}
                         refs.add(s);
         }
         break;
       default:
-        jj_la1[33] = jj_gen;
+        jj_la1[37] = jj_gen;
         jj_consume_token(-1);
         throw new ParseException();
       }
@@ -1312,7 +1437,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
   public Token jj_nt;
   private int jj_ntk;
   private int jj_gen;
-  final private int[] jj_la1 = new int[34];
+  final private int[] jj_la1 = new int[38];
   static private int[] jj_la1_0;
   static private int[] jj_la1_1;
   static private int[] jj_la1_2;
@@ -1322,13 +1447,13 @@ public class ClassicParser implements Parser, ClassicParserConstants {
       jj_la1_init_2();
    }
    private static void jj_la1_init_0() {
-      jj_la1_0 = new int[] {0x1000,0x10000,0x378a4000,0x378a4000,0x2000,0x378e4000,0x1804000,0x378a4000,0x200000,0x12000000,0x24000000,0x378a4000,0x200000,0x0,0x0,0x37800000,0x10000,0x37800000,0x378a4000,0x8000,0x1000000,0x12000000,0x24000000,0x0,0x37000000,0x1000000,0x4000,0x12000000,0x4000,0x0,0x4000,0x24000000,0x4000,0x37800000,};
+      jj_la1_0 = new int[] {0x1000,0x10000,0x37aa4000,0x4000,0x8000,0x4000,0x378a4000,0x2000,0x37aa4000,0x37ae4000,0x1804000,0x37aa4000,0x200000,0x24000000,0x37aa4000,0x200000,0x0,0x0,0x37800000,0x10000,0x37800000,0x378a4000,0x12000000,0x8000,0x1000000,0x12000000,0x24000000,0x0,0x37000000,0x1000000,0x4000,0x12000000,0x4000,0x0,0x4000,0x24000000,0x4000,0x37800000,};
    }
    private static void jj_la1_init_1() {
-      jj_la1_1 = new int[] {0x0,0x0,0x8f00,0x8f00,0x0,0x8f00,0xe00,0x8f00,0x0,0x0,0x0,0x8f00,0x0,0x8200,0x8100,0xf00,0x0,0xf00,0x8f00,0x0,0xe00,0x0,0x0,0x8200,0xf00,0xe00,0x0,0x0,0x0,0x8200,0x0,0x0,0x0,0xf00,};
+      jj_la1_1 = new int[] {0x0,0x0,0x8f00,0x0,0x0,0x0,0x8f00,0x0,0x8f00,0x8f00,0xe00,0x8f00,0x0,0x0,0x8f00,0x0,0x8200,0x8100,0xf00,0x0,0xf00,0x8f00,0x0,0x0,0xe00,0x0,0x0,0x8200,0xf00,0xe00,0x0,0x0,0x0,0x8200,0x0,0x0,0x0,0xf00,};
    }
    private static void jj_la1_init_2() {
-      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
+      jj_la1_2 = new int[] {0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,0x0,};
    }
 
   /** Constructor with user supplied CharStream. */
@@ -1337,7 +1462,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 34; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1346,7 +1471,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 34; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Constructor with generated Token Manager. */
@@ -1355,7 +1480,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 34; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   /** Reinitialise. */
@@ -1364,7 +1489,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
     token = new Token();
     jj_ntk = -1;
     jj_gen = 0;
-    for (int i = 0; i < 34; i++) jj_la1[i] = -1;
+    for (int i = 0; i < 38; i++) jj_la1[i] = -1;
   }
 
   private Token jj_consume_token(int kind) throws ParseException {
@@ -1422,7 +1547,7 @@ public class ClassicParser implements Parser, ClassicParserConstants {
       la1tokens[jj_kind] = true;
       jj_kind = -1;
     }
-    for (int i = 0; i < 34; i++) {
+    for (int i = 0; i < 38; i++) {
       if (jj_la1[i] == jj_gen) {
         for (int j = 0; j < 32; j++) {
           if ((jj_la1_0[i] & (1<<j)) != 0) {

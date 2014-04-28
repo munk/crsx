@@ -41,9 +41,8 @@ PG = $(JAVA) -cp "$(BUILD):$(CRSXJAR):$(JAVACCJAR):" net.sf.crsx.pg.PG $(EXTRA)
 JAVACC = $(JAVA) -cp "$(JAVACCJAR)" javacc
 RULEC = $(HACS)/rulecompiler/crsx
 COOK = $(HACS)/Cookmain
-COOK1 = $(HACS)/Cook1main
 
-all:: $(RULEC) $(COOK1)
+all:: $(RULEC) $(COOK)
 
 # So -n works...
 NOEXEC = $(if,$(findstring -n,$(MAKE)),echo)
@@ -69,7 +68,7 @@ SH_EXTRA = :
 %.hxt : %.hx
 	@/bin/echo -e '\n* Processing $<.' && $(SH_EXTRA) \
 	&& $(NOEXEC) $(CRSX) \
-		"grammar=('org.crsx.hacs.Raw1';'net.sf.crsx.text.Text';)" \
+		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';)" \
 		input='$<' category=rawModule \
 		output='$@.tmp' simple-terms max-indent=10 width=255 \
 	&& $(NOEXEC) mv '$@.tmp' '$@'
@@ -79,7 +78,7 @@ SH_EXTRA = :
 %.hx2 : %.hx
 	@/bin/echo -e '\n* Processing $<.' && $(SH_EXTRA) \
 	&& $(NOEXEC) $(CRSX) \
-		"grammar=('org.crsx.hacs.Raw2';'net.sf.crsx.text.Text';)" \
+		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';)" \
 		input='$<' category=rawModule \
 		output='$@.tmp' simple-terms max-indent=10 width=255 \
 	&& $(NOEXEC) mv '$@.tmp' '$@'
@@ -88,8 +87,8 @@ clean::; rm -f *.hxt
 
 # (1a) Generate PG grammar.
 #
-%.pg : %.hxt $(COOK1) 
-	$(COOK1) PG $< > $@
+%.pg : %.hxt $(COOK) 
+	$(COOK) PG $< > $@
 
 # (1b) Install the PG grammar (process with JavaCC and compile the generated parser).
 #
@@ -104,7 +103,18 @@ clean::; rm -f *.hxt
 	&& (cd $(BUILD) && (test $${base}Parser.java -ot $(BUILD)/$${base}Parser.class || $(NOEXEC) $(JAVAC) -cp '$(BUILD):$(CRSXJAR):$(JAVACCJAR)' -sourcepath $(BUILD) -d $(BUILD) $${base}Parser.java))
 	@touch $@
 
-realclean::; rm -f *.pg *.pg-installed
+%.pg-ref-installed : %.pg-ref $(JAVACCJAR)
+	@/bin/echo -e '\n* Generating and Compiling JavaCC parser for $<.' && $(SH_EXTRA) \
+	&& $(NOEXEC) class=$$(sed -n 's/^class \(.*\)Parser :.*/\1/p' '$*.pg-ref') \
+	&& $(NOEXEC) base=$$(echo $$class | sed 's:\.:/:g') \
+	&& $(NOEXEC) mkdir -p $(BUILD)/$$(dirname $$base) \
+	&& (test '$*.pg-ref' -ot $(BUILD)/$${base}Parser.pg-ref || $(NOEXEC) cp -v '$*.pg-ref' $(BUILD)/$${base}Parser.pg-ref) \
+	&& (test '$*.pg-ref' -ot $(BUILD)/$${base}Parser.jj || $(NOEXEC) $(PG) '$*.pg-ref' -source=$(BUILD)) \
+	&& (cd $(BUILD) && (test $${base}Parser.jj -ot $${base}Parser.java || $(NOEXEC) $(JAVACC) -OUTPUT_DIRECTORY=$$(dirname $$base) $${base}Parser.jj)) \
+	&& (cd $(BUILD) && (test $${base}Parser.java -ot $(BUILD)/$${base}Parser.class || $(NOEXEC) $(JAVAC) -cp '$(BUILD):$(CRSXJAR):$(JAVACCJAR)' -sourcepath $(BUILD) -d $(BUILD) $${base}Parser.java))
+	@touch $@
+
+realclean::; rm -f *.pg *.pg-installed *.pg-ref-installed
 
 # (2a) Generate CRSX system.
 #
@@ -124,9 +134,24 @@ realclean::; rm -f *.pg *.pg-installed
 
 realclean::; rm -f *.crs *.crs-installed
 
-# (3) Generate executable.
 
-# (3a) Dispatchify.
+# (3) Generate execution script (using interpreter for the generated .crs)
+%.run: %.crs-installed %.pg-installed
+	@/bin/echo -e '\n* Generating custom compilation script $@.' && $(SH_EXTRA) \
+	&& $(NOEXEC) class=$$(sed -n 's/^class \(.*\)Parser :.*/\1/p' '$*.pg') \
+	&& $(NOEXEC) prefix=$$(sed -n 's/^prefix //p' '$*.pg') \
+	&& $(NOEXEC) base=$$(echo $$class | sed -e 's:\.:/:g') \
+	&& (echo exec env "JAVA='$(JAVA)'" "JAVAC='$(JAVAC)'" "CRSXJAR='$(CRSXJAR)'" \
+			"HACSBUILD='$(BUILD)'" "HACSPARSERCLASS='$${class}Parser'" "HACSRULES='$(BUILD)/$${base}Rules.crs'" \
+			"HACSPREFIX='$$prefix'" \
+			'$(HACS)/run-hacs.sh' '"$$@"' > '$@.tmp') \
+	&& $(NOEXEC) mv '$@.tmp' '$@' \
+	&& $(NOEXEC) chmod +x $@
+
+
+# (3') Generate executable.
+
+# (3'a) Dispatchify.
 #
 %.dr: $(CRSXJAR)
 	$(CRSX) rules=org/crsx/hacs/$*.crs sortify dispatchify reify=$@ simple-terms omit-linear-variables canonical-variables
@@ -135,7 +160,7 @@ realclean::; rm -f *.crs *.crs-installed
 
 clean::; rm -f *.dr
 
-# (3b) Generate C files.
+# (3'b) Generate C files.
 #
 %.h: %.dr $(RULEC)
 	$(RULEC) wrapper=ComputeHeader HEADERS="crsx.h" input=$< output=$@
@@ -167,7 +192,7 @@ clean::; rm -f *.dr
 	$(CC) -o $*main $*main.o $*_sorts.o $*_rules.o $*_symbols.o crsx.o crsx_scan.o -licuuc -licudata -licui18n -licuio
 clean::; rm -f *.o
 
-# (3c) Generate executable.
+# (3'c) Generate executable.
 #
 %.run-c: %.crs-compiled %.pg-installed
 	@/bin/echo -e '\n* Generating custom compilation script $@.' && $(SH_EXTRA) \
@@ -186,28 +211,31 @@ clean::; rm -f *.o
 # INTERPRETER VARIANTS
 # ====================
 
-# (1a, using interpreter)
+# (1ref)
 %.pg-ref : %.hx
 	@set -x \
 	&& $(NOEXEC) $(CRSX) \
-		"grammar=('org.crsx.hacs.Raw1';'net.sf.crsx.text.Text';)" \
-		rules=org/crsx/hacs/Cook1.crs wrapper=PG \
+		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';)" \
+		rules=org/crsx/hacs/Cook.crs wrapper=PG \
 		input='$<' category=rawModule \
 		output='$@.tmp' sink=net.sf.crsx.text.TextSink \
 	&& $(NOEXEC) mv '$@.tmp' '$@'
 
-# (2a, using interpreter)
-%.crs-ref : %.hx
+# (2ref)
+%.crs-ref : %.hx %.pg-ref %.pg-ref-installed
 	@set -x \
+	&& $(NOEXEC) parser=$$(sed -n 's/^class \(.*\) :.*/\1/p' '$*.pg-ref') \
+	&& $(NOEXEC) prefix=$$(sed -n 's/^prefix //p' '$*.pg-ref') \
 	&& $(NOEXEC) $(CRSX) \
-		"grammar=('org.crsx.hacs.Raw2';'net.sf.crsx.text.Text';)" \
-		rules=org/crsx/hacs/CookCRS.crs wrapper=CRS \
+		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'$$parser';)" \
+		rules=org/crsx/hacs/Cook.crs wrapper=CRS concrete-prefix=$$prefix \
 		input='$<' category=rawModule \
 		output='$@.tmp' sink=net.sf.crsx.text.TextSink \
 	&& $(NOEXEC) mv '$@.tmp' '$@'
 
-# (3, using interpreter)
-%.run: %.crs-installed %.pg-installed
+
+# (3ref) Generate script that use interpreted rules.
+%.run-ref: %.crs-ref %.pg-ref-installed
 	@/bin/echo -e '\n* Generating custom compilation script $@.' && $(SH_EXTRA) \
 	&& $(NOEXEC) class=$$(sed -n 's/^class \(.*\)Parser :.*/\1/p' '$*.pg') \
 	&& $(NOEXEC) prefix=$$(sed -n 's/^prefix //p' '$*.pg') \
@@ -265,10 +293,6 @@ $(COOK): $(CRSXJAR)
 	@/bin/echo -e '\n* Regenerate internal HACS binaries...'
 	$(MAKE) -C $(HACS) Cookmain
 
-$(COOK1): $(CRSXJAR)
-	@/bin/echo -e '\n* Regenerate internal HACS binaries...'
-	$(MAKE) -C $(HACS) Cook1main
-
 
 ## Debugging helpers.
 
@@ -285,8 +309,3 @@ $(COOK1): $(CRSXJAR)
 	&& $(NOEXEC) mv '$@.tmp' '$@'
 
 realclean::; rm -f *.crsE
-
-
-%.raw2: %.hx
-	$(CRSX) "grammar=('org.crsx.hacs.Raw2';'net.sf.crsx.text.Text';'org.crsx.samples.gentle.FirstParser';)" \
-		parse-verbose verbose=3 omit-properties verbose-depth=50 input=first.hx category=rawModule > first.raw2
