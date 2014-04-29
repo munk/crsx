@@ -1,0 +1,11 @@
+<body>
+This package contains the HACS compiler generation frontend for CRSX. The frontend has the following passes:
+<ol>
+<li><b>CookPG:</b> Loads HACS file using the generic <em>Raw1</em> parser and generates <em>metaparser</em>, an internal <tt>.pg</tt> parser for the user's terms.
+<li><b>CookLoad:</b> Combines the generated <em>metaparser</em> with the skeleton <em>Raw</em> HACS parser to generate <em>HACS-term</em> version of user's HACS file.
+<li><b>CookCRS:</b> Converts user's <em>HACS-term</em> version of the HACS rules to generic CRSX3 form.
+</ol>
+After this the usual CRSX3 compilation process should be used.
+<p>
+<b>Note:</b> Do <b>not</b> store any <tt>.java</tt> or <tt>.jj</tt> files in this directory!
+</body>
