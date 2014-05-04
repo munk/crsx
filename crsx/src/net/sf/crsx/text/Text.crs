@@ -1,8 +1,8 @@
 // Copyright (c) 2010 IBM Corporation.
+// Copyright (c) 2014 Kristoffer H. Rose
 // $Id: Text.crs,v 3.6 2013/12/18 20:16:18 villardl Exp $
 
 // Text support.
-// Should probably be combined with 
 
 Text[(
 
@@ -24,5 +24,8 @@ Text-Part ::= (
 
 ∀ a . AsText[a] :: Text;
 AsText[#text] → #text ;
+
+TextConcat[Text, Text] :: Text ;
+TextConcat[#1, #2] → %n⟪« #1 »« #2 »⟫ ;
 
 )]

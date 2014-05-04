@@ -372,7 +372,7 @@ class PGParser
 				metavariables.put(use.name, new Triple<String, String, String>("", ".copy("+b_name+",false)", null));
 			}
 			action(production,
-				"try {"+sinkPut+"factory.parser(factory).parse("+sinkGet+", "+(use.category==null?"null":"\""+use.category+"\"")+", new java.io.StringReader("+use.converted+"), unit, t.beginLine, t.beginColumn+1, env);}\n"+
+				"try {"+sinkPut+"factory.parser(factory).parse("+sinkGet+", "+(use.category==null?"null":use.category)+", new java.io.StringReader("+use.converted+"), unit, t.beginLine, t.beginColumn+1, env);}\n"+
 				"catch (java.io.IOException e) {throw new ParseException(e.getMessage());}\n"+
 				"catch ("+CRS_EXCEPTION+" e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}");
 		}
@@ -1904,7 +1904,7 @@ Reverser.Builder Generation(String productionName, Map<String, String> decls, So
 			{
 				action(production, ""); // make sure "sink" is available for use
 				ExpandingJavaSink generatorSink = new ExpandingJavaSink(maker, "sink", production, variable2java, null, metavariables);
-				factory.parser(factory).parse(generatorSink, use.category, new StringReader(text), null, 1, 1, new LinkedExtensibleMap<String, Variable>().extend(variables));
+				factory.parser(factory).parse(generatorSink, unq(use.category), new StringReader(text), null, 1, 1, new LinkedExtensibleMap<String, Variable>().extend(variables));
 			}
 			catch (IOException e)
 			{
@@ -1929,7 +1929,7 @@ Reverser.Builder Generation(String productionName, Map<String, String> decls, So
 				action(production, ""); // make sure "sink" is available for use
 				production.addStatement(sinkName+" = "+bufferName+".sink();");
 				ExpandingJavaSink generatorSink = new ExpandingJavaSink(maker, sinkName, production, variable2java, null, metavariables);
-				factory.parser(factory).parse(generatorSink, use.category, new StringReader(text), null, 1, 1, new LinkedExtensibleMap<String, Variable>().extend(variables));
+				factory.parser(factory).parse(generatorSink, unq(use.category), new StringReader(text), null, 1, 1, new LinkedExtensibleMap<String, Variable>().extend(variables));
 				production.addStatement(production.wrapExpression(sinkName+" = ", ";").harvest());
 			}
 			catch (IOException e)
@@ -2130,7 +2130,7 @@ Usage Use(String prefix, String initial, Appendable html, boolean isConstant) th
 			// :Name means "convert using static String Name(String) method".
 			t=Name() {use.touched = true; use.converted = t.toString() + "(" + use.converted + ")"; annotation.append(""+t); use.wasConverted = true;}
 		|
-			// :«Expr» means "convert using code of type String where # is substituted by the value!
+			// :«Expr» means "convert using Expr code of type String where # is substituted by the value!
 			t=<EMBEDDED> {use.touched = true; use.converted = unembed(t.toString()).replaceAll("#", use.converted); annotation.append(""+t); use.wasConverted = true;}
 		|
 			// :# means that whatever was generated is stored and can be referenced with the meta-application #[...] with explicit subterm group.
@@ -2138,10 +2138,11 @@ Usage Use(String prefix, String initial, Appendable html, boolean isConstant) th
 	    |
 	        "{"
 	    	(
-	    	    // :{:Name} means reparse using category computed by Name(String) method. note: DOES NOT TOUCH!			    ":" t=Name() "}" {use.category = t.toString() + "(" + use.converted + ")"; annotation.append("{:"+t+"}");}
+	    	    // :{«Expr»} means reparse using category "computed by Expr code of type String where # is substituted by the value!
+				t=<EMBEDDED> "}" {use.category = unembed(t.toString()).replaceAll("#", use.converted); annotation.append(""+t);}
 	        |
 	    	     // :{category} means reparse using category. note: DOES NOT TOUCH!
-			     t=Name() "}" {use.category = t.toString(); annotation.append("{"+t+"}");}
+			     t=Name() "}" {use.category = "\""+t.toString()+"\""; annotation.append("{"+t+"}");}
 	        )
 		)
     |

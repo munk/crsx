@@ -29,7 +29,7 @@ sort Exp   | ⟦ ⟨Exp@1⟩ + ⟨Exp@2⟩ ⟧@1            // addition
            | ⟦ ⟨INT⟩ ⟧@3                        // integer
            | ⟦ ⟨FLOAT⟩ ⟧@3                      // floating point number
            | ⟦ ⟨Name⟩ ⟧@3                       // assigned value
-           | sugar ⟦ (⟨Exp#⟩) ⟧@3 → #           // parenthesis
+           | sugar ⟦ (⟨Exp#⟩) ⟧@3 → Exp#       // parenthesis
            ;
 
 sort Name  | symbol ⟦ ⟨ID⟩ ⟧ ;                  // assigned symbols

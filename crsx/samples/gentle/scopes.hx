@@ -32,13 +32,13 @@ sort Stat  | ↑ds ;
 attribute  ↓e{Id:Type} ;
 
 sort Stat  | scheme Check2(Stat)
-     	   | scheme Check2_(Defs, Stat) ↓e ;
+     	   | scheme Check2b(Defs, Stat) ↓e ;
 
-Check2(#s↑ds(#ds)) → Check2_(#ds, #s) ;
+Check2(#s↑ds(#ds)) → Check2b(#ds, #s) ;
 
-Check2_(⟦ ⟨Type#t⟩ id; ⟨Defs#ds⟩ ⟧, #s) → Check2_(#ds, #s) ↓e{id : #t} ;
+Check2b(⟦ ⟨Type#t⟩ id; ⟨Defs#ds⟩ ⟧, #s) → Check2b(#ds, #s) ↓e{id : #t} ;
 
-Check2_(⟦⟧, #s) → Check3(#s) ;
+Check2b(⟦⟧, #s) → Check3(#s) ;
 
 // 3. CHECK USING ENVIRONMENT.
 
