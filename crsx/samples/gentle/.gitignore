@@ -1,8 +1,12 @@
 build
+*-installed
+*.crs
+*.crs-ref
+*.crsE
+*.hxg
+*.hxr
 *.hxt
 *.pg
 *.pg-ref
+*.raw2
 *.run
-*.crs
-*.crs-ref
-*-installed

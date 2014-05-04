@@ -1,0 +1,6428 @@
+/* org.crsx.samples.gentle.FirstParser: PG-generated JavaCC parser specification. */
+
+options {
+	SANITY_CHECK  = true;
+	BUILD_PARSER = true;
+	JDK_VERSION = "1.5";
+	ERROR_REPORTING = true;
+	DEBUG_PARSER = true;
+	BUILD_TOKEN_MANAGER = true;
+	FORCE_LA_CHECK = true;
+	STATIC = false;
+}
+
+PARSER_BEGIN(FirstParser)
+package org.crsx.samples.gentle;
+
+/** PG Grammar for HACS module org.crsx.samples.gentle.First.
+ * @version $Id: CookPG.crs,v 1.48 2014/01/26 21:14:39 krisrose Exp $
+ */
+public class FirstParser implements net.sf.crsx.Parser
+{
+	/** Factory. */
+	net.sf.crsx.Factory<? extends net.sf.crsx.Term> factory;
+	/** Compilation unit name for error messages. */
+	String unit;
+	/** Whether the parser should capture token locations. */
+	boolean captureLocations = true;
+	/** Constructor with token location information. */
+	private net.sf.crsx.Constructor makeTConstructor(net.sf.crsx.Sink sink, Token t, Object object, String sort)
+	{
+		net.sf.crsx.Constructor c = sort == null ? sink.makeConstructor(object) : sink.makeLiteral(object, sort);
+		if (t == null) t = token;
+		if (captureLocations && t != null)
+		{
+			if (factory.get("meta") == null)
+				c = net.sf.crsx.util.Util.wrapWithLocation(sink, c, unit, t.beginLine, t.beginColumn);
+		}
+		return c;
+	}
+
+	/** Helper interface with category non-terminal calls. */
+	abstract class CategoryCall { abstract net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException; }
+	/** Direct category invocations. */
+	java.util.Map<String,CategoryCall> categoryCall = new java.util.HashMap<String,CategoryCall>();
+	{
+		categoryCall.put("first", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_A_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstA_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_A_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstTmp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Tmp$WithEOF(sink, bound);} });
+		categoryCall.put("firstI_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_I_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstA_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_A_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstStat", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Stat$WithEOF(sink, bound);} });
+		categoryCall.put("firstExp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Exp$WithEOF(sink, bound);} });
+		categoryCall.put("firstName", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Name$WithEOF(sink, bound);} });
+		categoryCall.put("firstI_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_I_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstA_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_A_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstI_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_I_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawTerm", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawTerm$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawTerms", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawTerms$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSortedTerm", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSortedTerm$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawConstruction", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawConstruction$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawVariableUse", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawVariableUse$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawMetaApplication", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawMetaApplication$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawScope", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawScope$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawScopes", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawScopes$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawVariables", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawVariables$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_A_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_A_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_A_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_A_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_A_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_A_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_Tmp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_Tmp$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_Tmp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_Tmp$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_Tmp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_Tmp$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_I_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_I_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_I_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_I_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_I_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_I_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_A_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_A_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_A_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_A_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_A_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_A_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_Stat", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_Stat$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_Stat", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_Stat$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_Stat", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_Stat$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_Exp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_Exp$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_Exp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_Exp$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_Exp", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_Exp$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_Name", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_Name$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_Name", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_Name$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_Name", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_Name$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_I_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_I_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_I_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_I_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_I_Progr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_I_Progr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_A_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_A_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_A_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_A_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_A_Instr", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_A_Instr$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_Type", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_Type$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_Type", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_Type$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_Type", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_Type$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_I_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_I_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_I_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_I_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_I_Arg", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_I_Arg$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_ID", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_ID$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_ID", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_ID$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_ID", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_ID$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_INT", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_INT$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_INT", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_INT$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_INT", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_INT$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_FLOAT", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_FLOAT$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_FLOAT", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_FLOAT$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_FLOAT", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_FLOAT$WithEOF(sink, bound);} });
+		categoryCall.put("firstRaw_T", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_Raw_T$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawSorted_T", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawSorted_T$WithEOF(sink, bound);} });
+		categoryCall.put("firstRawPresorted_T", new CategoryCall(){ net.sf.crsx.Sink call(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws ParseException {return N_RawPresorted_T$WithEOF(sink, bound);} });
+	}
+
+	// Constructor.
+
+	/** Construct dummy instance. */
+	public FirstParser()
+	{
+		this((java.io.Reader) null);
+		disable_tracing();
+	}
+
+	// Parser implementation.
+
+	public net.sf.crsx.Parser parser(net.sf.crsx.Factory<? extends net.sf.crsx.Term> f)
+	{
+		if (factory != null)
+		{
+			net.sf.crsx.Parser parser = new FirstParser().parser(f);
+			parser.setParserVerbose(trace_enabled); parser.setParserLocation(captureLocations);
+			return parser;
+		}
+		else
+		{
+			factory = f;
+			assert f != null : "Or Else!";
+			return this;
+		}
+	}
+
+	public void setParserVerbose(boolean verbose)
+	{
+		if (verbose)
+			enable_tracing();
+		else
+			disable_tracing();
+	}
+
+	public void setParserLocation(boolean capture)
+	{
+		captureLocations = capture;
+	}
+
+	public void setEmbeddedParser(net.sf.crsx.Parser subparser) throws net.sf.crsx.CRSException
+	{}
+
+	public Iterable<String> categories()
+	{
+		return categoryCall.keySet();
+	}
+
+	public net.sf.crsx.Sink parse(net.sf.crsx.Sink sink, String category, java.io.Reader reader, String unit, int firstLine, int firstColumn, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws net.sf.crsx.CRSException, java.io.IOException
+	{
+		try
+		{
+			this.unit = unit;
+			ReInit((java.io.Reader) null);
+			jj_input_stream.ReInit(reader, firstLine, firstColumn); token_source = new FirstParserTokenManager(jj_input_stream); // hacks to update line and column numbers
+			if (bound == null) bound = new net.sf.crsx.util.LinkedExtensibleMap<String, net.sf.crsx.Variable>();
+			if (category == null || category.length() == 0) return N_A_Arg(sink, bound);
+			else if (categoryCall.containsKey(category)) return categoryCall.get(category).call(sink, bound);
+			else throw new net.sf.crsx.CRSException("Parser category '"+category+"' not supported!");
+		}
+		catch (ParseException e)
+		{
+			throw new net.sf.crsx.CRSException(e.getMessage());
+		}
+	}
+
+	public net.sf.crsx.Term parseTerm(net.sf.crsx.Maker maker, String category, java.io.Reader reader, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws net.sf.crsx.CRSException, java.io.IOException
+	{
+		net.sf.crsx.util.Buffer buffer = new net.sf.crsx.util.Buffer(maker);
+		factory.parse(buffer.sink(), category, reader, null, 1, 1, bound);
+		return buffer.term(true);
+	}
+
+	public net.sf.crsx.Term parseTerm(net.sf.crsx.Maker maker, String category, java.io.Reader reader, String unit, int line, int col, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> bound) throws net.sf.crsx.CRSException, java.io.IOException
+	{
+		net.sf.crsx.util.Buffer buffer = new net.sf.crsx.util.Buffer(maker);
+		factory.parse(buffer.sink(), category, reader, unit, line, col, bound);
+		return buffer.term(true);
+	}
+
+
+static String unmeta(String s) {return s.substring(1, s.length()-1).trim();}
+
+	/**
+	 * Run the parser and print the resulting term.
+	 * @param args should contain two strings: the category and an input file name
+	 */
+	public static void main(String[] args)
+	{
+		try
+		{
+			if (args.length != 2)
+			{
+				System.err.println("Usage: FirstParser category input");
+				System.exit(2);
+			}
+			String category = args[0];
+			java.io.Reader reader = new java.io.FileReader(args[1]);
+			net.sf.crsx.Factory<net.sf.crsx.generic.GenericTerm> factory = new net.sf.crsx.generic.GenericFactory();
+			net.sf.crsx.Parser parser = new FirstParser();
+			net.sf.crsx.Sink sink = factory.sink(System.out);
+			parser.parser(factory).parse(sink, category, reader, null, 1, 1, null);
+		}
+		catch (net.sf.crsx.CRSException e)
+		{
+			System.err.println("CRS error: "+e);
+			System.exit(1);
+		}
+		catch (java.io.IOException e)
+		{
+			System.err.println("I/O error: "+e);
+			System.exit(1);
+		}
+	}
+
+}
+PARSER_END(FirstParser)
+
+/* GRAMMAR. */
+
+/* Productions for INT token. */
+
+/**
+ * <em>INT</em> ::=   <a href="#T_meta1_T_M_INT">meta1_T_M_INT</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_INT">meta2_T_M_INT</a><font color="red">$$:unmeta:{firstRawSorted_INT}</font>  <br>
+ *  |   <a href="#T_T_M_INT">T_M_INT</a><font color="red">$</font> 
+ */
+net.sf.crsx.Sink N_INT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	t=<T_meta1_T_M_INT>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_INT>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_INT", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	t=<T_T_M_INT>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Meta token for INT. */ 
+TOKEN : { < T_meta1_T_M_INT : ("\u27e8" (" ")* "INT" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "INT" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_INT }
+<IN_META_T_M_INT> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_INT }
+<IN_NESTED_META_T_M_INT> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_INT> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_INT); } }
+<IN_META_T_M_INT> TOKEN : { < T_meta2_T_M_INT : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_INT,IN_NESTED_META_T_M_INT> MORE : { < ~[] > }
+
+
+/* Raw terms of INT token sort. */
+
+/** <em>Raw_INT$WithEOF</em> ::= <em>Raw_INT</em> EOF . */
+net.sf.crsx.Sink N_Raw_INT$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_INT(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_INT</em> ::=  (   <a href="#T_RAW_TOKEN_INT">RAW_TOKEN_INT</a>  )?   <a href="#N_RawPresorted_INT">&lang;RawPresorted_INT&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_INT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_INT>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_INT(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_INT$WithEOF</em> ::= <em>RawSorted_INT</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_INT$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_INT(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_INT</em> ::=   <a href="#T_RAW_TOKEN_INT">RAW_TOKEN_INT</a>   <a href="#N_RawPresorted_INT">&lang;RawPresorted_INT&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_INT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_INT>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_INT(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_INT$WithEOF</em> ::= <em>RawPresorted_INT</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_INT$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_INT(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_INT</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{INT}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{INT}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_INT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "INT", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "INT", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for FLOAT token. */
+
+/**
+ * <em>FLOAT</em> ::=   <a href="#T_meta1_T_M_FLOAT">meta1_T_M_FLOAT</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_FLOAT">meta2_T_M_FLOAT</a><font color="red">$$:unmeta:{firstRawSorted_FLOAT}</font>  <br>
+ *  |   <a href="#T_T_M_FLOAT">T_M_FLOAT</a><font color="red">$</font> 
+ */
+net.sf.crsx.Sink N_FLOAT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	t=<T_meta1_T_M_FLOAT>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_FLOAT>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_FLOAT", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	t=<T_T_M_FLOAT>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Meta token for FLOAT. */ 
+TOKEN : { < T_meta1_T_M_FLOAT : ("\u27e8" (" ")* "FLOAT" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "FLOAT" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_FLOAT }
+<IN_META_T_M_FLOAT> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_FLOAT }
+<IN_NESTED_META_T_M_FLOAT> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_FLOAT> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_FLOAT); } }
+<IN_META_T_M_FLOAT> TOKEN : { < T_meta2_T_M_FLOAT : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_FLOAT,IN_NESTED_META_T_M_FLOAT> MORE : { < ~[] > }
+
+
+/* Raw terms of FLOAT token sort. */
+
+/** <em>Raw_FLOAT$WithEOF</em> ::= <em>Raw_FLOAT</em> EOF . */
+net.sf.crsx.Sink N_Raw_FLOAT$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_FLOAT(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_FLOAT</em> ::=  (   <a href="#T_RAW_TOKEN_FLOAT">RAW_TOKEN_FLOAT</a>  )?   <a href="#N_RawPresorted_FLOAT">&lang;RawPresorted_FLOAT&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_FLOAT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_FLOAT>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_FLOAT(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_FLOAT$WithEOF</em> ::= <em>RawSorted_FLOAT</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_FLOAT$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_FLOAT(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_FLOAT</em> ::=   <a href="#T_RAW_TOKEN_FLOAT">RAW_TOKEN_FLOAT</a>   <a href="#N_RawPresorted_FLOAT">&lang;RawPresorted_FLOAT&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_FLOAT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_FLOAT>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_FLOAT(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_FLOAT$WithEOF</em> ::= <em>RawPresorted_FLOAT</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_FLOAT$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_FLOAT(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_FLOAT</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{FLOAT}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{FLOAT}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_FLOAT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "FLOAT", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "FLOAT", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for ID token. */
+
+/**
+ * <em>ID</em> ::=   <a href="#T_meta1_T_M_ID">meta1_T_M_ID</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_ID">meta2_T_M_ID</a><font color="red">$$:unmeta:{firstRawSorted_ID}</font>  <br>
+ *  |   <a href="#T_T_M_ID">T_M_ID</a><font color="red">$</font> 
+ */
+net.sf.crsx.Sink N_ID(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	t=<T_meta1_T_M_ID>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_ID>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_ID", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	t=<T_T_M_ID>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Meta token for ID. */ 
+TOKEN : { < T_meta1_T_M_ID : ("\u27e8" (" ")* "ID" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "ID" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_ID }
+<IN_META_T_M_ID> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_ID }
+<IN_NESTED_META_T_M_ID> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_ID> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_ID); } }
+<IN_META_T_M_ID> TOKEN : { < T_meta2_T_M_ID : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_ID,IN_NESTED_META_T_M_ID> MORE : { < ~[] > }
+
+
+/* Raw terms of ID token sort. */
+
+/** <em>Raw_ID$WithEOF</em> ::= <em>Raw_ID</em> EOF . */
+net.sf.crsx.Sink N_Raw_ID$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_ID(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_ID</em> ::=  (   <a href="#T_RAW_TOKEN_ID">RAW_TOKEN_ID</a>  )?   <a href="#N_RawPresorted_ID">&lang;RawPresorted_ID&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_ID(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_ID>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_ID(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_ID$WithEOF</em> ::= <em>RawSorted_ID</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_ID$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_ID(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_ID</em> ::=   <a href="#T_RAW_TOKEN_ID">RAW_TOKEN_ID</a>   <a href="#N_RawPresorted_ID">&lang;RawPresorted_ID&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_ID(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_ID>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_ID(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_ID$WithEOF</em> ::= <em>RawPresorted_ID</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_ID$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_ID(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_ID</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{ID}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{ID}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_ID(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "ID", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "ID", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for Exp sort with precedence 0. */
+
+/** <em>Exp$WithEOF</em> ::= <em>Exp</em> EOF . */
+net.sf.crsx.Sink N_Exp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_Exp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Exp</em> ::=  (   "<code>TA</code>"   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#_Exp_1</font>   <font color="red">{{ Exp__M_TA_Exp[#_Exp_1]}}</font>  |  <a href="#N_Exp1">&lang;Exp1&rang;</a> <font color="red">:#_Exp_1</font>   <font color="red">{{#_Exp_1}}</font>  ) 
+ */
+net.sf.crsx.Sink N_Exp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	net.sf.crsx.Sink bs___Exp_1 = null;
+	net.sf.crsx.util.Buffer b___Exp_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+		 ( 
+		"TA"
+		 ) 
+		 ( 
+		{
+			bs___Exp_1 = b___Exp_1.sink();
+		}
+		N_Exp(bs___Exp_1, env)
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("Exp__M_TA_Exp")) .copy(b___Exp_1, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+		{
+			bs___Exp_1 = b___Exp_1.sink();
+		}
+		N_Exp1(bs___Exp_1, env)
+		 ) 
+		 ( 
+		{
+			sink = sink .copy(b___Exp_1, true) ;
+		}
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Productions for Exp sort with precedence 1. */
+
+/* Handle left recursion. */
+
+/**
+ * <em>Exp1LR</em> ::=   "<code>+</code>"   <a href="#N_Exp2">&lang;Exp2&rang;</a> <font color="red">:#_Exp_2</font>   <a href="#N_Exp1LR">&lang;Exp1LR {{Exp1_LR__M__2b_Exp[#1, #_Exp_2]}}&rang;</a>   <br>
+ *  |  <font color="red">{{#1}}</font> 
+ */
+net.sf.crsx.Sink N_Exp1LR(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env, net.sf.crsx.util.Buffer b__1) :
+{
+	Token t = null;
+	net.sf.crsx.Sink s1 = null;
+	net.sf.crsx.util.Buffer b1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Exp_2 = null;
+	net.sf.crsx.util.Buffer b___Exp_2 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	"+"
+	 ) 
+	 ( 
+	{
+		bs___Exp_2 = b___Exp_2.sink();
+	}
+	N_Exp2(bs___Exp_2, env)
+	 ) 
+	 ( 
+	{
+		s1 = b1.sink();
+		s1 .start(s1.makeConstructor("Exp1_LR__M__2b_Exp")) .copy(b__1, false) .copy(b___Exp_2, true) .end() ;
+	}
+	sink=N_Exp1LR(sink, env, b1)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	{
+		sink = sink .copy(b__1, false) ;
+	}
+	 ) 
+	{return sink;}
+}
+
+/**
+ * <em>Exp1</em> ::=  <a href="#N_Exp2">&lang;Exp2&rang;</a> <font color="red">:#_Exp_1</font>   <a href="#N_Exp1LR">&lang;Exp1LR {{#_Exp_1}}&rang;</a>  
+ */
+net.sf.crsx.Sink N_Exp1(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	net.sf.crsx.Sink s1 = null;
+	net.sf.crsx.util.Buffer b1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Exp_1 = null;
+	net.sf.crsx.util.Buffer b___Exp_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	{
+		bs___Exp_1 = b___Exp_1.sink();
+	}
+	N_Exp2(bs___Exp_1, env)
+	 ) 
+	 ( 
+	{
+		s1 = b1.sink();
+		s1 .copy(b___Exp_1, true) ;
+	}
+	sink=N_Exp1LR(sink, env, b1)
+	 ) 
+	{return sink;}
+}
+
+/* Productions for Exp sort with precedence 2. */
+
+/* Handle left recursion. */
+
+/**
+ * <em>Exp2LR</em> ::=   "<code>*</code>"   <a href="#N_Exp3">&lang;Exp3&rang;</a> <font color="red">:#_Exp_2</font>   <a href="#N_Exp2LR">&lang;Exp2LR {{Exp2_LR__M__2a_Exp[#1, #_Exp_2]}}&rang;</a>   <br>
+ *  |  <font color="red">{{#1}}</font> 
+ */
+net.sf.crsx.Sink N_Exp2LR(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env, net.sf.crsx.util.Buffer b__1) :
+{
+	Token t = null;
+	net.sf.crsx.Sink s1 = null;
+	net.sf.crsx.util.Buffer b1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Exp_2 = null;
+	net.sf.crsx.util.Buffer b___Exp_2 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	"*"
+	 ) 
+	 ( 
+	{
+		bs___Exp_2 = b___Exp_2.sink();
+	}
+	N_Exp3(bs___Exp_2, env)
+	 ) 
+	 ( 
+	{
+		s1 = b1.sink();
+		s1 .start(s1.makeConstructor("Exp2_LR__M__2a_Exp")) .copy(b__1, false) .copy(b___Exp_2, true) .end() ;
+	}
+	sink=N_Exp2LR(sink, env, b1)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	{
+		sink = sink .copy(b__1, false) ;
+	}
+	 ) 
+	{return sink;}
+}
+
+/**
+ * <em>Exp2</em> ::=  <a href="#N_Exp3">&lang;Exp3&rang;</a> <font color="red">:#_Exp_1</font>   <a href="#N_Exp2LR">&lang;Exp2LR {{#_Exp_1}}&rang;</a>  
+ */
+net.sf.crsx.Sink N_Exp2(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	net.sf.crsx.Sink s1 = null;
+	net.sf.crsx.util.Buffer b1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Exp_1 = null;
+	net.sf.crsx.util.Buffer b___Exp_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	{
+		bs___Exp_1 = b___Exp_1.sink();
+	}
+	N_Exp3(bs___Exp_1, env)
+	 ) 
+	 ( 
+	{
+		s1 = b1.sink();
+		s1 .copy(b___Exp_1, true) ;
+	}
+	sink=N_Exp2LR(sink, env, b1)
+	 ) 
+	{return sink;}
+}
+
+/* Productions for Exp sort with (highest) precedence 3. */
+
+/**
+ * <em>Exp3</em> ::=   <a href="#T_meta1_T_M_Exp">meta1_T_M_Exp</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Exp">meta2_T_M_Exp</a><font color="red">$$:unmeta:{firstRawSorted_Exp}</font>  <br>
+ *  |  (   "<code>(</code>"   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#</font>    "<code>)</code>"   <font color="red">{{Exp3__M__28_Exp__M__29[#]}}</font>  |  (  <a href="#N_INT">&lang;INT&rang;</a> <font color="red">:#_INT_1</font>   <font color="red">{{Exp3_INT[#_INT_1]}}</font>  |  (  <a href="#N_FLOAT">&lang;FLOAT&rang;</a> <font color="red">:#_FLOAT_1</font>   <font color="red">{{Exp3_FLOAT[#_FLOAT_1]}}</font>  |  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>   <font color="red">{{Exp3_Name[#_Name_1]}}</font>  )  )  ) 
+ */
+net.sf.crsx.Sink N_Exp3(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___Name_1 = null;
+	Token t = null;
+	net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___FLOAT_1 = null;
+	net.sf.crsx.util.Buffer b___INT_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs__ = null;
+	net.sf.crsx.util.Buffer b___FLOAT_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___INT_1 = null;
+	net.sf.crsx.util.Buffer b__ = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_Exp>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_Exp>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_Exp", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		"("
+		 ) 
+		 ( 
+		{
+			bs__ = b__.sink();
+		}
+		N_Exp(bs__, env)
+		 ) 
+		 ( 
+		")"
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("Exp3__M__28_Exp__M__29")) .copy(b__, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+			 ( 
+			{
+				bs___INT_1 = b___INT_1.sink();
+			}
+			N_INT(bs___INT_1, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("Exp3_INT")) .copy(b___INT_1, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				{
+					bs___FLOAT_1 = b___FLOAT_1.sink();
+				}
+				N_FLOAT(bs___FLOAT_1, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("Exp3_FLOAT")) .copy(b___FLOAT_1, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+				{
+					bs___Name_1 = b___Name_1.sink();
+				}
+				N_Name(bs___Name_1, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("Exp3_Name")) .copy(b___Name_1, true) .end() ;
+				}
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for Exp. */ 
+TOKEN : { < T_meta1_T_M_Exp : ("\u27e8" (" ")* "Exp" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "Exp" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_Exp }
+<IN_META_T_M_Exp> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_Exp }
+<IN_NESTED_META_T_M_Exp> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_Exp> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_Exp); } }
+<IN_META_T_M_Exp> TOKEN : { < T_meta2_T_M_Exp : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_Exp,IN_NESTED_META_T_M_Exp> MORE : { < ~[] > }
+
+
+/* Raw terms of Exp production sort. */
+
+/** <em>Raw_Exp$WithEOF</em> ::= <em>Raw_Exp</em> EOF . */
+net.sf.crsx.Sink N_Raw_Exp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_Exp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_Exp</em> ::=  (   <a href="#T_RAW_TOKEN_Exp">RAW_TOKEN_Exp</a>  )?   <a href="#N_RawPresorted_Exp">&lang;RawPresorted_Exp&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_Exp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_Exp>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_Exp(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_Exp$WithEOF</em> ::= <em>RawSorted_Exp</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_Exp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_Exp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_Exp</em> ::=   <a href="#T_RAW_TOKEN_Exp">RAW_TOKEN_Exp</a>   <a href="#N_RawPresorted_Exp">&lang;RawPresorted_Exp&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_Exp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_Exp>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_Exp(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_Exp$WithEOF</em> ::= <em>RawPresorted_Exp</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_Exp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_Exp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_Exp</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{Exp}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{Exp}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{Exp}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_Exp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Exp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Exp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Exp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for Name sort with (highest) precedence 0. */
+
+/** <em>Name$WithEOF</em> ::= <em>Name</em> EOF . */
+net.sf.crsx.Sink N_Name$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_Name(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Name</em> ::=   <a href="#T_meta1_T_M_Name">meta1_T_M_Name</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Name">meta2_T_M_Name</a><font color="red">$$:unmeta:{firstRawSorted_Name}</font>  <br>
+ *  |  <a href="#N_ID">&lang;ID&rang;</a> <font color="red">!!!:#_ID_1</font>   <font color="red">{{#_ID_1}}</font> 
+ */
+net.sf.crsx.Sink N_Name(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___ID_1 = null;
+	Token t = null;
+	String c1 = null;
+	String s___ID_1 = null;
+	net.sf.crsx.util.Buffer b___ID_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Variable v___ID_1 = null;
+}
+{
+	 ( 
+	t=<T_meta1_T_M_Name>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_Name>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_Name", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	{
+		bs___ID_1 = b___ID_1.sink();
+	}
+	N_ID(bs___ID_1, env)
+	{
+		c1 = net.sf.crsx.util.Util.symbol(b___ID_1.term(true));
+		s___ID_1 = c1;
+		v___ID_1 = (env.containsKey(s___ID_1) ? env.get(s___ID_1) : factory.freeVariable(s___ID_1, true, true));
+		if (v___ID_1 == null) throw new ParseException("Variable "+s___ID_1+" cannot be resolved?");
+	}
+	 ) 
+	 ( 
+	{
+		sink = sink .use(v___ID_1) ;
+	}
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for Name. */ 
+TOKEN : { < T_meta1_T_M_Name : ("\u27e8" (" ")* "Name" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "Name" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_Name }
+<IN_META_T_M_Name> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_Name }
+<IN_NESTED_META_T_M_Name> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_Name> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_Name); } }
+<IN_META_T_M_Name> TOKEN : { < T_meta2_T_M_Name : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_Name,IN_NESTED_META_T_M_Name> MORE : { < ~[] > }
+
+
+/* Raw terms of Name production sort. */
+
+/** <em>Raw_Name$WithEOF</em> ::= <em>Raw_Name</em> EOF . */
+net.sf.crsx.Sink N_Raw_Name$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_Name(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_Name</em> ::=  (   <a href="#T_RAW_TOKEN_Name">RAW_TOKEN_Name</a>  )?   <a href="#N_RawPresorted_Name">&lang;RawPresorted_Name&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_Name(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_Name>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_Name(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_Name$WithEOF</em> ::= <em>RawSorted_Name</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_Name$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_Name(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_Name</em> ::=   <a href="#T_RAW_TOKEN_Name">RAW_TOKEN_Name</a>   <a href="#N_RawPresorted_Name">&lang;RawPresorted_Name&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_Name(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_Name>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_Name(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_Name$WithEOF</em> ::= <em>RawPresorted_Name</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_Name$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_Name(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_Name</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{Name}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{Name}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{Name}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_Name(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Name", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Name", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Name", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for Stat sort with (highest) precedence 0. */
+
+/** <em>Stat$WithEOF</em> ::= <em>Stat</em> EOF . */
+net.sf.crsx.Sink N_Stat$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_Stat(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Stat</em> ::=   <a href="#T_meta1_T_M_Stat">meta1_T_M_Stat</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Stat">meta2_T_M_Stat</a><font color="red">$$:unmeta:{firstRawSorted_Stat}</font>  <br>
+ *  |  (   "<code>TA</code>"    "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <font color="red">{{ Stat__M_TA__M__7b_Stat__M__7d[#_Stat_1]}}</font>  |  (   "<code>TA2</code>"    "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <font color="red">{{ Stat__M_TA2__M__7b_Stat__M__7d[#_Stat_1]}}</font>  |  (   "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_2</font>   <font color="red">{{Stat__M__7b_Stat__M__7d_Stat[#_Stat_1, #_Stat_2]}}</font>  |  (  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">^x</font>    "<code>:=</code>"   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#_Exp_1</font>    "<code>;</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">[x]</font><font color="red">:#_Stat_2</font>   <font color="red">{{Stat_vName__M__3a_3d_Exp__M__3b_Stat[#_Exp_1, #_Stat_2]}}</font>  |  <font color="red">{{StatEMPTY}}</font>  )  )  )  ) 
+ */
+net.sf.crsx.Sink N_Stat(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Variable v_x = null;
+	net.sf.crsx.Sink bs___Stat_1 = null;
+	net.sf.crsx.Sink bs___Stat_2 = null;
+	Token t = null;
+	net.sf.crsx.Sink bs_x = null;
+	net.sf.crsx.util.Buffer b_x = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Exp_1 = null;
+	String c5 = null;
+	net.sf.crsx.util.Buffer b___Stat_1 = new net.sf.crsx.util.Buffer(sink);
+	String s_x = null;
+	net.sf.crsx.util.Buffer b___Stat_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___Exp_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_Stat>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_Stat>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_Stat", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		"TA"
+		 ) 
+		 ( 
+		"{"
+		 ) 
+		 ( 
+		{
+			bs___Stat_1 = b___Stat_1.sink();
+		}
+		N_Stat(bs___Stat_1, env)
+		 ) 
+		 ( 
+		"}"
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("Stat__M_TA__M__7b_Stat__M__7d")) .copy(b___Stat_1, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+			 ( 
+			"TA2"
+			 ) 
+			 ( 
+			"{"
+			 ) 
+			 ( 
+			{
+				bs___Stat_1 = b___Stat_1.sink();
+			}
+			N_Stat(bs___Stat_1, env)
+			 ) 
+			 ( 
+			"}"
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("Stat__M_TA2__M__7b_Stat__M__7d")) .copy(b___Stat_1, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				"{"
+				 ) 
+				 ( 
+				{
+					bs___Stat_1 = b___Stat_1.sink();
+				}
+				N_Stat(bs___Stat_1, env)
+				 ) 
+				 ( 
+				"}"
+				 ) 
+				 ( 
+				{
+					bs___Stat_2 = b___Stat_2.sink();
+				}
+				N_Stat(bs___Stat_2, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("Stat__M__7b_Stat__M__7d_Stat")) .copy(b___Stat_1, true) .copy(b___Stat_2, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+					 ( 
+					{
+						bs_x = b_x.sink();
+					}
+					N_Name(bs_x, env)
+					{
+						c5 = net.sf.crsx.util.Util.symbol(b_x.term(true));
+						s_x = c5;
+						v_x = sink.makeVariable(s_x,true);
+					}
+					 ) 
+					 ( 
+					":="
+					 ) 
+					 ( 
+					{
+						bs___Exp_1 = b___Exp_1.sink();
+					}
+					N_Exp(bs___Exp_1, env)
+					 ) 
+					 ( 
+					";"
+					 ) 
+					 ( 
+					{
+						bs___Stat_2 = b___Stat_2.sink();
+						{
+							net.sf.crsx.Variable[] bs1 = {v_x};
+							bs___Stat_2 = bs___Stat_2.binds(bs1);
+						}
+					}
+					N_Stat(bs___Stat_2, env.extend(s_x, v_x))
+					 ) 
+					 ( 
+					{
+						sink = sink .start(sink.makeConstructor("Stat_vName__M__3a_3d_Exp__M__3b_Stat")) .copy(b___Exp_1, true) .copy(b___Stat_2, true) .end() ;
+					}
+					 ) 
+				|
+					 ( 
+					{
+						sink = sink .start(sink.makeConstructor("StatEMPTY")) .end() ;
+					}
+					 ) 
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for Stat. */ 
+TOKEN : { < T_meta1_T_M_Stat : ("\u27e8" (" ")* "Stat" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "Stat" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_Stat }
+<IN_META_T_M_Stat> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_Stat }
+<IN_NESTED_META_T_M_Stat> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_Stat> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_Stat); } }
+<IN_META_T_M_Stat> TOKEN : { < T_meta2_T_M_Stat : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_Stat,IN_NESTED_META_T_M_Stat> MORE : { < ~[] > }
+
+
+/* Raw terms of Stat production sort. */
+
+/** <em>Raw_Stat$WithEOF</em> ::= <em>Raw_Stat</em> EOF . */
+net.sf.crsx.Sink N_Raw_Stat$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_Stat(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_Stat</em> ::=  (   <a href="#T_RAW_TOKEN_Stat">RAW_TOKEN_Stat</a>  )?   <a href="#N_RawPresorted_Stat">&lang;RawPresorted_Stat&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_Stat(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_Stat>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_Stat(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_Stat$WithEOF</em> ::= <em>RawSorted_Stat</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_Stat$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_Stat(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_Stat</em> ::=   <a href="#T_RAW_TOKEN_Stat">RAW_TOKEN_Stat</a>   <a href="#N_RawPresorted_Stat">&lang;RawPresorted_Stat&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_Stat(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_Stat>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_Stat(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_Stat$WithEOF</em> ::= <em>RawPresorted_Stat</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_Stat$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_Stat(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_Stat</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{Stat}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{Stat}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{Stat}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_Stat(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Stat", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Stat", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Stat", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Raw terms of Type production sort. */
+
+/** <em>Raw_Type$WithEOF</em> ::= <em>Raw_Type</em> EOF . */
+net.sf.crsx.Sink N_Raw_Type$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_Type(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_Type</em> ::=  (   <a href="#T_RAW_TOKEN_Type">RAW_TOKEN_Type</a>  )?   <a href="#N_RawPresorted_Type">&lang;RawPresorted_Type&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_Type>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_Type(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_Type$WithEOF</em> ::= <em>RawSorted_Type</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_Type$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_Type(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_Type</em> ::=   <a href="#T_RAW_TOKEN_Type">RAW_TOKEN_Type</a>   <a href="#N_RawPresorted_Type">&lang;RawPresorted_Type&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_Type>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_Type(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_Type$WithEOF</em> ::= <em>RawPresorted_Type</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_Type$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_Type(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_Type</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{Type}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{Type}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |   <a href="#T_RAW_TOKEN_Int">RAW_TOKEN_Int</a><font color="red">$</font>   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  )?  <br>
+ *  |   <a href="#T_RAW_TOKEN_Float">RAW_TOKEN_Float</a><font color="red">$</font>   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  )?  <br>
+ *  |   <a href="#T_RAW_TOKEN_Unif">RAW_TOKEN_Unif</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_COMMA">RAW_COMMA</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  <br>
+ *  |   <a href="#T_RAW_TOKEN_Test">RAW_TOKEN_Test</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>    <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">^x_72</font>    <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a> <font color="red">[x_72]</font>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{Type}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	String s_x_72 = null;
+	net.sf.crsx.Variable v_x_72 = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Type", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Type", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_RAW_TOKEN_Int>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	 )? 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_RAW_TOKEN_Float>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	 )? 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_RAW_TOKEN_Unif>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	 ( 
+	 <T_RAW_LPAREN>
+	 ) 
+	 ( 
+	sink=N_Raw_Type(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_COMMA>
+	 ) 
+	 ( 
+	sink=N_Raw_Type(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_RPAREN>
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_RAW_TOKEN_Test>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	 ( 
+	 <T_RAW_LPAREN>
+	 ) 
+	 ( 
+	 <T_RAW_LBRACKET>
+	 ) 
+	 ( 
+	t=<T_RAW_VARIABLE>
+	{
+		s_x_72 = t.toString();
+		v_x_72 = sink.makeVariable(s_x_72,true);
+	}
+	 ) 
+	 ( 
+	 <T_RAW_RBRACKET>
+	 ) 
+	 ( 
+	{
+		{
+			net.sf.crsx.Variable[] bs1 = {v_x_72};
+			sink = sink .binds(bs1) ;
+		}
+	}
+	sink=N_Raw_Type(sink, env.extend(s_x_72, v_x_72))
+	 ) 
+	 ( 
+	 <T_RAW_RPAREN>
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Type", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/**
+ * <em>RawAttributeSynthesized_t</em> ::=  <font color="red">{RAW-Attribute}</font>   (  <font color="red">{RAW-AttributeKindUp}</font>  )   (   <a href="#T_RAW_TOKEN_t">RAW_TOKEN_t</a><font color="red">$</font>  )    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <font color="red">{RAW-AttributeValue}</font>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a> 
+ */
+net.sf.crsx.Sink N_RawAttributeSynthesized_t(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-Attribute", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-AttributeKindUp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_TOKEN_t>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	 <T_RAW_LPAREN>
+	 ) 
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-AttributeValue", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_Raw_Type(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_RPAREN>
+	 ) 
+	{
+		return sink .end().end() ;
+	}
+}
+
+/**
+ * <em>RawAttributeInherited_e</em> ::=  <font color="red">{RAW-Attribute}</font>   (  <font color="red">{RAW-AttributeKindDown}</font>  )   (   <a href="#T_RAW_TOKEN_e">RAW_TOKEN_e</a><font color="red">$</font>  )    <a href="#T_RAW_LBRACE">RAW_LBRACE</a>   <font color="red">{RAW-AttributeKeyValue}</font>   <a href="#N_Raw_Name">&lang;Raw_Name&rang;</a>     <a href="#T_RAW_COLON">RAW_COLON</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_RBRACE">RAW_RBRACE</a> 
+ */
+net.sf.crsx.Sink N_RawAttributeInherited_e(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-Attribute", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-AttributeKindDown", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_TOKEN_e>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	 <T_RAW_LBRACE>
+	 ) 
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-AttributeKeyValue", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_Raw_Name(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_COLON>
+	 ) 
+	 ( 
+	sink=N_Raw_Type(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_RBRACE>
+	 ) 
+	{
+		return sink .end().end() ;
+	}
+}
+
+/* Productions for T token. */
+
+/**
+ * <em>T</em> ::=   <a href="#T_meta1_T_M_T">meta1_T_M_T</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_T">meta2_T_M_T</a><font color="red">$$:unmeta:{firstRawSorted_T}</font>  <br>
+ *  |   <a href="#T_T_M_T">T_M_T</a><font color="red">$</font> 
+ */
+net.sf.crsx.Sink N_T(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	t=<T_meta1_T_M_T>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_T>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_T", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	t=<T_T_M_T>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Meta token for T. */ 
+TOKEN : { < T_meta1_T_M_T : ("\u27e8" (" ")* "T" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "T" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_T }
+<IN_META_T_M_T> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_T }
+<IN_NESTED_META_T_M_T> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_T> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_T); } }
+<IN_META_T_M_T> TOKEN : { < T_meta2_T_M_T : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_T,IN_NESTED_META_T_M_T> MORE : { < ~[] > }
+
+
+/* Raw terms of T token sort. */
+
+/** <em>Raw_T$WithEOF</em> ::= <em>Raw_T</em> EOF . */
+net.sf.crsx.Sink N_Raw_T$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_T(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_T</em> ::=  (   <a href="#T_RAW_TOKEN_T">RAW_TOKEN_T</a>  )?   <a href="#N_RawPresorted_T">&lang;RawPresorted_T&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_T(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_T>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_T(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_T$WithEOF</em> ::= <em>RawSorted_T</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_T$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_T(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_T</em> ::=   <a href="#T_RAW_TOKEN_T">RAW_TOKEN_T</a>   <a href="#N_RawPresorted_T">&lang;RawPresorted_T&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_T(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_T>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_T(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_T$WithEOF</em> ::= <em>RawPresorted_T</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_T$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_T(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_T</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{T}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{T}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_T(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "T", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "T", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for I_Progr sort with (highest) precedence 0. */
+
+/** <em>I_Progr$WithEOF</em> ::= <em>I_Progr</em> EOF . */
+net.sf.crsx.Sink N_I_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_I_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>I_Progr</em> ::=   <a href="#T_meta1_T_M_I_xProgr">meta1_T_M_I_xProgr</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_I_xProgr">meta2_T_M_I_xProgr</a><font color="red">$$:unmeta:{firstRawSorted_I_Progr}</font>  <br>
+ *  |  (   "<code>ICG</code>"    "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <font color="red">{{ I_Progr__M_ICG__M__7b_Stat__M__7d[#_Stat_1]}}</font>  |  (   "<code>ICGExp</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#_Exp_2</font>   <font color="red">{{ I_Progr__M_ICGExp_Tmp_Exp[#_Tmp_1, #_Exp_2]}}</font>  |  (   "<code>{</code>"   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_1</font>    "<code>}</code>"   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_2</font>   <font color="red">{{ I_Progr__M__7b_I_Progr__M__7d_I_Progr[#_I_Progr_1, #_I_Progr_2]}}</font>  |  (  <a href="#N_I_Instr">&lang;I_Instr&rang;</a> <font color="red">:#_I_Instr_1</font>   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_2</font>   <font color="red">{{I_Progr_I_Instr_I_Progr[#_I_Instr_1, #_I_Progr_2]}}</font>  |  <font color="red">{{I_ProgrEMPTY}}</font>  )  )  )  ) 
+ */
+net.sf.crsx.Sink N_I_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___Tmp_1 = null;
+	net.sf.crsx.util.Buffer b___I_Instr_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___I_Progr_2 = null;
+	net.sf.crsx.Sink bs___I_Progr_1 = null;
+	net.sf.crsx.util.Buffer b___Stat_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___Exp_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___I_Progr_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Stat_1 = null;
+	net.sf.crsx.Sink bs___I_Instr_1 = null;
+	Token t = null;
+	net.sf.crsx.Sink bs___Exp_2 = null;
+	net.sf.crsx.util.Buffer b___Tmp_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___I_Progr_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_I_xProgr>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_I_xProgr>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_I_Progr", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		"ICG"
+		 ) 
+		 ( 
+		"{"
+		 ) 
+		 ( 
+		{
+			bs___Stat_1 = b___Stat_1.sink();
+		}
+		N_Stat(bs___Stat_1, env)
+		 ) 
+		 ( 
+		"}"
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("I_Progr__M_ICG__M__7b_Stat__M__7d")) .copy(b___Stat_1, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+			 ( 
+			"ICGExp"
+			 ) 
+			 ( 
+			{
+				bs___Tmp_1 = b___Tmp_1.sink();
+			}
+			N_Tmp(bs___Tmp_1, env)
+			 ) 
+			 ( 
+			{
+				bs___Exp_2 = b___Exp_2.sink();
+			}
+			N_Exp(bs___Exp_2, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("I_Progr__M_ICGExp_Tmp_Exp")) .copy(b___Tmp_1, true) .copy(b___Exp_2, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				"{"
+				 ) 
+				 ( 
+				{
+					bs___I_Progr_1 = b___I_Progr_1.sink();
+				}
+				N_I_Progr(bs___I_Progr_1, env)
+				 ) 
+				 ( 
+				"}"
+				 ) 
+				 ( 
+				{
+					bs___I_Progr_2 = b___I_Progr_2.sink();
+				}
+				N_I_Progr(bs___I_Progr_2, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("I_Progr__M__7b_I_Progr__M__7d_I_Progr")) .copy(b___I_Progr_1, true) .copy(b___I_Progr_2, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+					 ( 
+					{
+						bs___I_Instr_1 = b___I_Instr_1.sink();
+					}
+					N_I_Instr(bs___I_Instr_1, env)
+					 ) 
+					 ( 
+					{
+						bs___I_Progr_2 = b___I_Progr_2.sink();
+					}
+					N_I_Progr(bs___I_Progr_2, env)
+					 ) 
+					 ( 
+					{
+						sink = sink .start(sink.makeConstructor("I_Progr_I_Instr_I_Progr")) .copy(b___I_Instr_1, true) .copy(b___I_Progr_2, true) .end() ;
+					}
+					 ) 
+				|
+					 ( 
+					{
+						sink = sink .start(sink.makeConstructor("I_ProgrEMPTY")) .end() ;
+					}
+					 ) 
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for I_Progr. */ 
+TOKEN : { < T_meta1_T_M_I_xProgr : ("\u27e8" (" ")* "I_Progr" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "I_Progr" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_I_xProgr }
+<IN_META_T_M_I_xProgr> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_I_xProgr }
+<IN_NESTED_META_T_M_I_xProgr> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_I_xProgr> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_I_xProgr); } }
+<IN_META_T_M_I_xProgr> TOKEN : { < T_meta2_T_M_I_xProgr : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_I_xProgr,IN_NESTED_META_T_M_I_xProgr> MORE : { < ~[] > }
+
+
+/* Raw terms of I_Progr production sort. */
+
+/** <em>Raw_I_Progr$WithEOF</em> ::= <em>Raw_I_Progr</em> EOF . */
+net.sf.crsx.Sink N_Raw_I_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_I_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_I_Progr</em> ::=  (   <a href="#T_RAW_TOKEN_I_Progr">RAW_TOKEN_I_Progr</a>  )?   <a href="#N_RawPresorted_I_Progr">&lang;RawPresorted_I_Progr&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_I_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_I_Progr>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_I_Progr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_I_Progr$WithEOF</em> ::= <em>RawSorted_I_Progr</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_I_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_I_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_I_Progr</em> ::=   <a href="#T_RAW_TOKEN_I_Progr">RAW_TOKEN_I_Progr</a>   <a href="#N_RawPresorted_I_Progr">&lang;RawPresorted_I_Progr&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_I_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_I_Progr>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_I_Progr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_I_Progr$WithEOF</em> ::= <em>RawPresorted_I_Progr</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_I_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_I_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_I_Progr</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{I_Progr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{I_Progr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{I_Progr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_I_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Progr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Progr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Progr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for I_Instr sort with (highest) precedence 0. */
+
+/** <em>I_Instr$WithEOF</em> ::= <em>I_Instr</em> EOF . */
+net.sf.crsx.Sink N_I_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_I_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>I_Instr</em> ::=   <a href="#T_meta1_T_M_I_xInstr">meta1_T_M_I_xInstr</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_I_xInstr">meta2_T_M_I_xInstr</a><font color="red">$$:unmeta:{firstRawSorted_I_Instr}</font>  <br>
+ *  |  (  <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>    "<code>=</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_2</font>   (   "<code>*</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_3</font>    "<code>;</code>"   <font color="red">{{I_Instr_Tmp__M__3d_I_Arg__M__2a_I_Arg__M__3b[#_Tmp_1, #_I_Arg_2, #_I_Arg_3]}}</font>  |  (   "<code>+</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_3</font>    "<code>;</code>"   <font color="red">{{I_Instr_Tmp__M__3d_I_Arg__M__2b_I_Arg__M__3b[#_Tmp_1, #_I_Arg_2, #_I_Arg_3]}}</font>  |   "<code>;</code>"   <font color="red">{{I_Instr_Tmp__M__3d_I_Arg__M__3b[#_Tmp_1, #_I_Arg_2]}}</font>  )  )  |  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>    "<code>=</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_2</font>    "<code>;</code>"   <font color="red">{{I_Instr_Name__M__3d_Tmp__M__3b[#_Name_1, #_Tmp_2]}}</font>  ) 
+ */
+net.sf.crsx.Sink N_I_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___Tmp_1 = null;
+	net.sf.crsx.Sink bs___Name_1 = null;
+	Token t = null;
+	net.sf.crsx.util.Buffer b___I_Arg_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___I_Arg_3 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Tmp_2 = null;
+	net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___I_Arg_3 = null;
+	net.sf.crsx.util.Buffer b___Tmp_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___I_Arg_2 = null;
+	net.sf.crsx.util.Buffer b___Tmp_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_I_xInstr>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_I_xInstr>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_I_Instr", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		{
+			bs___Tmp_1 = b___Tmp_1.sink();
+		}
+		N_Tmp(bs___Tmp_1, env)
+		 ) 
+		 ( 
+		"="
+		 ) 
+		 ( 
+		{
+			bs___I_Arg_2 = b___I_Arg_2.sink();
+		}
+		N_I_Arg(bs___I_Arg_2, env)
+		 ) 
+		 ( 
+			 ( 
+			"*"
+			 ) 
+			 ( 
+			{
+				bs___I_Arg_3 = b___I_Arg_3.sink();
+			}
+			N_I_Arg(bs___I_Arg_3, env)
+			 ) 
+			 ( 
+			";"
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("I_Instr_Tmp__M__3d_I_Arg__M__2a_I_Arg__M__3b")) .copy(b___Tmp_1, true) .copy(b___I_Arg_2, true) .copy(b___I_Arg_3, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				"+"
+				 ) 
+				 ( 
+				{
+					bs___I_Arg_3 = b___I_Arg_3.sink();
+				}
+				N_I_Arg(bs___I_Arg_3, env)
+				 ) 
+				 ( 
+				";"
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("I_Instr_Tmp__M__3d_I_Arg__M__2b_I_Arg__M__3b")) .copy(b___Tmp_1, true) .copy(b___I_Arg_2, true) .copy(b___I_Arg_3, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+				";"
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("I_Instr_Tmp__M__3d_I_Arg__M__3b")) .copy(b___Tmp_1, true) .copy(b___I_Arg_2, true) .end() ;
+				}
+				 ) 
+			 ) 
+		 ) 
+	|
+		 ( 
+		{
+			bs___Name_1 = b___Name_1.sink();
+		}
+		N_Name(bs___Name_1, env)
+		 ) 
+		 ( 
+		"="
+		 ) 
+		 ( 
+		{
+			bs___Tmp_2 = b___Tmp_2.sink();
+		}
+		N_Tmp(bs___Tmp_2, env)
+		 ) 
+		 ( 
+		";"
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("I_Instr_Name__M__3d_Tmp__M__3b")) .copy(b___Name_1, true) .copy(b___Tmp_2, true) .end() ;
+		}
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for I_Instr. */ 
+TOKEN : { < T_meta1_T_M_I_xInstr : ("\u27e8" (" ")* "I_Instr" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "I_Instr" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_I_xInstr }
+<IN_META_T_M_I_xInstr> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_I_xInstr }
+<IN_NESTED_META_T_M_I_xInstr> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_I_xInstr> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_I_xInstr); } }
+<IN_META_T_M_I_xInstr> TOKEN : { < T_meta2_T_M_I_xInstr : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_I_xInstr,IN_NESTED_META_T_M_I_xInstr> MORE : { < ~[] > }
+
+
+/* Raw terms of I_Instr production sort. */
+
+/** <em>Raw_I_Instr$WithEOF</em> ::= <em>Raw_I_Instr</em> EOF . */
+net.sf.crsx.Sink N_Raw_I_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_I_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_I_Instr</em> ::=  (   <a href="#T_RAW_TOKEN_I_Instr">RAW_TOKEN_I_Instr</a>  )?   <a href="#N_RawPresorted_I_Instr">&lang;RawPresorted_I_Instr&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_I_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_I_Instr>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_I_Instr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_I_Instr$WithEOF</em> ::= <em>RawSorted_I_Instr</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_I_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_I_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_I_Instr</em> ::=   <a href="#T_RAW_TOKEN_I_Instr">RAW_TOKEN_I_Instr</a>   <a href="#N_RawPresorted_I_Instr">&lang;RawPresorted_I_Instr&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_I_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_I_Instr>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_I_Instr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_I_Instr$WithEOF</em> ::= <em>RawPresorted_I_Instr</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_I_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_I_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_I_Instr</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{I_Instr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{I_Instr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{I_Instr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_I_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Instr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Instr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Instr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for I_Arg sort with (highest) precedence 0. */
+
+/** <em>I_Arg$WithEOF</em> ::= <em>I_Arg</em> EOF . */
+net.sf.crsx.Sink N_I_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_I_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>I_Arg</em> ::=   <a href="#T_meta1_T_M_I_xArg">meta1_T_M_I_xArg</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_I_xArg">meta2_T_M_I_xArg</a><font color="red">$$:unmeta:{firstRawSorted_I_Arg}</font>  <br>
+ *  |  (  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>   <font color="red">{{I_Arg_Name[#_Name_1]}}</font>  |  (  <a href="#N_FLOAT">&lang;FLOAT&rang;</a> <font color="red">:#_FLOAT_1</font>   <font color="red">{{I_Arg_FLOAT[#_FLOAT_1]}}</font>  |  (  <a href="#N_INT">&lang;INT&rang;</a> <font color="red">:#_INT_1</font>   <font color="red">{{I_Arg_INT[#_INT_1]}}</font>  |  <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>   <font color="red">{{I_Arg_Tmp[#_Tmp_1]}}</font>  )  )  ) 
+ */
+net.sf.crsx.Sink N_I_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___Tmp_1 = null;
+	net.sf.crsx.Sink bs___Name_1 = null;
+	Token t = null;
+	net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___FLOAT_1 = null;
+	net.sf.crsx.util.Buffer b___Tmp_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___INT_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___INT_1 = null;
+	net.sf.crsx.util.Buffer b___FLOAT_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_I_xArg>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_I_xArg>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_I_Arg", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		{
+			bs___Name_1 = b___Name_1.sink();
+		}
+		N_Name(bs___Name_1, env)
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("I_Arg_Name")) .copy(b___Name_1, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+			 ( 
+			{
+				bs___FLOAT_1 = b___FLOAT_1.sink();
+			}
+			N_FLOAT(bs___FLOAT_1, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("I_Arg_FLOAT")) .copy(b___FLOAT_1, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				{
+					bs___INT_1 = b___INT_1.sink();
+				}
+				N_INT(bs___INT_1, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("I_Arg_INT")) .copy(b___INT_1, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+				{
+					bs___Tmp_1 = b___Tmp_1.sink();
+				}
+				N_Tmp(bs___Tmp_1, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("I_Arg_Tmp")) .copy(b___Tmp_1, true) .end() ;
+				}
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for I_Arg. */ 
+TOKEN : { < T_meta1_T_M_I_xArg : ("\u27e8" (" ")* "I_Arg" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "I_Arg" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_I_xArg }
+<IN_META_T_M_I_xArg> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_I_xArg }
+<IN_NESTED_META_T_M_I_xArg> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_I_xArg> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_I_xArg); } }
+<IN_META_T_M_I_xArg> TOKEN : { < T_meta2_T_M_I_xArg : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_I_xArg,IN_NESTED_META_T_M_I_xArg> MORE : { < ~[] > }
+
+
+/* Raw terms of I_Arg production sort. */
+
+/** <em>Raw_I_Arg$WithEOF</em> ::= <em>Raw_I_Arg</em> EOF . */
+net.sf.crsx.Sink N_Raw_I_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_I_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_I_Arg</em> ::=  (   <a href="#T_RAW_TOKEN_I_Arg">RAW_TOKEN_I_Arg</a>  )?   <a href="#N_RawPresorted_I_Arg">&lang;RawPresorted_I_Arg&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_I_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_I_Arg>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_I_Arg(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_I_Arg$WithEOF</em> ::= <em>RawSorted_I_Arg</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_I_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_I_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_I_Arg</em> ::=   <a href="#T_RAW_TOKEN_I_Arg">RAW_TOKEN_I_Arg</a>   <a href="#N_RawPresorted_I_Arg">&lang;RawPresorted_I_Arg&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_I_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_I_Arg>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_I_Arg(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_I_Arg$WithEOF</em> ::= <em>RawPresorted_I_Arg</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_I_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_I_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_I_Arg</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{I_Arg}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{I_Arg}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{I_Arg}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_I_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Arg", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Arg", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "I_Arg", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for Tmp sort with (highest) precedence 0. */
+
+/** <em>Tmp$WithEOF</em> ::= <em>Tmp</em> EOF . */
+net.sf.crsx.Sink N_Tmp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_Tmp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Tmp</em> ::=   <a href="#T_meta1_T_M_Tmp">meta1_T_M_Tmp</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Tmp">meta2_T_M_Tmp</a><font color="red">$$:unmeta:{firstRawSorted_Tmp}</font>  <br>
+ *  |  <a href="#N_T">&lang;T&rang;</a> <font color="red">!!!:#_T_1</font>   <font color="red">{{#_T_1}}</font> 
+ */
+net.sf.crsx.Sink N_Tmp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Variable v___T_1 = null;
+	net.sf.crsx.Sink bs___T_1 = null;
+	Token t = null;
+	String c1 = null;
+	String s___T_1 = null;
+	net.sf.crsx.util.Buffer b___T_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_Tmp>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_Tmp>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_Tmp", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	{
+		bs___T_1 = b___T_1.sink();
+	}
+	N_T(bs___T_1, env)
+	{
+		c1 = net.sf.crsx.util.Util.symbol(b___T_1.term(true));
+		s___T_1 = c1;
+		v___T_1 = (env.containsKey(s___T_1) ? env.get(s___T_1) : factory.freeVariable(s___T_1, true, true));
+		if (v___T_1 == null) throw new ParseException("Variable "+s___T_1+" cannot be resolved?");
+	}
+	 ) 
+	 ( 
+	{
+		sink = sink .use(v___T_1) ;
+	}
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for Tmp. */ 
+TOKEN : { < T_meta1_T_M_Tmp : ("\u27e8" (" ")* "Tmp" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "Tmp" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_Tmp }
+<IN_META_T_M_Tmp> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_Tmp }
+<IN_NESTED_META_T_M_Tmp> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_Tmp> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_Tmp); } }
+<IN_META_T_M_Tmp> TOKEN : { < T_meta2_T_M_Tmp : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_Tmp,IN_NESTED_META_T_M_Tmp> MORE : { < ~[] > }
+
+
+/* Raw terms of Tmp production sort. */
+
+/** <em>Raw_Tmp$WithEOF</em> ::= <em>Raw_Tmp</em> EOF . */
+net.sf.crsx.Sink N_Raw_Tmp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_Tmp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_Tmp</em> ::=  (   <a href="#T_RAW_TOKEN_Tmp">RAW_TOKEN_Tmp</a>  )?   <a href="#N_RawPresorted_Tmp">&lang;RawPresorted_Tmp&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_Tmp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_Tmp>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_Tmp(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_Tmp$WithEOF</em> ::= <em>RawSorted_Tmp</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_Tmp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_Tmp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_Tmp</em> ::=   <a href="#T_RAW_TOKEN_Tmp">RAW_TOKEN_Tmp</a>   <a href="#N_RawPresorted_Tmp">&lang;RawPresorted_Tmp&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_Tmp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_Tmp>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_Tmp(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_Tmp$WithEOF</em> ::= <em>RawPresorted_Tmp</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_Tmp$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_Tmp(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_Tmp</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{Tmp}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{Tmp}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{Tmp}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_Tmp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Tmp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Tmp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "Tmp", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/**
+ * <em>RawAttributeInherited_TmpType</em> ::=  <font color="red">{RAW-Attribute}</font>   (  <font color="red">{RAW-AttributeKindDown}</font>  )   (   <a href="#T_RAW_TOKEN_TmpType">RAW_TOKEN_TmpType</a><font color="red">$</font>  )    <a href="#T_RAW_LBRACE">RAW_LBRACE</a>   <font color="red">{RAW-AttributeKeyValue}</font>   <a href="#N_Raw_Tmp">&lang;Raw_Tmp&rang;</a>     <a href="#T_RAW_COLON">RAW_COLON</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_RBRACE">RAW_RBRACE</a> 
+ */
+net.sf.crsx.Sink N_RawAttributeInherited_TmpType(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-Attribute", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-AttributeKindDown", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_TOKEN_TmpType>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	 <T_RAW_LBRACE>
+	 ) 
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-AttributeKeyValue", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_Raw_Tmp(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_COLON>
+	 ) 
+	 ( 
+	sink=N_Raw_Type(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_RBRACE>
+	 ) 
+	{
+		return sink .end().end() ;
+	}
+}
+
+/* Productions for A_Progr sort with (highest) precedence 0. */
+
+/** <em>A_Progr$WithEOF</em> ::= <em>A_Progr</em> EOF . */
+net.sf.crsx.Sink N_A_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_A_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>A_Progr</em> ::=   <a href="#T_meta1_T_M_A_xProgr">meta1_T_M_A_xProgr</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_A_xProgr">meta2_T_M_A_xProgr</a><font color="red">$$:unmeta:{firstRawSorted_A_Progr}</font>  <br>
+ *  |  (   "<code>CG</code>"   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_1</font>   <font color="red">{{ A_Progr__M_CG_I_Progr[#_I_Progr_1]}}</font>  |  (   "<code>Compile</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>   <font color="red">{{ A_Progr__M_Compile_Stat[#_Stat_1]}}</font>  |  (  <a href="#N_A_Instr">&lang;A_Instr&rang;</a> <font color="red">:#_A_Instr_1</font>   <a href="#N_A_Progr">&lang;A_Progr&rang;</a> <font color="red">:#_A_Progr_2</font>   <font color="red">{{A_Progr_A_Instr_A_Progr[#_A_Instr_1, #_A_Progr_2]}}</font>  |  <font color="red">{{A_ProgrEMPTY}}</font>  )  )  ) 
+ */
+net.sf.crsx.Sink N_A_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.util.Buffer b___A_Instr_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___A_Progr_2 = null;
+	net.sf.crsx.Sink bs___Stat_1 = null;
+	Token t = null;
+	net.sf.crsx.util.Buffer b___A_Progr_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___I_Progr_1 = null;
+	net.sf.crsx.util.Buffer b___Stat_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___A_Instr_1 = null;
+	net.sf.crsx.util.Buffer b___I_Progr_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_A_xProgr>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_A_xProgr>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_A_Progr", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		"CG"
+		 ) 
+		 ( 
+		{
+			bs___I_Progr_1 = b___I_Progr_1.sink();
+		}
+		N_I_Progr(bs___I_Progr_1, env)
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("A_Progr__M_CG_I_Progr")) .copy(b___I_Progr_1, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+			 ( 
+			"Compile"
+			 ) 
+			 ( 
+			{
+				bs___Stat_1 = b___Stat_1.sink();
+			}
+			N_Stat(bs___Stat_1, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("A_Progr__M_Compile_Stat")) .copy(b___Stat_1, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				{
+					bs___A_Instr_1 = b___A_Instr_1.sink();
+				}
+				N_A_Instr(bs___A_Instr_1, env)
+				 ) 
+				 ( 
+				{
+					bs___A_Progr_2 = b___A_Progr_2.sink();
+				}
+				N_A_Progr(bs___A_Progr_2, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("A_Progr_A_Instr_A_Progr")) .copy(b___A_Instr_1, true) .copy(b___A_Progr_2, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("A_ProgrEMPTY")) .end() ;
+				}
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for A_Progr. */ 
+TOKEN : { < T_meta1_T_M_A_xProgr : ("\u27e8" (" ")* "A_Progr" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "A_Progr" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_A_xProgr }
+<IN_META_T_M_A_xProgr> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_A_xProgr }
+<IN_NESTED_META_T_M_A_xProgr> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_A_xProgr> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_A_xProgr); } }
+<IN_META_T_M_A_xProgr> TOKEN : { < T_meta2_T_M_A_xProgr : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_A_xProgr,IN_NESTED_META_T_M_A_xProgr> MORE : { < ~[] > }
+
+
+/* Raw terms of A_Progr production sort. */
+
+/** <em>Raw_A_Progr$WithEOF</em> ::= <em>Raw_A_Progr</em> EOF . */
+net.sf.crsx.Sink N_Raw_A_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_A_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_A_Progr</em> ::=  (   <a href="#T_RAW_TOKEN_A_Progr">RAW_TOKEN_A_Progr</a>  )?   <a href="#N_RawPresorted_A_Progr">&lang;RawPresorted_A_Progr&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_A_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_A_Progr>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_A_Progr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_A_Progr$WithEOF</em> ::= <em>RawSorted_A_Progr</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_A_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_A_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_A_Progr</em> ::=   <a href="#T_RAW_TOKEN_A_Progr">RAW_TOKEN_A_Progr</a>   <a href="#N_RawPresorted_A_Progr">&lang;RawPresorted_A_Progr&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_A_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_A_Progr>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_A_Progr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_A_Progr$WithEOF</em> ::= <em>RawPresorted_A_Progr</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_A_Progr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_A_Progr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_A_Progr</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{A_Progr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{A_Progr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |   <a href="#T_RAW_TOKEN_Compile">RAW_TOKEN_Compile</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_Raw_Stat">&lang;Raw_Stat&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{A_Progr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_A_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Progr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Progr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_RAW_TOKEN_Compile>
+	{
+		sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+	}
+	 ) 
+	 ( 
+	 <T_RAW_LPAREN>
+	 ) 
+	 ( 
+	sink=N_Raw_Stat(sink, env)
+	 ) 
+	 ( 
+	 <T_RAW_RPAREN>
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Progr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for A_Instr sort with (highest) precedence 0. */
+
+/** <em>A_Instr$WithEOF</em> ::= <em>A_Instr</em> EOF . */
+net.sf.crsx.Sink N_A_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_A_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>A_Instr</em> ::=   <a href="#T_meta1_T_M_A_xInstr">meta1_T_M_A_xInstr</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_A_xInstr">meta2_T_M_A_xInstr</a><font color="red">$$:unmeta:{firstRawSorted_A_Instr}</font>  <br>
+ *  |  (   "<code>ADDF</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_1</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_2</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_3</font>   <font color="red">{{A_Instr__M_ADDF_A_Arg__M__2c_A_Arg__M__2c_A_Arg[#_A_Arg_1, #_A_Arg_2, #_A_Arg_3]}}</font>  |  (   "<code>LDF</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_2</font>   <font color="red">{{A_Instr__M_LDF_Tmp__M__2c_A_Arg[#_Tmp_1, #_A_Arg_2]}}</font>  |  (   "<code>MULF</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_1</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_2</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_3</font>   <font color="red">{{A_Instr__M_MULF_A_Arg__M__2c_A_Arg__M__2c_A_Arg[#_A_Arg_1, #_A_Arg_2, #_A_Arg_3]}}</font>  |   "<code>STF</code>"   <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>    "<code>,</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_2</font>   <font color="red">{{A_Instr__M_STF_Name__M__2c_Tmp[#_Name_1, #_Tmp_2]}}</font>  )  )  ) 
+ */
+net.sf.crsx.Sink N_A_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___Tmp_1 = null;
+	net.sf.crsx.Sink bs___Name_1 = null;
+	net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___Tmp_2 = null;
+	net.sf.crsx.util.Buffer b___A_Arg_3 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___A_Arg_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___A_Arg_1 = new net.sf.crsx.util.Buffer(sink);
+	Token t = null;
+	net.sf.crsx.Sink bs___A_Arg_3 = null;
+	net.sf.crsx.Sink bs___A_Arg_1 = null;
+	net.sf.crsx.util.Buffer b___Tmp_2 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___A_Arg_2 = null;
+	net.sf.crsx.util.Buffer b___Tmp_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_A_xInstr>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_A_xInstr>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_A_Instr", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		"ADDF"
+		 ) 
+		 ( 
+		{
+			bs___A_Arg_1 = b___A_Arg_1.sink();
+		}
+		N_A_Arg(bs___A_Arg_1, env)
+		 ) 
+		 ( 
+		","
+		 ) 
+		 ( 
+		{
+			bs___A_Arg_2 = b___A_Arg_2.sink();
+		}
+		N_A_Arg(bs___A_Arg_2, env)
+		 ) 
+		 ( 
+		","
+		 ) 
+		 ( 
+		{
+			bs___A_Arg_3 = b___A_Arg_3.sink();
+		}
+		N_A_Arg(bs___A_Arg_3, env)
+		 ) 
+		 ( 
+		{
+			sink = sink .start(sink.makeConstructor("A_Instr__M_ADDF_A_Arg__M__2c_A_Arg__M__2c_A_Arg")) .copy(b___A_Arg_1, true) .copy(b___A_Arg_2, true) .copy(b___A_Arg_3, true) .end() ;
+		}
+		 ) 
+	|
+		 ( 
+			 ( 
+			"LDF"
+			 ) 
+			 ( 
+			{
+				bs___Tmp_1 = b___Tmp_1.sink();
+			}
+			N_Tmp(bs___Tmp_1, env)
+			 ) 
+			 ( 
+			","
+			 ) 
+			 ( 
+			{
+				bs___A_Arg_2 = b___A_Arg_2.sink();
+			}
+			N_A_Arg(bs___A_Arg_2, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("A_Instr__M_LDF_Tmp__M__2c_A_Arg")) .copy(b___Tmp_1, true) .copy(b___A_Arg_2, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				"MULF"
+				 ) 
+				 ( 
+				{
+					bs___A_Arg_1 = b___A_Arg_1.sink();
+				}
+				N_A_Arg(bs___A_Arg_1, env)
+				 ) 
+				 ( 
+				","
+				 ) 
+				 ( 
+				{
+					bs___A_Arg_2 = b___A_Arg_2.sink();
+				}
+				N_A_Arg(bs___A_Arg_2, env)
+				 ) 
+				 ( 
+				","
+				 ) 
+				 ( 
+				{
+					bs___A_Arg_3 = b___A_Arg_3.sink();
+				}
+				N_A_Arg(bs___A_Arg_3, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("A_Instr__M_MULF_A_Arg__M__2c_A_Arg__M__2c_A_Arg")) .copy(b___A_Arg_1, true) .copy(b___A_Arg_2, true) .copy(b___A_Arg_3, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+				"STF"
+				 ) 
+				 ( 
+				{
+					bs___Name_1 = b___Name_1.sink();
+				}
+				N_Name(bs___Name_1, env)
+				 ) 
+				 ( 
+				","
+				 ) 
+				 ( 
+				{
+					bs___Tmp_2 = b___Tmp_2.sink();
+				}
+				N_Tmp(bs___Tmp_2, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("A_Instr__M_STF_Name__M__2c_Tmp")) .copy(b___Name_1, true) .copy(b___Tmp_2, true) .end() ;
+				}
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for A_Instr. */ 
+TOKEN : { < T_meta1_T_M_A_xInstr : ("\u27e8" (" ")* "A_Instr" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "A_Instr" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_A_xInstr }
+<IN_META_T_M_A_xInstr> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_A_xInstr }
+<IN_NESTED_META_T_M_A_xInstr> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_A_xInstr> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_A_xInstr); } }
+<IN_META_T_M_A_xInstr> TOKEN : { < T_meta2_T_M_A_xInstr : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_A_xInstr,IN_NESTED_META_T_M_A_xInstr> MORE : { < ~[] > }
+
+
+/* Raw terms of A_Instr production sort. */
+
+/** <em>Raw_A_Instr$WithEOF</em> ::= <em>Raw_A_Instr</em> EOF . */
+net.sf.crsx.Sink N_Raw_A_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_A_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_A_Instr</em> ::=  (   <a href="#T_RAW_TOKEN_A_Instr">RAW_TOKEN_A_Instr</a>  )?   <a href="#N_RawPresorted_A_Instr">&lang;RawPresorted_A_Instr&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_A_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_A_Instr>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_A_Instr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_A_Instr$WithEOF</em> ::= <em>RawSorted_A_Instr</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_A_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_A_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_A_Instr</em> ::=   <a href="#T_RAW_TOKEN_A_Instr">RAW_TOKEN_A_Instr</a>   <a href="#N_RawPresorted_A_Instr">&lang;RawPresorted_A_Instr&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_A_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_A_Instr>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_A_Instr(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_A_Instr$WithEOF</em> ::= <em>RawPresorted_A_Instr</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_A_Instr$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_A_Instr(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_A_Instr</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{A_Instr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{A_Instr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{A_Instr}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_A_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Instr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Instr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Instr", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Productions for A_Arg sort with (highest) precedence 0. */
+
+/** <em>A_Arg$WithEOF</em> ::= <em>A_Arg</em> EOF . */
+net.sf.crsx.Sink N_A_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  sink=N_A_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>A_Arg</em> ::=   <a href="#T_meta1_T_M_A_xArg">meta1_T_M_A_xArg</a><font color="red">:unmeta</font>  <br>
+ *  |   <a href="#T_meta2_T_M_A_xArg">meta2_T_M_A_xArg</a><font color="red">$$:unmeta:{firstRawSorted_A_Arg}</font>  <br>
+ *  |  (   "<code>#</code>"   (  <a href="#N_FLOAT">&lang;FLOAT&rang;</a> <font color="red">:#_FLOAT_1</font>   <font color="red">{{A_Arg__M__h_FLOAT[#_FLOAT_1]}}</font>  |  <a href="#N_INT">&lang;INT&rang;</a> <font color="red">:#_INT_1</font>   <font color="red">{{A_Arg__M__h_INT[#_INT_1]}}</font>  )  |  (   "<code>[</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_1</font>    "<code>]</code>"   <font color="red">{{ A_Arg__M__5b_I_Arg__M__5d[#_I_Arg_1]}}</font>  |  (  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>   <font color="red">{{A_Arg_Name[#_Name_1]}}</font>  |  <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>   <font color="red">{{A_Arg_Tmp[#_Tmp_1]}}</font>  )  )  ) 
+ */
+net.sf.crsx.Sink N_A_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	net.sf.crsx.Sink bs___Tmp_1 = null;
+	net.sf.crsx.Sink bs___Name_1 = null;
+	Token t = null;
+	net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.util.Buffer b___I_Arg_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___FLOAT_1 = null;
+	net.sf.crsx.util.Buffer b___Tmp_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___I_Arg_1 = null;
+	net.sf.crsx.util.Buffer b___INT_1 = new net.sf.crsx.util.Buffer(sink);
+	net.sf.crsx.Sink bs___INT_1 = null;
+	net.sf.crsx.util.Buffer b___FLOAT_1 = new net.sf.crsx.util.Buffer(sink);
+}
+{
+	 ( 
+	t=<T_meta1_T_M_A_xArg>
+	{
+		sink = sink .start(makeTConstructor(sink, t, unmeta(t.toString()), null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	t=<T_meta2_T_M_A_xArg>
+	{
+		try {sink = factory.parser(factory).parse(sink, "firstRawSorted_A_Arg", new java.io.StringReader(unmeta(t.toString())), unit, t.beginLine, t.beginColumn+1, env);}
+		catch (java.io.IOException e) {throw new ParseException(e.getMessage());}
+		catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) throw (ParseException) cause; else throw new ParseException(e.getMessage());}
+	}
+	 ) 
+	{return sink;}
+ |
+	 ( 
+		 ( 
+		"#"
+		 ) 
+		 ( 
+			 ( 
+			{
+				bs___FLOAT_1 = b___FLOAT_1.sink();
+			}
+			N_FLOAT(bs___FLOAT_1, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("A_Arg__M__h_FLOAT")) .copy(b___FLOAT_1, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+			{
+				bs___INT_1 = b___INT_1.sink();
+			}
+			N_INT(bs___INT_1, env)
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("A_Arg__M__h_INT")) .copy(b___INT_1, true) .end() ;
+			}
+			 ) 
+		 ) 
+	|
+		 ( 
+			 ( 
+			"["
+			 ) 
+			 ( 
+			{
+				bs___I_Arg_1 = b___I_Arg_1.sink();
+			}
+			N_I_Arg(bs___I_Arg_1, env)
+			 ) 
+			 ( 
+			"]"
+			 ) 
+			 ( 
+			{
+				sink = sink .start(sink.makeConstructor("A_Arg__M__5b_I_Arg__M__5d")) .copy(b___I_Arg_1, true) .end() ;
+			}
+			 ) 
+		|
+			 ( 
+				 ( 
+				{
+					bs___Name_1 = b___Name_1.sink();
+				}
+				N_Name(bs___Name_1, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("A_Arg_Name")) .copy(b___Name_1, true) .end() ;
+				}
+				 ) 
+			|
+				 ( 
+				{
+					bs___Tmp_1 = b___Tmp_1.sink();
+				}
+				N_Tmp(bs___Tmp_1, env)
+				 ) 
+				 ( 
+				{
+					sink = sink .start(sink.makeConstructor("A_Arg_Tmp")) .copy(b___Tmp_1, true) .end() ;
+				}
+				 ) 
+			 ) 
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* Meta token for A_Arg. */ 
+TOKEN : { < T_meta1_T_M_A_xArg : ("\u27e8" (" ")* "A_Arg" (" ")* "\u27e9") > }
+MORE : { < "\u27e8" (" ")* "A_Arg" (" ")* ~["\u27e8","\u27e9"] > { nesting = 0; nestedState = curLexState; } : IN_META_T_M_A_xArg }
+<IN_META_T_M_A_xArg> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_META_T_M_A_xArg }
+<IN_NESTED_META_T_M_A_xArg> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_META_T_M_A_xArg> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_META_T_M_A_xArg); } }
+<IN_META_T_M_A_xArg> TOKEN : { < T_meta2_T_M_A_xArg : "\u27e9" > { SwitchTo(nestedState); } }
+<IN_META_T_M_A_xArg,IN_NESTED_META_T_M_A_xArg> MORE : { < ~[] > }
+
+
+/* Raw terms of A_Arg production sort. */
+
+/** <em>Raw_A_Arg$WithEOF</em> ::= <em>Raw_A_Arg</em> EOF . */
+net.sf.crsx.Sink N_Raw_A_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_Raw_A_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>Raw_A_Arg</em> ::=  (   <a href="#T_RAW_TOKEN_A_Arg">RAW_TOKEN_A_Arg</a>  )?   <a href="#N_RawPresorted_A_Arg">&lang;RawPresorted_A_Arg&rang;</a>  
+ */
+net.sf.crsx.Sink N_Raw_A_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+		 ( 
+		 <T_RAW_TOKEN_A_Arg>
+		 ) 
+	 )? 
+	 ( 
+	sink=N_RawPresorted_A_Arg(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSorted_A_Arg$WithEOF</em> ::= <em>RawSorted_A_Arg</em> EOF . */
+net.sf.crsx.Sink N_RawSorted_A_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSorted_A_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSorted_A_Arg</em> ::=   <a href="#T_RAW_TOKEN_A_Arg">RAW_TOKEN_A_Arg</a>   <a href="#N_RawPresorted_A_Arg">&lang;RawPresorted_A_Arg&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSorted_A_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_TOKEN_A_Arg>
+	 ) 
+	 ( 
+	sink=N_RawPresorted_A_Arg(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawPresorted_A_Arg$WithEOF</em> ::= <em>RawPresorted_A_Arg</em> EOF . */
+net.sf.crsx.Sink N_RawPresorted_A_Arg$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawPresorted_A_Arg(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawPresorted_A_Arg</em> ::=  <font color="red">{RAW-VariableUseSorted}</font>   (  <font color="red">{A_Arg}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-MetaApplicationSorted}</font>   (  <font color="red">{A_Arg}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{RAW-ConstructionSorted}</font>   (  <font color="red">{A_Arg}</font>  )   (  <font color="red">{RAW-RepeatSingle}</font>  )   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawPresorted_A_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUseSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Arg", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplicationSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Arg", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-ConstructionSorted", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "A_Arg", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "RAW-RepeatSingle", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/* Raw term entry points.
+ * (1) a term is 'sorted'
+ */
+
+/** <em>RawTerms$WithEOF</em> ::= <em>RawTerms</em> EOF . */
+net.sf.crsx.Sink N_RawTerms$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawTerms(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawTerms</em> ::=  <font color="red">{$Cons}</font>   <a href="#N_RawTerm">&lang;RawTerm&rang;</a>    <a href="#N_RawTermsTail">&lang;RawTermsTail&rang;</a>   <br>
+ *  |  <font color="red">{$Nil}</font> 
+ */
+net.sf.crsx.Sink N_RawTerms(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_RawTerm(sink, env)
+	 ) 
+	 ( 
+	sink=N_RawTermsTail(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/**
+ * <em>RawTermsTail</em> ::=  <font color="red">{$Cons}</font>    <a href="#T_RAW_COMMA">RAW_COMMA</a>   <a href="#N_RawTerm">&lang;RawTerm&rang;</a>    <a href="#N_RawTermsTail">&lang;RawTermsTail&rang;</a>   <br>
+ *  |  <font color="red">{$Nil}</font> 
+ */
+net.sf.crsx.Sink N_RawTermsTail(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+	 <T_RAW_COMMA>
+	 ) 
+	 ( 
+	sink=N_RawTerm(sink, env)
+	 ) 
+	 ( 
+	sink=N_RawTermsTail(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>RawTerm$WithEOF</em> ::= <em>RawTerm</em> EOF . */
+net.sf.crsx.Sink N_RawTerm$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawTerm(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawTerm</em> ::=  <a href="#N_RawSortedTerm">&lang;RawSortedTerm&rang;</a>   <br>
+ *  |  <a href="#N_RawConstruction">&lang;RawConstruction&rang;</a>   <br>
+ *  |  <a href="#N_RawVariableUse">&lang;RawVariableUse&rang;</a>   <br>
+ *  |  <a href="#N_RawMetaApplication">&lang;RawMetaApplication&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawTerm(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	sink=N_RawSortedTerm(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawConstruction(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawVariableUse(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawMetaApplication(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawSortedTerm$WithEOF</em> ::= <em>RawSortedTerm</em> EOF . */
+net.sf.crsx.Sink N_RawSortedTerm$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawSortedTerm(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawSortedTerm</em> ::=  <a href="#N_RawSorted_A_Arg">&lang;RawSorted_A_Arg&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_Tmp">&lang;RawSorted_Tmp&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_I_Instr">&lang;RawSorted_I_Instr&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_A_Progr">&lang;RawSorted_A_Progr&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_Stat">&lang;RawSorted_Stat&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_Name">&lang;RawSorted_Name&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_I_Arg">&lang;RawSorted_I_Arg&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_Exp">&lang;RawSorted_Exp&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_I_Progr">&lang;RawSorted_I_Progr&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_A_Instr">&lang;RawSorted_A_Instr&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_Type">&lang;RawSorted_Type&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawSortedTerm(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	sink=N_RawSorted_A_Arg(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_Tmp(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_I_Instr(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_A_Progr(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_Stat(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_Name(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_I_Arg(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_Exp(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_I_Progr(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_A_Instr(sink, env)
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	sink=N_RawSorted_Type(sink, env)
+	 ) 
+	{return sink;}
+}
+
+/** <em>RawConstruction$WithEOF</em> ::= <em>RawConstruction</em> EOF . */
+net.sf.crsx.Sink N_RawConstruction$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawConstruction(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawConstruction</em> ::=  <font color="red">{RAW-Construction}</font>   (   <a href="#T_RAW_CONSTRUCTOR">RAW_CONSTRUCTOR</a><font color="red">$</font>  )   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_RawScopes">&lang;RawScopes&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawConstruction(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-Construction", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_CONSTRUCTOR>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LPAREN>
+		 ) 
+		 ( 
+		sink=N_RawScopes(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RPAREN>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>RawVariableUse$WithEOF</em> ::= <em>RawVariableUse</em> EOF . */
+net.sf.crsx.Sink N_RawVariableUse$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawVariableUse(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawVariableUse</em> ::=  <font color="red">{RAW-VariableUse}</font>   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">!!!</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawVariableUse(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+	String s_RAW_VARIABLE = null;
+	net.sf.crsx.Variable v_RAW_VARIABLE = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-VariableUse", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			s_RAW_VARIABLE = t.toString();
+			v_RAW_VARIABLE = (env.containsKey(s_RAW_VARIABLE) ? env.get(s_RAW_VARIABLE) : factory.freeVariable(s_RAW_VARIABLE, true, true));
+			if (v_RAW_VARIABLE == null) throw new ParseException("Variable "+s_RAW_VARIABLE+" cannot be resolved?");
+			sink = sink .use(v_RAW_VARIABLE) ;
+		}
+		 ) 
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>RawMetaApplication$WithEOF</em> ::= <em>RawMetaApplication</em> EOF . */
+net.sf.crsx.Sink N_RawMetaApplication$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawMetaApplication(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawMetaApplication</em> ::=  <font color="red">{RAW-MetaApplication}</font>   (   <a href="#T_RAW_META_VARIABLE">RAW_META_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawTerms">&lang;RawTerms&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawMetaApplication(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-MetaApplication", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_META_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawTerms(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>RawScopes$WithEOF</em> ::= <em>RawScopes</em> EOF . */
+net.sf.crsx.Sink N_RawScopes$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawScopes(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawScopes</em> ::=  <font color="red">{$Cons}</font>   <a href="#N_RawScope">&lang;RawScope&rang;</a>    <a href="#N_RawScopesTail">&lang;RawScopesTail&rang;</a>   <br>
+ *  |  <font color="red">{$Nil}</font> 
+ */
+net.sf.crsx.Sink N_RawScopes(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_RawScope(sink, env)
+	 ) 
+	 ( 
+	sink=N_RawScopesTail(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/**
+ * <em>RawScopesTail</em> ::=  <font color="red">{$Cons}</font>    <a href="#T_RAW_COMMA">RAW_COMMA</a>   <a href="#N_RawScope">&lang;RawScope&rang;</a>    <a href="#N_RawScopesTail">&lang;RawScopesTail&rang;</a>   <br>
+ *  |  <font color="red">{$Nil}</font> 
+ */
+net.sf.crsx.Sink N_RawScopesTail(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+	 <T_RAW_COMMA>
+	 ) 
+	 ( 
+	sink=N_RawScope(sink, env)
+	 ) 
+	 ( 
+	sink=N_RawScopesTail(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>RawScope$WithEOF</em> ::= <em>RawScope</em> EOF . */
+net.sf.crsx.Sink N_RawScope$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawScope(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawScope</em> ::=  <font color="red">{RAW-Scope}</font>   (   <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>   <a href="#N_RawVariables">&lang;RawVariables&rang;</a>     <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>  |  <font color="red">{$Nil}</font>  )   <a href="#N_RawTerm">&lang;RawTerm&rang;</a>  
+ */
+net.sf.crsx.Sink N_RawScope(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "RAW-Scope", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_LBRACKET>
+		 ) 
+		 ( 
+		sink=N_RawVariables(sink, env)
+		 ) 
+		 ( 
+		 <T_RAW_RBRACKET>
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+	sink=N_RawTerm(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/** <em>RawVariables$WithEOF</em> ::= <em>RawVariables</em> EOF . */
+net.sf.crsx.Sink N_RawVariables$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{{int savedState = token_source.curLexState;}  {token_source.SwitchTo(RAW);} sink=N_RawVariables(sink, env) {token_source.SwitchTo(savedState);} <EOF> {return sink;} }
+
+/**
+ * <em>RawVariables</em> ::=  <font color="red">{$Cons}</font>   (   <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">$</font>  )   (   <a href="#T_RAW_COMMA">RAW_COMMA</a>   <a href="#N_RawVariables">&lang;RawVariables&rang;</a>   |  <font color="red">{$Nil}</font>  ) 
+ */
+net.sf.crsx.Sink N_RawVariables(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+		 ( 
+		t=<T_RAW_VARIABLE>
+		{
+			sink = sink .start(makeTConstructor(sink, t, t.toString(), net.sf.crsx.CRS.STRING_SORT)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	 ( 
+		 ( 
+		 <T_RAW_COMMA>
+		 ) 
+		 ( 
+		sink=N_RawVariables(sink, env)
+		 ) 
+	|
+		 ( 
+		{
+			sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+		}
+		 ) 
+		{
+			sink = sink .end() ;
+		}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/**
+ * <em>RawAttributes</em> ::=  <font color="red">{$Cons}</font>   <a href="#N_RawAttribute">&lang;RawAttribute&rang;</a>    <a href="#N_RawAttributes">&lang;RawAttributes&rang;</a>   <br>
+ *  |  <font color="red">{$Nil}</font> 
+ */
+net.sf.crsx.Sink N_RawAttributes(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Cons", null)) ;
+	}
+	 ) 
+	 ( 
+	sink=N_RawAttribute(sink, env)
+	 ) 
+	 ( 
+	sink=N_RawAttributes(sink, env)
+	 ) 
+	{
+		return sink .end() ;
+	}
+ |
+	 ( 
+	{
+		sink = sink .start(makeTConstructor(sink, t, "$Nil", null)) ;
+	}
+	 ) 
+	{
+		return sink .end() ;
+	}
+}
+
+/**
+ * <em>RawAttribute</em> ::=   <a href="#T_RAW_UP">RAW_UP</a>   (  <a href="#N_RawAttributeSynthesized_t">&lang;RawAttributeSynthesized_t&rang;</a>   )  <br>
+ *  |   <a href="#T_RAW_DOWN">RAW_DOWN</a>   (  <a href="#N_RawAttributeInherited_e">&lang;RawAttributeInherited_e&rang;</a>   |  <a href="#N_RawAttributeInherited_TmpType">&lang;RawAttributeInherited_TmpType&rang;</a>   ) 
+ */
+net.sf.crsx.Sink N_RawAttribute(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{
+	Token t = null;
+}
+{
+	 ( 
+	 <T_RAW_UP>
+	 ) 
+	 ( 
+		 ( 
+		sink=N_RawAttributeSynthesized_t(sink, env)
+		 ) 
+	 ) 
+	{return sink;}
+ |
+	 ( 
+	 <T_RAW_DOWN>
+	 ) 
+	 ( 
+		 ( 
+		sink=N_RawAttributeInherited_e(sink, env)
+		 ) 
+	|
+		 ( 
+		sink=N_RawAttributeInherited_TmpType(sink, env)
+		 ) 
+	 ) 
+	{return sink;}
+}
+
+/* TOKENS. */
+
+TOKEN_MGR_DECLS : { int nesting; int nestedState;} /* Used by all nesting constructs. */
+
+
+/* Tokens for Raw mode. */
+
+/* Nested concrete token. */
+<RAW> MORE : { "\u27e6" { nesting = 0; nestedState = curLexState; } : RAW_CONCRETE }
+<RAW_CONCRETE> MORE : { "\u27e6" { nesting = 1; } : NESTED_RAW_CONCRETE }
+<NESTED_RAW_CONCRETE> MORE : { "\u27e6" { nesting++; } }
+<NESTED_RAW_CONCRETE> MORE : { "\u27e7" { if (--nesting <= 0) SwitchTo(RAW_CONCRETE); } }
+<RAW_CONCRETE> TOKEN : { <T_RAW_CONCRETE : "\u27e7"> { SwitchTo(nestedState); } }
+<RAW_CONCRETE,NESTED_RAW_CONCRETE> MORE : { < ~[] > }
+
+
+/**
+ * RAW_TOKEN_INT ::=  "<code>INT</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_INT : "INT" >}
+
+/**
+ * RAW_TOKEN_FLOAT ::=  "<code>FLOAT</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_FLOAT : "FLOAT" >}
+
+/**
+ * RAW_TOKEN_ID ::=  "<code>ID</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_ID : "ID" >}
+
+/**
+ * RAW_TOKEN_Exp ::=  "<code>Exp</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Exp : "Exp" >}
+
+/**
+ * RAW_TOKEN_Name ::=  "<code>Name</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Name : "Name" >}
+
+/**
+ * RAW_TOKEN_Stat ::=  "<code>Stat</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Stat : "Stat" >}
+
+/**
+ * RAW_TOKEN_Type ::=  "<code>Type</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Type : "Type" >}
+
+/**
+ * RAW_TOKEN_Int ::=  "<code>Int</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Int : "Int" >}
+
+/**
+ * RAW_TOKEN_Float ::=  "<code>Float</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Float : "Float" >}
+
+/**
+ * RAW_TOKEN_Unif ::=  "<code>Unif</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Unif : "Unif" >}
+
+/**
+ * RAW_TOKEN_Test ::=  "<code>Test</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Test : "Test" >}
+
+/**
+ * RAW_TOKEN_t ::=  "<code>t</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_t : "t" >}
+
+/**
+ * RAW_TOKEN_e ::=  "<code>e</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_e : "e" >}
+
+/**
+ * RAW_TOKEN_T ::=  "<code>T</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_T : "T" >}
+
+/**
+ * RAW_TOKEN_I_Progr ::=  "<code>I_Progr</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_I_Progr : "I_Progr" >}
+
+/**
+ * RAW_TOKEN_I_Instr ::=  "<code>I_Instr</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_I_Instr : "I_Instr" >}
+
+/**
+ * RAW_TOKEN_I_Arg ::=  "<code>I_Arg</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_I_Arg : "I_Arg" >}
+
+/**
+ * RAW_TOKEN_Tmp ::=  "<code>Tmp</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Tmp : "Tmp" >}
+
+/**
+ * RAW_TOKEN_TmpType ::=  "<code>TmpType</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_TmpType : "TmpType" >}
+
+/**
+ * RAW_TOKEN_A_Progr ::=  "<code>A_Progr</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_A_Progr : "A_Progr" >}
+
+/**
+ * RAW_TOKEN_Compile ::=  "<code>Compile</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_Compile : "Compile" >}
+
+/**
+ * RAW_TOKEN_A_Instr ::=  "<code>A_Instr</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_A_Instr : "A_Instr" >}
+
+/**
+ * RAW_TOKEN_A_Arg ::=  "<code>A_Arg</code>"
+ */
+<RAW> TOKEN : {<T_RAW_TOKEN_A_Arg : "A_Arg" >}
+
+/**
+ * <b>skip</b> ::=  "<code> </code>" | ["<code> </code>","<code>	</code>","<code>
+ * </code>"]
+ */
+SKIP : { <" " | [" ","\t","\n"]| "\001" > }
+
+/**
+ * T_M_INT ::= (T_M_Digit)+
+ */
+TOKEN : {<T_T_M_INT : (<T_T_M_Digit>)+ >}
+
+/**
+ * T_M_FLOAT ::= T_M_INT  "<code>.</code>" T_M_INT
+ */
+TOKEN : {<T_T_M_FLOAT : <T_T_M_INT> "." <T_T_M_INT> >}
+
+/**
+ * T_M_ID ::= (T_M_Lower)+ ((( "<code>_</code>")? T_M_INT))*
+ */
+TOKEN : {<T_T_M_ID : (<T_T_M_Lower>)+ ((("_")? <T_T_M_INT>))* >}
+
+/**
+ * T_M_Digit ::= ["<code>0</code>"&ndash;"<code>9</code>"]
+ */
+TOKEN : {<#T_T_M_Digit : ["0"-"9"] >}
+
+/**
+ * T_M_Lower ::= ["<code>a</code>"&ndash;"<code>z</code>"]
+ */
+TOKEN : {<#T_T_M_Lower : ["a"-"z"] >}
+
+/**
+ * T_M_T ::=  "<code>T</code>" (( "<code>_</code>" T_M_INT))*
+ */
+TOKEN : {<T_T_M_T : "T" (("_" <T_T_M_INT>))* >}
+
+/**
+ * RAW_VARIABLE ::= [<code>a-z</code>] [<code>A-Za-z0-9</code><code>_</code><code>$</code>&ndash;]*
+ */
+<RAW> TOKEN : {<T_RAW_VARIABLE : ["a"-"z"] (["A"-"Z","a"-"z","0"-"9","_","$","-"])* >}
+
+/**
+ * RAW_META_VARIABLE ::= [<code>#</code>] [<code>A-Za-z0-9</code><code>_</code><code>$</code>&ndash;]*
+ */
+<RAW> TOKEN : {<T_RAW_META_VARIABLE : ["#"] (["A"-"Z","a"-"z","0"-"9","_","$","-"])* >}
+
+/**
+ * RAW_CONSTRUCTOR ::= [<code>A-Z</code>] [<code>A-Za-z0-9</code><code>_</code><code>$</code>&ndash;]*
+ */
+<RAW> TOKEN : {<T_RAW_CONSTRUCTOR : ["A"-"Z"] (["A"-"Z","a"-"z","0"-"9","_","$","-"])* >}
+
+/**
+ * RAW_LPAREN ::=  "<code>(</code>"
+ */
+<RAW> TOKEN : {<T_RAW_LPAREN : "(" >}
+
+/**
+ * RAW_RPAREN ::=  "<code>)</code>"
+ */
+<RAW> TOKEN : {<T_RAW_RPAREN : ")" >}
+
+/**
+ * RAW_LBRACKET ::=  "<code>[</code>"
+ */
+<RAW> TOKEN : {<T_RAW_LBRACKET : "[" >}
+
+/**
+ * RAW_RBRACKET ::=  "<code>]</code>"
+ */
+<RAW> TOKEN : {<T_RAW_RBRACKET : "]" >}
+
+/**
+ * RAW_LBRACE ::=  "<code>{</code>"
+ */
+<RAW> TOKEN : {<T_RAW_LBRACE : "{" >}
+
+/**
+ * RAW_RBRACE ::=  "<code>}</code>"
+ */
+<RAW> TOKEN : {<T_RAW_RBRACE : "}" >}
+
+/**
+ * RAW_COMMA ::=  "<code>,</code>"
+ */
+<RAW> TOKEN : {<T_RAW_COMMA : "," >}
+
+/**
+ * RAW_COLON ::=  "<code>:</code>"
+ */
+<RAW> TOKEN : {<T_RAW_COLON : ":" >}
+
+/**
+ * RAW_UP ::= <code>&#92;u2191</code>
+ */
+<RAW> TOKEN : {<T_RAW_UP : "\u2191" >}
+
+/**
+ * RAW_DOWN ::= <code>&#92;u2193</code>
+ */
+<RAW> TOKEN : {<T_RAW_DOWN : "\u2193" >}
+
+/**
+ * RAW_NOT ::= <code>&#92;u00ac</code>
+ */
+<RAW> TOKEN : {<T_RAW_NOT : "\254" >}
+
+/**
+ * <b>skip</b><font color="red"> (RAW)</font> ::= [<code>&#92; </code><code>&#92;t</code><code>&#92;n</code>]
+ */
+<RAW> SKIP : { <[" ","\t","\n"]| "\001" > }
