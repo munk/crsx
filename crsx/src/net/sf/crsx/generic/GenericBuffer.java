@@ -147,6 +147,8 @@ class GenericBuffer
 			else
 			{
 				// Generic case: get source to copy itself into the buffer...
+				if (source ==null)
+					return null;
 				return source.copy(this, discard, new LinkedExtensibleMap<Variable, Variable>());
 			}
 		}

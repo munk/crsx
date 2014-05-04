@@ -60,6 +60,7 @@ SH_EXTRA = :
 # Runs Java with crsx.jar embedded Raw+Text parsers.
 #
 %.hxg : %.hx
+	@/bin/echo '*****'
 	@/bin/echo '* PROCESSING $< TO $@ (STEP 1 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) $(CRSX) \
@@ -77,6 +78,7 @@ clean::; rm -f *.tmp *.hxg
 # TODO2: Directly generate JavaCC or some other parser generator.
 #
 %.pg : %.hxg
+	@/bin/echo '*****'
 	@/bin/echo '* PROCESSING $< TO $@ (STEP 2 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) $(CRSX) \
@@ -92,7 +94,8 @@ clean::; rm -f *.tmp *.pg
 # Runs PG (from crsx.jar), JavaCC, and javac, to generate parser Java classes in build/ directory.
 #
 %.pg-installed : %.pg $(JAVACCJAR)
-	@/bin/echo -e '* GENERATING AND COMPILING JavaCC PARSER FOR $< (STEP 3 OF 8).'
+	@/bin/echo '*****'
+	@/bin/echo '* GENERATING AND COMPILING JavaCC PARSER FOR $< (STEP 3 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) class=$$(sed -n 's/^class \(.*\)Parser :.*/\1/p' '$*.pg') \
 	&& $(NOEXEC) base=$$(echo $$class | sed 's:\.:/:g') \
@@ -113,8 +116,9 @@ clean::; rm -f *.tmp *.pg-installed
 # Runs Java with crsx.jar on Prep.crs(wrapper=Prep) to emit complete simple term version of the .hx file.
 # 
 %.hxr : %.hx %.pg %.pg-installed
+	@/bin/echo '*****'
 	@/bin/echo '* PROCESSING $< TO $@ (STEP 4 OF 8).'
-	@: set -x \
+	@set -x \
 	&& $(NOEXEC) parser=$$(sed -n 's/^class \(.*\) :.*/\1/p' '$*.pg') \
 	&& $(NOEXEC) $(CRSX) \
 		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'$$parser';)" raw \
@@ -131,6 +135,7 @@ clean::; rm -f *.tmp *.hxr
 # TODO: revive and use compiled Cookmain.
 #
 %.crs : %.hxr
+	@/bin/echo '*****'
 	@/bin/echo '* PROCESSING $< TO $@ (STEP 5 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) $(CRSX) \
@@ -144,6 +149,7 @@ realclean::; rm -f *.crs
 # 6. Expand .crs to stand-alone simple-terms .crsE.
 #
 %.crsE: %.crs %.pg %.pg-installed
+	@/bin/echo '*****'
 	@/bin/echo '* EXPANDING $< TO $@ (STEP 6 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) parser=$$(sed -n 's/^class \(.*\) :.*/\1/p' '$*.pg') \
@@ -160,6 +166,7 @@ clean::; rm -f *.crsE
 # TODO: Upgrade to "rule-compile" generated .crs to proper binary.
 #
 %.crs-installed: %.crsE %.pg %.pg-installed
+	@/bin/echo '*****'
 	@/bin/echo '* INSTALLING $< (STEP 7 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) class=$$(sed -n 's/^class \(.*\)Parser :.*/\1/p' '$*.pg') \
@@ -174,6 +181,7 @@ realclean::; rm -f *.crs-installed
 # 8. Generate .run script for user's .crs.
 #
 %.run: %.crs-installed %.pg %.pg-installed
+	@/bin/echo '*****'
 	@/bin/echo '* GENERATING CUSTOM COMPILATION SCRIPT $@ (STEP 8 OF 8).'
 	@: set -x \
 	&& $(NOEXEC) class=$$(sed -n 's/^class \(.*\)Parser :.*/\1/p' '$*.pg') \
