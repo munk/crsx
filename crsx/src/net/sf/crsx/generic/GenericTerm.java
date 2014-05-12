@@ -312,7 +312,7 @@ abstract public class GenericTerm implements Pattern, Contractum
 	 * @param used names already used for variables
 	 * @param noLinear omit linear markers
 	 * @param depth remaining sublevels to print (or -1 for all)
-	 * @param outer whether the term is an outermost list elemet
+	 * @param outer whether the term is an outermost list element
 	 * @param full whether full term syntax should be used (omitting abbreviations)
 	 * @param namedProps whether to include named properties in the output
 	 * @param variableProps whether to include variable properties in the output
@@ -484,6 +484,10 @@ abstract public class GenericTerm implements Pattern, Contractum
 			FormattingAppendable f = FormattingAppendable.format(w, Integer.MAX_VALUE, 0, Integer.MAX_VALUE);
 			Map<Variable,String> variableNames = new HashMap<Variable, String>();
 			appendTermTo(f, variableNames, factory.defined(GenericFactory.NO_LINEAR_VARIABLES), Integer.MAX_VALUE, false, false, true, true, new HashSet<Variable>());
+//			boolean full = factory.defined(Factory.SIMPLE_TERMS);
+//			boolean namedProps = !factory.defined(Factory.OMIT_NAMED_PROPERTIES) && !factory.defined (Factory.OMIT_PROPERTIES);
+//			boolean variableProps = !factory.defined(Factory.OMIT_NAMED_PROPERTIES) && !factory.defined(Factory.OMIT_PROPERTIES);
+//			appendTermTo(f, factory.printedVariables, factory.defined(GenericFactory.NO_LINEAR_VARIABLES), Integer.MAX_VALUE, false, full, namedProps, variableProps, new HashSet<Variable>());
 		}
 		catch (IOException e)
 		{

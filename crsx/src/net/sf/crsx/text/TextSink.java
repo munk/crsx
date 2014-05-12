@@ -177,7 +177,7 @@ public class TextSink extends ManagedSink implements Sinker
     			String name = namings.get(v);
     			if (name == null)
     			{
-    				name = Util.safeVariableName(v, namings, noLinearMarkers, (factory != null && factory.defined("trust-generated-variable-names")));
+    				name = Util.safeVariableName(v, namings, noLinearMarkers, (factory != null && factory.defined(GenericFactory.NO_VARIABLE_ENCODING)));
     				/*
     				// Custom version of Util.safeVariableName()...
     				if (!name.matches("[a-z][A-Za-z0-9_]*"))

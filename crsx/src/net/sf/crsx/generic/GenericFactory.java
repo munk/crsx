@@ -76,6 +76,9 @@ public class GenericFactory implements Factory<GenericTerm>
     /** If set then linear variable names do not include a linear marker. */
     final public static String NO_LINEAR_VARIABLES = "omit-linear-variables";
 
+    /** If set then odd variables names are just printed. */
+    final public static String NO_VARIABLE_ENCODING = "no-variable-encoding";
+
     /** If set then {@link #makeBuffer(net.sf.crsx.Maker.CallBack)} creates flexible terms. */
     final public static String FLEXIBLE = "flexible";
 
@@ -193,6 +196,9 @@ public class GenericFactory implements Factory<GenericTerm>
 
     /** Globally free variables. */
     final private Map<String,Variable> globalFreeVariables = new HashMap<String, Variable>();
+
+    /** Variables that have been printed, with their name. */
+    final Map<Variable,String> printedVariables = new HashMap<Variable,String>();
 	
 	// Constructor.
 
@@ -649,6 +655,17 @@ public class GenericFactory implements Factory<GenericTerm>
 		set(PARSE_LOCATIONS, (captureLocations ? literal(1) : literal(0)));
 	}
 
+	public void appendTermTo(GenericTerm term, Appendable writer) throws IOException
+	{
+		int depth = getInteger("depth");
+		boolean full = defined(SIMPLE_TERMS);
+		boolean namedProps = !defined(OMIT_NAMED_PROPERTIES) && !defined (OMIT_PROPERTIES);
+		boolean variableProps = !defined(OMIT_NAMED_PROPERTIES) && !defined (OMIT_PROPERTIES);
+		Set<Variable> omitProps = new HashSet<>();
+		term.appendTo(writer, printedVariables, depth, full, namedProps, variableProps, omitProps);
+	}
+	
+	
     // Factory<GenericTerm>...
 
 	public Builder builder()
@@ -739,6 +756,20 @@ public class GenericFactory implements Factory<GenericTerm>
     public Stub get(String name)
 	{
 		return environment.get(name);
+	}
+
+    public int getInteger(String name)
+	{
+		Stub s = environment.get(name);
+		if (s == null) return 0;
+		try
+		{
+			return Integer.parseInt(Util.symbol(s));
+		}
+		catch (NumberFormatException e)
+		{
+			return 0;
+		}
 	}
     
 	public synchronized void set(String name, final Stub value)

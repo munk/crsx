@@ -1597,11 +1597,17 @@ class GenericEvaluator extends FixedGenericConstruction
         		return rewrapWithProperties(factory.literal(s));
             }
             
-            case SHOW :
+            case SHOW : {
             	// $[Show, term]
-///            	contractArgument(1);
-                return rewrapWithProperties(factory.literal(sub(1).toString()));
-
+            	return rewrapWithProperties(factory.literal(sub(1).toString()));
+//            	StringBuilder sb = new StringBuilder();
+//            	try {
+//					factory.appendTermTo(sub(1), sb);
+//				} catch (IOException e) {
+//					break;
+//				}
+//                return rewrapWithProperties(factory.literal(sb.toString()));
+            }
             case COMPUTE :
             	// $[Compute, term]
             	computeArguments();

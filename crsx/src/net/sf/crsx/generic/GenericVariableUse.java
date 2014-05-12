@@ -239,6 +239,7 @@ public class GenericVariableUse extends GenericTerm implements Visitor.VariableU
 			writer.append("null");
 		else
 			writer.append(Util.safeVariableName(variable, used, factory.defined(GenericFactory.NO_LINEAR_VARIABLES), false));
+			///writer.append(Util.safeVariableName(variable, used, factory.defined(GenericFactory.NO_LINEAR_VARIABLES), factory.defined(GenericFactory.NO_VARIABLE_ENCODING)));
 	}
 	
 	public Sink reify(Sink sink, Map<String, Term> metaArgSort, Map<Variable, Term> freeSort, Map<String, Reifier> subReifiers)

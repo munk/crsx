@@ -1,0 +1,208 @@
+// Raw.crs: SORTS OF RAW HACS FORMAT (with all embedded syntax as tokens).
+//
+Raw[(
+
+// STRUCTURE.
+
+{$String : $StringEntrySort}
+RawModule ::=(
+  %rawModule⟪ %EmbeddedModule«RawEmbeddedModule» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawEmbeddedModule ::=(
+  %rawEmbeddedModule⟪ module %ModuleName«$String» { %Declarations«$List[RawDeclaration]» } ⟫;
+);
+
+{$String : $StringEntrySort}
+RawDeclaration ::=(
+ %rawDeclaration⟪ %EmbeddedModule«RawEmbeddedModule» ; ⟫;
+ %rawDeclaration⟪ import %ModuleName«$String» ( %SortNames«$List[$String]» ) ; ⟫;
+ %rawDeclaration⟪ space %RegExp«$List[RawRegExpChoice]» ; ⟫;
+ %rawDeclaration⟪ token %SortName«$String» | %RegExp«$List[RawRegExpChoice]» ; ⟫;
+ %rawDeclaration⟪ fragment %FragmentName«$String» | %RegExp«$List[RawRegExpChoice]» ; ⟫;
+ %rawDeclaration⟪ attribute %AttributeKind«RawAttributeKind» %AttributeName«$String» %AttributeForm«RawAttributeForm» %AttributeOptions«$List[RawAttributeOption]» ; ⟫;
+ %rawDeclaration⟪ sort %SortName«$String» %Repeat«RawRepeat» %SortAbstraction«RawSortAbstraction» ; ⟫;
+ %rawDeclaration⟪ %SortAlternatives«$List[RawSortAlternative]» ; ⟫;
+ %rawDeclaration⟪ rule %Rule«RawRule» ; ⟫;
+ %rawDeclaration⟪ { %Declarations«$List[RawDeclaration]» } ⟫;
+);
+
+//// SYNTAX.
+
+{$String : $StringEntrySort}
+RawRegExpChoice ::=(
+ %rawRegExpChoice⟪ nested %RegExpSimple«RawRegExpSimple» %RegExpSimple«RawRegExpSimple» ⟫;
+ %rawRegExpChoice⟪ %RegExpUnits«$List[RawRegExpUnit]» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawRegExpUnit ::= (
+ %rawRegExpUnit⟪ %RegExpSimple«RawRegExpSimple» %Repeat«RawRepeat» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawRepeat ::=(
+ %rawRepeat⟪ ⟫;
+ %rawRepeat⟪ ? ⟫;
+ %rawRepeat⟪ * ⟫;
+ %rawRepeat⟪ + ⟫;
+ %rawRepeat⟪ + _ %RegExpLeaf«RawRegExpSimple» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawRegExpSimple ::=(
+ %rawRegExpSimple⟪ %String«$String» ⟫;
+ %rawRegExpSimple⟪ %Word«$String» ⟫;
+ %rawRegExpSimple⟪ %FragmentRef«$String» ⟫;
+ %rawRegExpSimple⟪ %RegExpClass«RawRegExpClass» ⟫;
+ %rawRegExpSimple⟪ . ⟫;
+ %rawRegExpSimple⟪ ( %RegExp«$List[RawRegExpChoice]» ) ⟫;
+);
+
+{$String : $StringEntrySort}
+RawRegExpClass ::=(
+ RAW-RegExpClassNot[RawRegExpClass];
+ RAW-RegExpClassChar[$String, RawRegExpClass];
+ RAW-RegExpClassRange[$String, $String, RawRegExpClass];
+ RAW-RegExpClassDone;
+);
+
+//// SORTS.
+
+{$String : $StringEntrySort}
+RawSortAbstraction ::=(
+ %rawSortAbstraction⟪ a %SortAbstraction« {a:RawSortParam} RawSortAbstraction »  ⟫;
+ %rawSortAbstraction⟪ %SortAlternatives«$List[RawSortAlternative]»  ⟫;
+);
+
+{$String : $StringEntrySort}
+RawSortAlternative ::=(
+ %rawSortAlternative⟪ | data %Form«RawForm» %Tagging« $List[$String] » ⟫;
+ %rawSortAlternative⟪ | scheme %Form«RawForm» ⟫;
+ %rawSortAlternative⟪ | ↑ %AttributeName«$String» ⟫;
+ %rawSortAlternative⟪ | symbol %Form«RawForm» ⟫;
+ %rawSortAlternative⟪ | static symbol %Form«RawForm» ⟫;
+ %rawSortAlternative⟪ | sugar %Form«RawForm» → %Term«RawTerm» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawForm ::=(
+ RAW-FormParsedSorted[$String<!--SortName-->, RawParsedForm, $Numeric<!--Prec-->, $List[RawInheritedRef]];
+ RAW-FormParsed[RawParsedForm, $Numeric<!--Prec-->, $List[RawInheritedRef]];
+ RAW-FormConstruction[$String<!--Constructor-->, $List[RawScopeSort], $List[RawInheritedRef]];
+);
+
+{$String : $StringEntrySort}
+RawScopeSort ::=(
+ %rawScopeSort⟪ %Sort«RawSort» %Repeat«RawRepeat» [ %SubstituteSorts«$List[RawSubstituteSort]» ] ⟫;
+ %rawScopeSort⟪ [ %Variable«$String» : %Sort«RawSort» ] ⟫;
+ %rawBindersScopeSort⟪ [ %Variable«$String» : %Sort«RawSort» ] %BindersScopeSort« RawScopeSort » ⟫;
+);
+
+{$String : $StringEntrySort}
+RawSubstituteSort ::=(
+ %rawSubstituteSort⟪ %Variable«$String» : %Sort«RawSort» ⟫;
+ %rawSubstituteSort⟪ %Variable«$String» ⟫;
+ );
+
+{$String : $StringEntrySort}
+RawSort ::=(
+ %rawSort⟪ %SimpleSort«RawSort» %SimpleSorts«$List[RawSort]» ⟫;
+ %rawSimpleSort⟪ %SortName«$String» %MetaVariables«$List[$String]» ⟫;
+ RAW-SortParam[RawSort];
+);
+
+{$String : $StringEntrySort}
+RawParsedForm ::=(
+ RAW-ParsedFormWord[$String, RawParsedForm];
+ RAW-ParsedFormTerm[RawScopeSortPrecRepeat, RawParsedForm];
+ RAW-ParsedFormSpace[$String, RawParsedForm];
+ RAW-ParsedFormDone;
+);
+
+{$String : $StringEntrySort}
+RawScopeSortPrecRepeat ::=(
+  %rawScopeSortPrecRepeat⟪ %ScopeSort«RawScopeSort» %FormPrec«$Numeric» %Repeat«RawRepeat» ⟫; 
+);
+
+{$String : $StringEntrySort}
+RawAttributeKind ::=(
+ %rawAttributeKind⟪ ↑ ⟫;
+ %rawAttributeKind⟪ ↓ ⟫;
+);
+
+{$String : $StringEntrySort}
+RawAttributeForm ::=(
+ %rawAttributeForm⟪ ( %Sort«RawSort» ) ⟫;
+ %rawAttributeForm⟪ { %Sort«RawSort» } ⟫;
+ %rawAttributeForm⟪ { %Sort«RawSort» : %Sort«RawSort» } ⟫;
+);
+
+{$String : $StringEntrySort}
+RawAttributeOption ::=(
+ %rawAttributeOption⟪ %Variable«$String» %Constructor«$String» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawInheritedRef ::=(
+ %rawInheritedRef⟪ ↓ %AttributeName«$String» ⟫;
+);
+
+//// RULES.
+
+{$String : $StringEntrySort}
+RawRule ::=(
+ %rawRule⟪ %Priority«RawPriority» %Construction«RawTerm» : %Construction«RawTerm» → %Term«RawTerm» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawPriority ::=(
+ %rawPriority⟪ priority ⟫;
+ %rawPriority⟪ default ⟫;
+ %rawPriority⟪ ⟫;
+);
+
+//// TERMS.
+
+{$String : $StringEntrySort}
+RawTerm ::=(
+
+ %rawTerm⟪ %Constructor«$String» ( %Scopes«$List[RawScope]» ) %Attributes«$List[RawAttribute]» ⟫;
+ %rawTerm⟪ %Constructor«$String» %Repeat«RawRepeat» %Constructor«$String» ( %Scopes«$List[RawScope]» ) %Attributes«$List[RawAttribute]» ⟫;
+ %rawTerm⟪ %Literal«$String» %Attributes«$List[RawAttribute]» ⟫;
+ %rawTerm⟪ %Constructor«$String» %Repeat«RawRepeat» %Literal«$String» %Attributes«$List[RawAttribute]» ⟫;
+
+ %rawTerm⟪ %Variable«$String» %Attributes«$List[RawAttribute]» ⟫;
+ %rawTerm⟪ %Constructor«$String» %Repeat«RawRepeat» %Variable«$String» %Attributes«$List[RawAttribute]» ⟫;
+
+ %rawTerm⟪ %MetaVariable«$String» [ %Terms«$List[RawTerm]» ] %Attributes«$List[RawAttribute]» ⟫;
+ %rawTerm⟪ %Constructor«$String» %Repeat«RawRepeat» %MetaVariable«$String» [ %Terms«$List[RawTerm]» ] %Attributes«$List[RawAttribute]» ⟫;
+ 
+ RAW-Unparsed[$String, $List[RawAttribute]] ;
+ RAW-UnparsedSorted[$String, RawRepeat, $String, $List[RawAttribute]];
+
+ RAW-Special[$String, Text]; //TODO: parameters in text
+ RAW-OMITTED;
+
+);
+
+{$String : $StringEntrySort}
+RawScope ::=(
+ %rawScope⟪ [ %VariableList«$List[$String]» ] %Term«RawTerm» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawAttribute ::=(
+ %rawAttribute⟪ %AttributeKind«RawAttributeKind» %AttributeName«$String» %AttributeValue«RawAttributeValue» ⟫;
+);
+
+{$String : $StringEntrySort}
+RawAttributeValue ::=(
+ %rawAttributeValue⟪ ( %Term«RawTerm» ) ⟫;
+ %rawAttributeValue⟪ { %Term«RawTerm» } ⟫;
+ %rawAttributeValue⟪ { %Term«RawTerm» : %Term«RawTerm» } ⟫;
+ %rawAttributeValue⟪ { ¬ %Term«RawTerm» } ⟫;
+);
+
+)]

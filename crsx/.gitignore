@@ -8,8 +8,6 @@ crsx-javadoc
 out
 outj
 bin
-*.crs
-*.pg
 *-installed
 *.aux
 *.bbl
