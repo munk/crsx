@@ -11,6 +11,8 @@ import java.util.SortedSet;
 import java.util.Stack;
 import java.util.TreeSet;
 
+import com.sun.org.apache.xpath.internal.axes.HasPositionalPredChecker;
+
 import net.sf.crsx.CRS;
 import net.sf.crsx.CRSException;
 import net.sf.crsx.Constructor;

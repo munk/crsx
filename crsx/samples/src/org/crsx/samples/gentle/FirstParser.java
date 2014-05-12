@@ -178,7 +178,7 @@ public class FirstParser implements net.sf.crsx.Parser, FirstParserConstants {
 
 
 String unconcrete(String s) {return s.substring(1, s.length()-1).trim();}
-String unmeta(String s, int skip) {return ((net.sf.crsx.generic.GenericFactory) factory).defined("raw") ? unconcrete(s) : s.substring(1+skip, s.length()-1).trim();}
+String unmeta(String s, int skip) {return s.substring(1+skip, s.length()-1).trim();}
 String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory) factory).defined("raw") ? category : "" ;}
 
         /**
@@ -219,7 +219,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>INT</em> ::=   <a href="#T_meta1_T_M_INT">meta1_T_M_INT</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_INT">meta2_T_M_INT</a><font color="red">$$:[[unmeta(#,3)]]:[[ rawornaked("firstRawSorted_INT") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_INT">meta2_T_M_INT</a><font color="red">$$:[[unmeta(#,3)]]:[[ rawornaked("firstRawPresorted_INT") ]]</font>  <br>
  *  |   <a href="#T_T_M_INT">T_M_INT</a><font color="red">$</font> 
  */
   final public net.sf.crsx.Sink N_INT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -234,7 +234,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_INT:
         t = jj_consume_token(T_meta2_T_M_INT);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_INT") , new java.io.StringReader(unmeta(t.toString(),3)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_INT") , new java.io.StringReader(unmeta(t.toString(),3)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -420,7 +420,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>FLOAT</em> ::=   <a href="#T_meta1_T_M_FLOAT">meta1_T_M_FLOAT</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_FLOAT">meta2_T_M_FLOAT</a><font color="red">$$:[[unmeta(#,5)]]:[[ rawornaked("firstRawSorted_FLOAT") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_FLOAT">meta2_T_M_FLOAT</a><font color="red">$$:[[unmeta(#,5)]]:[[ rawornaked("firstRawPresorted_FLOAT") ]]</font>  <br>
  *  |   <a href="#T_T_M_FLOAT">T_M_FLOAT</a><font color="red">$</font> 
  */
   final public net.sf.crsx.Sink N_FLOAT(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -435,7 +435,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_FLOAT:
         t = jj_consume_token(T_meta2_T_M_FLOAT);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_FLOAT") , new java.io.StringReader(unmeta(t.toString(),5)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_FLOAT") , new java.io.StringReader(unmeta(t.toString(),5)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -621,7 +621,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>ID</em> ::=   <a href="#T_meta1_T_M_ID">meta1_T_M_ID</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_ID">meta2_T_M_ID</a><font color="red">$$:[[unmeta(#,2)]]:[[ rawornaked("firstRawSorted_ID") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_ID">meta2_T_M_ID</a><font color="red">$$:[[unmeta(#,2)]]:[[ rawornaked("firstRawPresorted_ID") ]]</font>  <br>
  *  |   <a href="#T_T_M_ID">T_M_ID</a><font color="red">$</font> 
  */
   final public net.sf.crsx.Sink N_ID(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -636,7 +636,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_ID:
         t = jj_consume_token(T_meta2_T_M_ID);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_ID") , new java.io.StringReader(unmeta(t.toString(),2)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_ID") , new java.io.StringReader(unmeta(t.toString(),2)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -1005,7 +1005,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>Exp3</em> ::=   <a href="#T_meta1_T_M_Exp">meta1_T_M_Exp</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_Exp">meta2_T_M_Exp</a><font color="red">$$:[[unmeta(#,3)]]:[[ rawornaked("firstRawSorted_Exp") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Exp">meta2_T_M_Exp</a><font color="red">$$:[[unmeta(#,3)]]:[[ rawornaked("firstRawPresorted_Exp") ]]</font>  <br>
  *  |  (   "<code>(</code>"   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#</font>    "<code>)</code>"   <font color="red">{{Exp3__M__28_Exp__M__29[#]}}</font>  |  (  <a href="#N_INT">&lang;INT&rang;</a> <font color="red">:#_INT_1</font>   <font color="red">{{Exp3_INT[#_INT_1]}}</font>  |  (  <a href="#N_FLOAT">&lang;FLOAT&rang;</a> <font color="red">:#_FLOAT_1</font>   <font color="red">{{Exp3_FLOAT[#_FLOAT_1]}}</font>  |  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>   <font color="red">{{Exp3_Name[#_Name_1]}}</font>  )  )  ) 
  */
   final public net.sf.crsx.Sink N_Exp3(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -1028,7 +1028,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_Exp:
         t = jj_consume_token(T_meta2_T_M_Exp);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_Exp") , new java.io.StringReader(unmeta(t.toString(),3)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_Exp") , new java.io.StringReader(unmeta(t.toString(),3)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -1336,7 +1336,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>Name</em> ::=   <a href="#T_meta1_T_M_Name">meta1_T_M_Name</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_Name">meta2_T_M_Name</a><font color="red">$$:[[unmeta(#,4)]]:[[ rawornaked("firstRawSorted_Name") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Name">meta2_T_M_Name</a><font color="red">$$:[[unmeta(#,4)]]:[[ rawornaked("firstRawPresorted_Name") ]]</font>  <br>
  *  |  <a href="#N_ID">&lang;ID&rang;</a> <font color="red">!!!:#_ID_1</font>   <font color="red">{{#_ID_1}}</font> 
  */
   final public net.sf.crsx.Sink N_Name(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -1356,7 +1356,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_Name:
         t = jj_consume_token(T_meta2_T_M_Name);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_Name") , new java.io.StringReader(unmeta(t.toString(),4)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_Name") , new java.io.StringReader(unmeta(t.toString(),4)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -1593,7 +1593,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>Stat</em> ::=   <a href="#T_meta1_T_M_Stat">meta1_T_M_Stat</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_Stat">meta2_T_M_Stat</a><font color="red">$$:[[unmeta(#,4)]]:[[ rawornaked("firstRawSorted_Stat") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Stat">meta2_T_M_Stat</a><font color="red">$$:[[unmeta(#,4)]]:[[ rawornaked("firstRawPresorted_Stat") ]]</font>  <br>
  *  |  (   "<code>TA</code>"    "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <font color="red">{{ Stat__M_TA__M__7b_Stat__M__7d[#_Stat_1]}}</font>  |  (   "<code>TA2</code>"    "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <font color="red">{{ Stat__M_TA2__M__7b_Stat__M__7d[#_Stat_1]}}</font>  |  (   "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_2</font>   <font color="red">{{Stat__M__7b_Stat__M__7d_Stat[#_Stat_1, #_Stat_2]}}</font>  |  (  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">^x</font>    "<code>:=</code>"   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#_Exp_1</font>    "<code>;</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">[x]</font><font color="red">:#_Stat_2</font>   <font color="red">{{Stat_vName__M__3a_3d_Exp__M__3b_Stat[#_Exp_1, #_Stat_2]}}</font>  |  <font color="red">{{StatEMPTY}}</font>  )  )  )  ) 
  */
   final public net.sf.crsx.Sink N_Stat(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -1619,7 +1619,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_Stat:
         t = jj_consume_token(T_meta2_T_M_Stat);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_Stat") , new java.io.StringReader(unmeta(t.toString(),4)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_Stat") , new java.io.StringReader(unmeta(t.toString(),4)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -1985,15 +1985,15 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
  *  |   <a href="#T_RAW_TOKEN_Int">RAW_TOKEN_Int</a><font color="red">$</font>   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  )?  <br>
  *  |   <a href="#T_RAW_TOKEN_Float">RAW_TOKEN_Float</a><font color="red">$</font>   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  )?  <br>
  *  |   <a href="#T_RAW_TOKEN_Unif">RAW_TOKEN_Unif</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_COMMA">RAW_COMMA</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  <br>
- *  |   <a href="#T_RAW_TOKEN_Test">RAW_TOKEN_Test</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>    <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">^x_8</font>    <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a> <font color="red">[x_8]</font>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a> 
+ *  |   <a href="#T_RAW_TOKEN_Test">RAW_TOKEN_Test</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>    <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">^x_54</font>    <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a> <font color="red">[x_54]</font>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a> 
  */
   final public net.sf.crsx.Sink N_RawPresorted_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
     trace_call("N_RawPresorted_Type");
     try {
         Token t = null;
         String s_RAW_VARIABLE = null;
-        net.sf.crsx.Variable v_x_8 = null;
-        String s_x_8 = null;
+        net.sf.crsx.Variable v_x_54 = null;
+        String s_x_54 = null;
         net.sf.crsx.Variable v_RAW_VARIABLE = null;
       switch ((jj_ntk==-1)?jj_ntk():jj_ntk) {
       case T_RAW_VARIABLE:
@@ -2117,14 +2117,14 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         jj_consume_token(T_RAW_LPAREN);
         jj_consume_token(T_RAW_LBRACKET);
         t = jj_consume_token(T_RAW_VARIABLE);
-                s_x_8 = t.toString();
-                v_x_8 = sink.makeVariable(s_x_8,true);
+                s_x_54 = t.toString();
+                v_x_54 = sink.makeVariable(s_x_54,true);
         jj_consume_token(T_RAW_RBRACKET);
                 {
-                        net.sf.crsx.Variable[] bs1 = {v_x_8};
+                        net.sf.crsx.Variable[] bs1 = {v_x_54};
                         sink = sink .binds(bs1) ;
                 }
-        sink = N_Raw_Type(sink, env.extend(s_x_8, v_x_8));
+        sink = N_Raw_Type(sink, env.extend(s_x_54, v_x_54));
         jj_consume_token(T_RAW_RPAREN);
                 {if (true) return sink .end() ;}
         break;
@@ -2193,7 +2193,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>T</em> ::=   <a href="#T_meta1_T_M_T">meta1_T_M_T</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_T">meta2_T_M_T</a><font color="red">$$:[[unmeta(#,1)]]:[[ rawornaked("firstRawSorted_T") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_T">meta2_T_M_T</a><font color="red">$$:[[unmeta(#,1)]]:[[ rawornaked("firstRawPresorted_T") ]]</font>  <br>
  *  |   <a href="#T_T_M_T">T_M_T</a><font color="red">$</font> 
  */
   final public net.sf.crsx.Sink N_T(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -2208,7 +2208,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_T:
         t = jj_consume_token(T_meta2_T_M_T);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_T") , new java.io.StringReader(unmeta(t.toString(),1)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_T") , new java.io.StringReader(unmeta(t.toString(),1)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -2409,7 +2409,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>I_Progr</em> ::=   <a href="#T_meta1_T_M_I_xProgr">meta1_T_M_I_xProgr</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_I_xProgr">meta2_T_M_I_xProgr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawSorted_I_Progr") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_I_xProgr">meta2_T_M_I_xProgr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawPresorted_I_Progr") ]]</font>  <br>
  *  |  (   "<code>ICG</code>"    "<code>{</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>    "<code>}</code>"   <font color="red">{{ I_Progr__M_ICG__M__7b_Stat__M__7d[#_Stat_1]}}</font>  |  (   "<code>ICGExp</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>   <a href="#N_Exp">&lang;Exp&rang;</a> <font color="red">:#_Exp_2</font>   <font color="red">{{ I_Progr__M_ICGExp_Tmp_Exp[#_Tmp_1, #_Exp_2]}}</font>  |  (   "<code>{</code>"   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_1</font>    "<code>}</code>"   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_2</font>   <font color="red">{{ I_Progr__M__7b_I_Progr__M__7d_I_Progr[#_I_Progr_1, #_I_Progr_2]}}</font>  |  (  <a href="#N_I_Instr">&lang;I_Instr&rang;</a> <font color="red">:#_I_Instr_1</font>   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_2</font>   <font color="red">{{I_Progr_I_Instr_I_Progr[#_I_Instr_1, #_I_Progr_2]}}</font>  |  <font color="red">{{I_ProgrEMPTY}}</font>  )  )  )  ) 
  */
   final public net.sf.crsx.Sink N_I_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -2422,8 +2422,8 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         net.sf.crsx.util.Buffer b___Stat_1 = new net.sf.crsx.util.Buffer(sink);
         net.sf.crsx.util.Buffer b___Exp_2 = new net.sf.crsx.util.Buffer(sink);
         net.sf.crsx.util.Buffer b___I_Progr_2 = new net.sf.crsx.util.Buffer(sink);
-        net.sf.crsx.Sink bs___Stat_1 = null;
         net.sf.crsx.Sink bs___I_Instr_1 = null;
+        net.sf.crsx.Sink bs___Stat_1 = null;
         Token t = null;
         net.sf.crsx.Sink bs___Exp_2 = null;
         net.sf.crsx.util.Buffer b___Tmp_1 = new net.sf.crsx.util.Buffer(sink);
@@ -2436,7 +2436,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_I_xProgr:
         t = jj_consume_token(T_meta2_T_M_I_xProgr);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_I_Progr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_I_Progr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -2720,7 +2720,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>I_Instr</em> ::=   <a href="#T_meta1_T_M_I_xInstr">meta1_T_M_I_xInstr</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_I_xInstr">meta2_T_M_I_xInstr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawSorted_I_Instr") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_I_xInstr">meta2_T_M_I_xInstr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawPresorted_I_Instr") ]]</font>  <br>
  *  |  (  <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>    "<code>=</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_2</font>   (   "<code>*</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_3</font>    "<code>;</code>"   <font color="red">{{I_Instr_Tmp__M__3d_I_Arg__M__2a_I_Arg__M__3b[#_Tmp_1, #_I_Arg_2, #_I_Arg_3]}}</font>  |  (   "<code>+</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_3</font>    "<code>;</code>"   <font color="red">{{I_Instr_Tmp__M__3d_I_Arg__M__2b_I_Arg__M__3b[#_Tmp_1, #_I_Arg_2, #_I_Arg_3]}}</font>  |   "<code>;</code>"   <font color="red">{{I_Instr_Tmp__M__3d_I_Arg__M__3b[#_Tmp_1, #_I_Arg_2]}}</font>  )  )  |  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>    "<code>=</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_2</font>    "<code>;</code>"   <font color="red">{{I_Instr_Name__M__3d_Tmp__M__3b[#_Name_1, #_Tmp_2]}}</font>  ) 
  */
   final public net.sf.crsx.Sink N_I_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -2745,7 +2745,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_I_xInstr:
         t = jj_consume_token(T_meta2_T_M_I_xInstr);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_I_Instr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_I_Instr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -3045,7 +3045,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>I_Arg</em> ::=   <a href="#T_meta1_T_M_I_xArg">meta1_T_M_I_xArg</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_I_xArg">meta2_T_M_I_xArg</a><font color="red">$$:[[unmeta(#,5)]]:[[ rawornaked("firstRawSorted_I_Arg") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_I_xArg">meta2_T_M_I_xArg</a><font color="red">$$:[[unmeta(#,5)]]:[[ rawornaked("firstRawPresorted_I_Arg") ]]</font>  <br>
  *  |  (  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>   <font color="red">{{I_Arg_Name[#_Name_1]}}</font>  |  (  <a href="#N_FLOAT">&lang;FLOAT&rang;</a> <font color="red">:#_FLOAT_1</font>   <font color="red">{{I_Arg_FLOAT[#_FLOAT_1]}}</font>  |  (  <a href="#N_INT">&lang;INT&rang;</a> <font color="red">:#_INT_1</font>   <font color="red">{{I_Arg_INT[#_INT_1]}}</font>  |  <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>   <font color="red">{{I_Arg_Tmp[#_Tmp_1]}}</font>  )  )  ) 
  */
   final public net.sf.crsx.Sink N_I_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -3068,7 +3068,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_I_xArg:
         t = jj_consume_token(T_meta2_T_M_I_xArg);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_I_Arg") , new java.io.StringReader(unmeta(t.toString(),5)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_I_Arg") , new java.io.StringReader(unmeta(t.toString(),5)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -3382,7 +3382,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>Tmp</em> ::=   <a href="#T_meta1_T_M_Tmp">meta1_T_M_Tmp</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_Tmp">meta2_T_M_Tmp</a><font color="red">$$:[[unmeta(#,3)]]:[[ rawornaked("firstRawSorted_Tmp") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_Tmp">meta2_T_M_Tmp</a><font color="red">$$:[[unmeta(#,3)]]:[[ rawornaked("firstRawPresorted_Tmp") ]]</font>  <br>
  *  |  <a href="#N_T">&lang;T&rang;</a> <font color="red">!!!:#_T_1</font>   <font color="red">{{#_T_1}}</font> 
  */
   final public net.sf.crsx.Sink N_Tmp(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -3402,7 +3402,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_Tmp:
         t = jj_consume_token(T_meta2_T_M_Tmp);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_Tmp") , new java.io.StringReader(unmeta(t.toString(),3)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_Tmp") , new java.io.StringReader(unmeta(t.toString(),3)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -3665,7 +3665,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>A_Progr</em> ::=   <a href="#T_meta1_T_M_A_xProgr">meta1_T_M_A_xProgr</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_A_xProgr">meta2_T_M_A_xProgr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawSorted_A_Progr") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_A_xProgr">meta2_T_M_A_xProgr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawPresorted_A_Progr") ]]</font>  <br>
  *  |  (   "<code>CG</code>"   <a href="#N_I_Progr">&lang;I_Progr&rang;</a> <font color="red">:#_I_Progr_1</font>   <font color="red">{{ A_Progr__M_CG_I_Progr[#_I_Progr_1]}}</font>  |  (   "<code>Compile</code>"   <a href="#N_Stat">&lang;Stat&rang;</a> <font color="red">:#_Stat_1</font>   <font color="red">{{ A_Progr__M_Compile_Stat[#_Stat_1]}}</font>  |  (  <a href="#N_A_Instr">&lang;A_Instr&rang;</a> <font color="red">:#_A_Instr_1</font>   <a href="#N_A_Progr">&lang;A_Progr&rang;</a> <font color="red">:#_A_Progr_2</font>   <font color="red">{{A_Progr_A_Instr_A_Progr[#_A_Instr_1, #_A_Progr_2]}}</font>  |  <font color="red">{{A_ProgrEMPTY}}</font>  )  )  ) 
  */
   final public net.sf.crsx.Sink N_A_Progr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -3688,7 +3688,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_A_xProgr:
         t = jj_consume_token(T_meta2_T_M_A_xProgr);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_A_Progr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_A_Progr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -3958,7 +3958,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>A_Instr</em> ::=   <a href="#T_meta1_T_M_A_xInstr">meta1_T_M_A_xInstr</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_A_xInstr">meta2_T_M_A_xInstr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawSorted_A_Instr") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_A_xInstr">meta2_T_M_A_xInstr</a><font color="red">$$:[[unmeta(#,7)]]:[[ rawornaked("firstRawPresorted_A_Instr") ]]</font>  <br>
  *  |  (   "<code>ADDF</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_1</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_2</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_3</font>   <font color="red">{{A_Instr__M_ADDF_A_Arg__M__2c_A_Arg__M__2c_A_Arg[#_A_Arg_1, #_A_Arg_2, #_A_Arg_3]}}</font>  |  (   "<code>LDF</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_2</font>   <font color="red">{{A_Instr__M_LDF_Tmp__M__2c_A_Arg[#_Tmp_1, #_A_Arg_2]}}</font>  |  (   "<code>MULF</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_1</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_2</font>    "<code>,</code>"   <a href="#N_A_Arg">&lang;A_Arg&rang;</a> <font color="red">:#_A_Arg_3</font>   <font color="red">{{A_Instr__M_MULF_A_Arg__M__2c_A_Arg__M__2c_A_Arg[#_A_Arg_1, #_A_Arg_2, #_A_Arg_3]}}</font>  |   "<code>STF</code>"   <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>    "<code>,</code>"   <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_2</font>   <font color="red">{{A_Instr__M_STF_Name__M__2c_Tmp[#_Name_1, #_Tmp_2]}}</font>  )  )  ) 
  */
   final public net.sf.crsx.Sink N_A_Instr(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -3966,8 +3966,8 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
     try {
         net.sf.crsx.Sink bs___Tmp_1 = null;
         net.sf.crsx.Sink bs___Name_1 = null;
-        net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
         net.sf.crsx.Sink bs___Tmp_2 = null;
+        net.sf.crsx.util.Buffer b___Name_1 = new net.sf.crsx.util.Buffer(sink);
         net.sf.crsx.util.Buffer b___A_Arg_3 = new net.sf.crsx.util.Buffer(sink);
         net.sf.crsx.util.Buffer b___A_Arg_2 = new net.sf.crsx.util.Buffer(sink);
         net.sf.crsx.util.Buffer b___A_Arg_1 = new net.sf.crsx.util.Buffer(sink);
@@ -3985,7 +3985,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_A_xInstr:
         t = jj_consume_token(T_meta2_T_M_A_xInstr);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_A_Instr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_A_Instr") , new java.io.StringReader(unmeta(t.toString(),7)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -4283,7 +4283,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
 
 /**
  * <em>A_Arg</em> ::=   <a href="#T_meta1_T_M_A_xArg">meta1_T_M_A_xArg</a><font color="red">:unconcrete</font>  <br>
- *  |   <a href="#T_meta2_T_M_A_xArg">meta2_T_M_A_xArg</a><font color="red">$$:[[unmeta(#,5)]]:[[ rawornaked("firstRawSorted_A_Arg") ]]</font>  <br>
+ *  |   <a href="#T_meta2_T_M_A_xArg">meta2_T_M_A_xArg</a><font color="red">$$:[[unmeta(#,5)]]:[[ rawornaked("firstRawPresorted_A_Arg") ]]</font>  <br>
  *  |  (   "<code>#</code>"   (  <a href="#N_FLOAT">&lang;FLOAT&rang;</a> <font color="red">:#_FLOAT_1</font>   <font color="red">{{A_Arg__M__h_FLOAT[#_FLOAT_1]}}</font>  |  <a href="#N_INT">&lang;INT&rang;</a> <font color="red">:#_INT_1</font>   <font color="red">{{A_Arg__M__h_INT[#_INT_1]}}</font>  )  |  (   "<code>[</code>"   <a href="#N_I_Arg">&lang;I_Arg&rang;</a> <font color="red">:#_I_Arg_1</font>    "<code>]</code>"   <font color="red">{{ A_Arg__M__5b_I_Arg__M__5d[#_I_Arg_1]}}</font>  |  (  <a href="#N_Name">&lang;Name&rang;</a> <font color="red">:#_Name_1</font>   <font color="red">{{A_Arg_Name[#_Name_1]}}</font>  |  <a href="#N_Tmp">&lang;Tmp&rang;</a> <font color="red">:#_Tmp_1</font>   <font color="red">{{A_Arg_Tmp[#_Tmp_1]}}</font>  )  )  ) 
  */
   final public net.sf.crsx.Sink N_A_Arg(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
@@ -4308,7 +4308,7 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_meta2_T_M_A_xArg:
         t = jj_consume_token(T_meta2_T_M_A_xArg);
-                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawSorted_A_Arg") , new java.io.StringReader(unmeta(t.toString(),5)), unit, t.beginLine, t.beginColumn+1, env);}
+                try {sink = factory.parser(factory).parse(sink,  rawornaked("firstRawPresorted_A_Arg") , new java.io.StringReader(unmeta(t.toString(),5)), unit, t.beginLine, t.beginColumn+1, env);}
                 catch (java.io.IOException e) {{if (true) throw new ParseException(e.getMessage());}}
                 catch (net.sf.crsx.CRSException e) {Throwable cause = e.getCause(); if (cause instanceof ParseException) {if (true) throw (ParseException) cause;} else {if (true) throw new ParseException(e.getMessage());}}
          {if (true) return sink;}
@@ -4794,12 +4794,12 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
  *  |  <a href="#N_RawSorted_I_Instr">&lang;RawSorted_I_Instr&rang;</a>   <br>
  *  |  <a href="#N_RawSorted_A_Progr">&lang;RawSorted_A_Progr&rang;</a>   <br>
  *  |  <a href="#N_RawSorted_Stat">&lang;RawSorted_Stat&rang;</a>   <br>
- *  |  <a href="#N_RawSorted_Name">&lang;RawSorted_Name&rang;</a>   <br>
- *  |  <a href="#N_RawSorted_I_Arg">&lang;RawSorted_I_Arg&rang;</a>   <br>
  *  |  <a href="#N_RawSorted_Exp">&lang;RawSorted_Exp&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_Name">&lang;RawSorted_Name&rang;</a>   <br>
  *  |  <a href="#N_RawSorted_I_Progr">&lang;RawSorted_I_Progr&rang;</a>   <br>
  *  |  <a href="#N_RawSorted_A_Instr">&lang;RawSorted_A_Instr&rang;</a>   <br>
- *  |  <a href="#N_RawSorted_Type">&lang;RawSorted_Type&rang;</a>  
+ *  |  <a href="#N_RawSorted_Type">&lang;RawSorted_Type&rang;</a>   <br>
+ *  |  <a href="#N_RawSorted_I_Arg">&lang;RawSorted_I_Arg&rang;</a>  
  */
   final public net.sf.crsx.Sink N_RawSortedTerm(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) throws ParseException {
     trace_call("N_RawSortedTerm");
@@ -4826,16 +4826,12 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         sink = N_RawSorted_Stat(sink, env);
          {if (true) return sink;}
         break;
-      case T_RAW_TOKEN_Name:
-        sink = N_RawSorted_Name(sink, env);
-         {if (true) return sink;}
-        break;
-      case T_RAW_TOKEN_I_Arg:
-        sink = N_RawSorted_I_Arg(sink, env);
-         {if (true) return sink;}
-        break;
       case T_RAW_TOKEN_Exp:
         sink = N_RawSorted_Exp(sink, env);
+         {if (true) return sink;}
+        break;
+      case T_RAW_TOKEN_Name:
+        sink = N_RawSorted_Name(sink, env);
          {if (true) return sink;}
         break;
       case T_RAW_TOKEN_I_Progr:
@@ -4848,6 +4844,10 @@ String rawornaked(String category) {return ((net.sf.crsx.generic.GenericFactory)
         break;
       case T_RAW_TOKEN_Type:
         sink = N_RawSorted_Type(sink, env);
+         {if (true) return sink;}
+        break;
+      case T_RAW_TOKEN_I_Arg:
+        sink = N_RawSorted_I_Arg(sink, env);
          {if (true) return sink;}
         break;
       default:

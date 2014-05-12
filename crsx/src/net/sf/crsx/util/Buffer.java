@@ -205,11 +205,13 @@ public class Buffer extends DelegateMaker implements Copyable
 	}
 	
 	/**
-	 * Return the term that has been collected by the result of {@link #sink()}, or null if none. 
-	 * @param discard set when this buffer will not be accessed any more
+	 * Return the term that has been collected by the result of {@link #sink()}, or null if none.
+	 * @param discard set when this buffer will not be accessed any more (ignored if null returned)
 	 */
 	public Term term(boolean discard)
 	{
+		if (storedTerm == null)
+			return null;
 		Term t = storedTerm;
 		if (discard) storedTerm = null;
 		return t;

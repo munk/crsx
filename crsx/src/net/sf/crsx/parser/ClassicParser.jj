@@ -961,9 +961,9 @@ TOKEN :
 	< NOT : "\u00AC" | "&not;" > |
 	
 	/* Names. */
-	< CONSTRUCTOR : (<CONSTRUCTOR_PREFIX> | <CONNECTOR> <PART>) (<CONNECTOR> <PART>)* > |
 	< VARIABLE : (<LINEAR>)? <VARIABLE_PREFIX> (<CONNECTOR> <PART>)* (<LINEAR>)? > |
 	< METAVARIABLE : <METAVARIABLE_PREFIX> (<CONNECTOR> <PART>)* > |
+	< CONSTRUCTOR : (<CONSTRUCTOR_PREFIX> | <CONNECTOR> <PART>) (<CONNECTOR> <PART>)* > |
 
 	< #LINEAR : "&sup1;" | "\u00B9" > |
 
@@ -971,17 +971,17 @@ TOKEN :
     < QUOTED_METAVARIABLE : "#" <STRING> > |
 
 	/* Internals. */
+	< #VARIABLE_PREFIX :
+		<LOWER> (<ALPHANUMERIC>)*
+	> |
+	< #METAVARIABLE_PREFIX :
+		(<ALPHANUMERIC> | ["_","$","\u0391"-"\u03C9"])* ("#" (<ALPHANUMERIC> | ["_","$","\u0391"-"\u03C9"])* (["?","*","+"] (<DIGIT>)*)?)+
+	> |
 	< #CONSTRUCTOR_PREFIX :
 		<UPPER> (<ALPHANUMERIC>)*
 		| (<OTHER>)+
 		| (<ALPHANUMERIC>)* "$" (<ALPHANUMERIC>)* // internal constructors...
 		| (["\u00D7","\u00F7","\u0391"-"\u2038","\u203B"-"\u218F","\u2200"-"\u2307","\u230C"-"\u2767","\u276A"-"\u27E5","\u27EC"-"\u2982","\u2985"-"\uF000"])+ // Unicode...
-	> |
-	< #VARIABLE_PREFIX :
-		<LOWER> (<ALPHANUMERIC>)*
-	> |
-	< #METAVARIABLE_PREFIX :
-		(<ALPHANUMERIC> | ["$","\u0391"-"\u03C9"])* ("#" (<ALPHANUMERIC> | ["$","\u0391"-"\u03C9"])* (["?","*","+"] (<DIGIT>)*)?)+
 	> |
 	< #PART : (<CONSTRUCTOR_PREFIX> | <VARIABLE_PREFIX> | <METAVARIABLE_PREFIX> | <NUMERIC> | <ATOM> | <STRING> )? > |
 	

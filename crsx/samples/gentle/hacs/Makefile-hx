@@ -118,7 +118,7 @@ clean::; rm -f *.tmp *.pg-installed
 %.hxr : %.hx %.pg %.pg-installed
 	@/bin/echo '*****'
 	@/bin/echo '* PROCESSING $< TO $@ (STEP 4 OF 8).'
-	@set -x \
+	@: set -x \
 	&& $(NOEXEC) parser=$$(sed -n 's/^class \(.*\) :.*/\1/p' '$*.pg') \
 	&& $(NOEXEC) $(CRSX) \
 		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'$$parser';)" raw \
@@ -155,10 +155,19 @@ realclean::; rm -f *.crs
 	&& $(NOEXEC) parser=$$(sed -n 's/^class \(.*\) :.*/\1/p' '$*.pg') \
 	&& $(NOEXEC) $(CRSX) rules='$<' \
 		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'$$parser';)" \
+		dump-rules='$@.tmp' simple-terms max-indent=10 width=255
+	@mv '$@.tmp' '$@'
+
+# Helper for human readable version
+%.crsF: %.crs %.pg %.pg-installed
+	@: set -x \
+	&& $(NOEXEC) parser=$$(sed -n 's/^class \(.*\) :.*/\1/p' '$*.pg') \
+	&& $(NOEXEC) $(CRSX) rules='$<' \
+		"grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'$$parser';)" \
 		dump-rules='$@.tmp'
 	@mv '$@.tmp' '$@'
 
-clean::; rm -f *.crsE
+clean::; rm -f *.crsE *.crsF
 
 # 7. Install .crs(E) into Java environment.
 #

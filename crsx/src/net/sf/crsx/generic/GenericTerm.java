@@ -310,7 +310,7 @@ abstract public class GenericTerm implements Pattern, Contractum
 	 * Helper to append a reparseable textual version of term to output.
 	 * @param writer to write to
 	 * @param used names already used for variables
-	 * @param noLinear TODO
+	 * @param noLinear omit linear markers
 	 * @param depth remaining sublevels to print (or -1 for all)
 	 * @param outer whether the term is an outermost list elemet
 	 * @param full whether full term syntax should be used (omitting abbreviations)

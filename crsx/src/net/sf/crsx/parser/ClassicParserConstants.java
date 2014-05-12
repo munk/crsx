@@ -35,11 +35,11 @@ public interface ClassicParserConstants {
   /** RegularExpression Id. */
   int NOT = 23;
   /** RegularExpression Id. */
-  int CONSTRUCTOR = 24;
+  int VARIABLE = 24;
   /** RegularExpression Id. */
-  int VARIABLE = 25;
+  int METAVARIABLE = 25;
   /** RegularExpression Id. */
-  int METAVARIABLE = 26;
+  int CONSTRUCTOR = 26;
   /** RegularExpression Id. */
   int LINEAR = 27;
   /** RegularExpression Id. */
@@ -47,11 +47,11 @@ public interface ClassicParserConstants {
   /** RegularExpression Id. */
   int QUOTED_METAVARIABLE = 29;
   /** RegularExpression Id. */
-  int CONSTRUCTOR_PREFIX = 30;
+  int VARIABLE_PREFIX = 30;
   /** RegularExpression Id. */
-  int VARIABLE_PREFIX = 31;
+  int METAVARIABLE_PREFIX = 31;
   /** RegularExpression Id. */
-  int METAVARIABLE_PREFIX = 32;
+  int CONSTRUCTOR_PREFIX = 32;
   /** RegularExpression Id. */
   int PART = 33;
   /** RegularExpression Id. */
@@ -116,15 +116,15 @@ public interface ClassicParserConstants {
     "\"[\"",
     "\"]\"",
     "<NOT>",
-    "<CONSTRUCTOR>",
     "<VARIABLE>",
     "<METAVARIABLE>",
+    "<CONSTRUCTOR>",
     "<LINEAR>",
     "<QUOTED_VARIABLE>",
     "<QUOTED_METAVARIABLE>",
-    "<CONSTRUCTOR_PREFIX>",
     "<VARIABLE_PREFIX>",
     "<METAVARIABLE_PREFIX>",
+    "<CONSTRUCTOR_PREFIX>",
     "<PART>",
     "<UPPER>",
     "<LOWER>",

@@ -207,13 +207,13 @@ public enum Primitive
     
 	/** TODO. */
 	HAS_GRAMMAR("HasGrammar", 1, 2),
-	/** $[Parse, #filename] loads a file by using the standard parser and category. */
+	/** $[{#}Parse[sort], #filename] loads a file by using the standard parser and category, respecting the variable name mapping {#} with entries "Name" : v. */
 	PARSE("Parse", 1, 1),
-	/** $[ParseURL[sort], #category, #url] for constant arguments, evaluates to the term obtained by parsing the content of the #url as a #category term. */
+	/** $[{#}ParseURL[sort], #category, #url] for constant arguments, evaluates to the term obtained by parsing the content of the #url as a #category term. */
 	PARSE_URL("ParseURL", 2, 2),
-	/** $[ParseResource, #category, #name] for constant arguments, evaluates to the term obtained by getting and parsing the #name resource as a #category term. */
+	/** $[{#}ParseResource, #category, #name] for constant arguments, evaluates to the term obtained by getting and parsing the #name resource as a #category term. */
 	PARSE_RESOURCE("ParseResource", 2, 2),
-	/** $[ParseText[sort], #category, #text] for constant arguments, evaluates to the term obtained by parsing the #text as a #category term. */
+	/** $[{#}ParseText[sort], #category, #text] for constant arguments, evaluates to the term obtained by parsing the #text as a #category term. */
 	PARSE_TEXT("ParseText", 2, 2),
 	/** $[Load[sort], #r, #category] parses the resource #r using the category, if any, and returns the term. */
 	LOAD("Load", 1, 2),

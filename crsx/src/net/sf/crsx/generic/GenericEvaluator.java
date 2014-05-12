@@ -1013,6 +1013,23 @@ class GenericEvaluator extends FixedGenericConstruction
                         if (!Util.isConstant(sub(i)))
                             break What; // parsing not supported until all arguments constant.
 
+                    ExtensibleMap<String,Variable> bound = LinkedExtensibleMap.EMPTY_SCOPE;
+					if (globals != null)
+					{
+						for (Variable v : globals)
+							bound = bound.extend(v.name(), v);
+					}
+                	PropertiesHolder ph = Util.propertiesHolder(sub(0));
+                	if (ph != null)
+                	{
+                		for (String key : ph.propertyNames())
+                		{
+                			Term value = ph.getProperty(key);
+                			if (value.kind() == Kind.VARIABLE_USE)
+                				bound = bound.extend(key, value.variable());
+                		}
+                	}
+
                     String category;
                     String resource;
                     Reader reader;
@@ -1074,19 +1091,13 @@ class GenericEvaluator extends FixedGenericConstruction
                         default :
                         	break What; // "Unknown $[Parse...] command?!?"
                     }
-					if (Util.getInteger(factory, Factory.VERBOSE_OPTION, 0) > 0)
+
+                    if (Util.getInteger(factory, Factory.VERBOSE_OPTION, 0) > 0)
 	                    if (Util.getInteger(factory, GenericFactory.VERBOSE_OPTION, 0) >= 0)
                         	factory.message(toString());
                     Buffer buffer = new Buffer(factory);
                     Sink bufferSink = buffer.sink();
-					Map<String,Variable> free = null;
-					if (globals != null)
-					{
-						free = new HashMap<String, Variable>();
-						for (Variable v : globals)
-							free.put(v.name(), v);
-					}
-                    factory.parser(factory).parse(bufferSink, category, reader, resource, 1, 1, null);
+                    factory.parser(factory).parse(bufferSink, category, reader, resource, 1, 1, bound);
                     Term result = buffer.term(true);
                     assert result != null : "Parser did not build complete term.";
                     return rewrapWithProperties(result);

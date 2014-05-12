@@ -7,7 +7,8 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="net.sf.crsx.run.Crsx"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="term=&quot;A_Instr#_A_Instr_1&quot;&#10;parse-verbose"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'org.crsx.samples.gentle.FirstParser';)&quot;&#10;rules=first.crs no-sortify&#10;dump-rules=first.crsE simple-terms max-indent=20 width=1023"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="crsx"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
+<stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:crsx/samples/gentle}"/>
 </launchConfiguration>

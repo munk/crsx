@@ -1995,6 +1995,13 @@ public class GenericCRS implements CRS, Builder, Constructor, Term, Observable
 		final SortedMultiMap<String, GenericRule> rulesByFunction = new SortedHashMultiMap<String, GenericRule>();
 		classifySymbols(constructors, dataForms, functionForms, fullSort, rulesByFunction, rulesByFunction);
 
+		if (factory.defined(Builder.LAX_SYMBOL))
+		{
+			sink = sink.start(sink.makeConstructor(CRS.CONS_SYMBOL)); // $Cons[
+			++declarationEnds;
+			sink = sink.start(sink.makeConstructor(Builder.LAX_SYMBOL)).end(); // $Lax;
+		}
+		
 		// Sort aliases.
 		for (Map.Entry<String, String> e : factory.sortAliases.entrySet())
 		{

@@ -7,7 +7,7 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="net.sf.crsx.run.Crsx"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'org.crsx.samples.gentle.FirstParser';)&quot;&#10;rules=org/crsx/hacs/Cook.crs wrapper=Prepare no-sortify&#10;input=first.hx category=rawModule  concrete-prefix=first&#10;no-parse-verbose verbose=3 omit-properties verbose-depth=50&#10;sink=net.sf.crsx.text.TextSink&#10;output=first.hxc"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="&quot;grammar=('org.crsx.hacs.Raw';'net.sf.crsx.text.Text';'org.crsx.samples.gentle.FirstParser';)&quot;&#10;rules=org/crsx/hacs/Cook.crs wrapper=CRS sortify&#10;input=first.hxr&#10;no-parse-verbose verbose=3 omit-properties verbose-depth=50&#10;sink=net.sf.crsx.text.TextSink&#10;output=first.crs"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="crsx"/>
 <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="-ea"/>
 <stringAttribute key="org.eclipse.jdt.launching.WORKING_DIRECTORY" value="${workspace_loc:crsx/samples/gentle}"/>
