@@ -23,6 +23,7 @@ RawDeclaration ::=(
  %rawDeclaration⟪ fragment %FragmentName«$String» | %RegExp«$List[RawRegExpChoice]» ; ⟫;
  %rawDeclaration⟪ attribute %AttributeKind«RawAttributeKind» %AttributeName«$String» %AttributeForm«RawAttributeForm» %AttributeOptions«$List[RawAttributeOption]» ; ⟫;
  %rawDeclaration⟪ sort %SortName«$String» %Repeat«RawRepeat» %SortAbstraction«RawSortAbstraction» ; ⟫;
+ %rawDeclaration⟪ text %SortAlternatives«$List[RawSortAlternative]» ; ⟫;
  %rawDeclaration⟪ %SortAlternatives«$List[RawSortAlternative]» ; ⟫;
  %rawDeclaration⟪ rule %Rule«RawRule» ; ⟫;
  %rawDeclaration⟪ { %Declarations«$List[RawDeclaration]» } ⟫;

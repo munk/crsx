@@ -8,7 +8,7 @@ class org.crsx.hacs.Raw : <Module>, <ModuleName>, <EmbeddedModule>,
 <Term>, <NotVariableTerm>, <Attributes>, <Attribute>, <AttributeValue>, <Scopes>, <Scope>, <Terms>,
 <Literal>, <Constructor>, <MetaVariable>, <MetaVariables>, <Variable>, <Variables>, <AttributeName>,
 <RegExpClass>, <CC>, <CC_RangesTop>, <CC_Ranges>, <CC_FirstRangeStartChar>, <CC_NonDashRangeStartChar>, <CC_RangeChar>,
-<ParsedForm>, <PP>, <PP_ConcreteSpace>, <PP_ConcreteWord>
+<ParsedForm>, <PP>
 
 prefix raw
 
@@ -25,7 +25,7 @@ private String storedSort = "";
 
 //// HACS-INTERNAL META SYNTAX.
 
-// Guillemets ("French quotes") used for embedded naked CRSX terms (for sort hacks in Raw.crs).
+// Guillemets ("French quotes") used for embedded  CRSX terms (for sort hacks in Raw.crs).
 <Embedded> (*) ::= Embedded$$:unwrap .
 token Embedded (*) ::= '«' (~['«','»'])* '»' .
 
@@ -56,6 +56,7 @@ inject[<Embedded>]  ::=  '%<PRODUCTION_NAME>', '', '' .
 | {anonymous}:raw <SortAlternatives> SEMI
 | (RULE)? {rule}:raw <Rule> SEMI
 | {nestedDeclarations}:raw LBRACE <Declarations> RBRACE
+| TEXT:raw <Store_Text> <SortAlternatives> SEMI
 .
 
 
@@ -186,7 +187,7 @@ inject[<Embedded>]  ::=  '%<PRODUCTION_NAME>', '', '' .
 //// TERMS.
 
 <Term> ::=
-  <Variable>!!!:#v ( {Special}:raw {{#v}} (CONCRETE$:unwrap) | {VariableUse}:raw {{#v}} <Attributes>)
+  <Variable>!!!:#v ( {Special}:raw {{#v}} <ConcreteText> | {VariableUse}:raw {{#v}} <Attributes>)
 | <NotVariableTerm>
 .
 
@@ -289,7 +290,7 @@ skip (DEFAULT,RE) ::= ' ' | \r | \t | \n | '//' ~[\n\r]* | \u1 .
 <FragmentRef> (DEFAULT,RE) ::= FRAGMENT_REF$:unwrap .
 <AttributeName> ::= <Literal> | <Variable> | <Constructor> .
 <Constructor> ::= ( UPPER$ | DASH$ | CON$ ).
-<Variable> ::= ( LOWER$ | VAR$ | MODULE$ | SORT$ | DATA$ | STATIC$ | SYMBOL$ | SCHEME$ | AUTOMATIC$ | ATTRIBUTE$ | COMPOSE$ | SUGAR$ | RULE$ | PRIORITY$ | DEFAULT$ | SPACE$ | IMPORT$ | TOKEN$ | FRAGMENT$ | NESTED$ | TAG$ ).
+<Variable> ::= ( LOWER$ | VAR$ | MODULE$ | SORT$ | TEXT$ | DATA$ | STATIC$ | SYMBOL$ | SCHEME$ | AUTOMATIC$ | ATTRIBUTE$ | COMPOSE$ | SUGAR$ | RULE$ | PRIORITY$ | DEFAULT$ | SPACE$ | IMPORT$ | TOKEN$ | FRAGMENT$ | NESTED$ | TAG$ ).
 <MetaVariable> ::= ( META$ | HASH$ ).
 <Separator> ::= ( BAR$ | SEMI$ | COMMA$ | COLON$ | STAR$ | DOT$ ).
 
@@ -331,6 +332,7 @@ token UPPER (DEFAULT,RE) ::= [A-Z] .
 
 token MODULE ::= "module" .
 token SORT ::= "sort" .
+token TEXT ::= "text" .
 token DATA ::= "data" .
 token SCHEME ::= "scheme" .
 token AUTOMATIC ::= "automatic" .
@@ -442,22 +444,19 @@ token CC_SKIP (CC) ::= \u1 .
 <ParsedForm> ::= CONCRETE$$:unpp:{rawPP} .
 
 <PP> (PP) ::=
-  {ParsedFormSpace}:raw <PP_ConcreteSpace> <PP>
-| {ParsedFormWord}:raw <PP_ConcreteWord> <PP>
+  {ParsedFormSpace}:raw PP_CONCRETESPACE$ <PP>
+| {ParsedFormWord}:raw PP_CONCRETEWORD$ <PP>
 | {ParsedFormTerm}:raw PP_UNCONCRETE$$:unpp:{rawScopeSortPrecRepeat}  <PP>
 | PP_SKIP <PP>
 | {ParsedFormDone}:raw
 .
-
-<PP_ConcreteSpace> (PP) ::= PP_CONCRETESPACE$ .
-<PP_ConcreteWord> (PP) ::= PP_CONCRETEWORD$ .
 
 token PP_CONCRETESPACE (PP) ::= [' ',\t\r\n,\ub6]+ . // no comments but include special spacing marks
 token PP_CONCRETEWORD (PP) ::= ~[' ',\t\r\n\ub6\u27e6\u27e7\u27e8\u27e9\u1]+ .
 token PP_SKIP (PP) ::= \u1 .
 
 %{
-// Nested unconcrete token ⟨...⟩. 
+// Nested unconcrete token ⟨...⟩ inside PP.
 <PP> MORE : { "\u27e8" { nesting = 0; nestedState = curLexState; } : IN_PP_UNCONCRETE }
 <IN_PP_UNCONCRETE> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_PP_UNCONCRETE }
 <IN_NESTED_PP_UNCONCRETE> MORE : { "\u27e8" { nesting++; } }
@@ -466,7 +465,45 @@ token PP_SKIP (PP) ::= \u1 .
 <IN_PP_UNCONCRETE,IN_NESTED_PP_UNCONCRETE> MORE : { < ~[] > }
 %}
 
-//// Sort name cache
+
+//// TEXT SUBPARSER (TT)
+
+<ConcreteText> ::= CONCRETE$$:unpp:{rawTT} .
+
+<TT> (TT) ::= {$TextCons} <TT_Part> <TT> | TT_SKIP <TT> | {$TextNil} .
+
+<TT_Part> (TT) ::= {$TextChars} TT_CHARS$
+         	     | {$TextBreak} TT_BREAK$
+                 | TT_PAR_LPAREN {$TextIndent} <TT> TT_PAR_RPAREN
+                 | TT_PAR_LBRACK {$TextBreak} <TT> TT_PAR_RBRACK
+                 | TT_PAR
+                   ( {$TextChars} TT_UNCONCRETE$$:unembed:{rawTerm}
+                   | {{ $TextBreak["\n"] }}
+                   )
+		 		 | {$TextEmbed} {AsText} TT_UNCONCRETE$$:unembed:{rawTerm}
+                 .
+
+TT_PAR_LPAREN (TT) ::= '¶(' .
+TT_PAR_RPAREN (TT) ::= '¶)' .
+TT_PAR_LBRACK (TT) ::= '¶[' .
+TT_PAR_RBRACK (TT) ::= '¶]' .
+TT_PAR (TT) ::= '¶' .
+token TT_SKIP (TT) ::= \u1 .
+TT_CHARS (TT) ::= ~[\n\r\f,'¶','⟦','⟧','⟨','⟩']+ .
+TT_BREAK (TT) ::= [\n\r\f]+ .
+
+%{
+// Nested unconcrete token ⟨...⟩ inside TT.
+<TT> MORE : { "\u27e8" { nesting = 0; nestedState = curLexState; } : IN_TT_UNCONCRETE }
+<IN_TT_UNCONCRETE> MORE : { "\u27e8" { nesting = 1; } : IN_NESTED_TT_UNCONCRETE }
+<IN_NESTED_TT_UNCONCRETE> MORE : { "\u27e8" { nesting++; } }
+<IN_NESTED_TT_UNCONCRETE> MORE : { "\u27e9" { if (--nesting <= 0) SwitchTo(IN_TT_UNCONCRETE); } }
+<IN_TT_UNCONCRETE> TOKEN : { <T_TT_UNCONCRETE : "\u27e9"> { SwitchTo(nestedState); } }
+<IN_TT_UNCONCRETE,IN_NESTED_TT_UNCONCRETE> MORE : { < ~[] > }
+%}
+
+
+//// SPECIAL SORT NAME CACHE HACK
 
 %{
 net.sf.crsx.Sink N_Store_SortName(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
@@ -479,6 +516,15 @@ net.sf.crsx.Sink N_Store_SortName(net.sf.crsx.Sink sink, net.sf.crsx.util.Extens
 		net.sf.crsx.Term term = b.term(false);
 		storedSort = net.sf.crsx.util.Util.symbol(term);
 		return term.copy(sink, true, net.sf.crsx.util.LinkedExtensibleMap.EMPTY_RENAMING);
+	}
+}
+
+net.sf.crsx.Sink N_Store_Text(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
+{}
+{
+	{
+		storedSort = "Text";
+		return sink;
 	}
 }
 

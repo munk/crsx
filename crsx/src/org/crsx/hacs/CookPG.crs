@@ -1078,6 +1078,12 @@ PG-Lexical2[%rawDeclarations⟪ sort #SortName# #Repeat# #SortAbstraction# ; #De
 PG-Lexical2[#Declarations#, #hasSkip, hasskip.#[hasskip]]
 ;
 
+Lexical-text:
+PG-Lexical2[%rawDeclarations⟪ text #SortAlternatives# ; #Declarations# ⟫, #hasSkip, hasskip.#[hasskip]]
+→
+PG-Lexical2[#Declarations#, #hasSkip, hasskip.#[hasskip]]
+;
+
 Lexical-alternatives:
 PG-Lexical2[%rawDeclarations⟪ #SortAlternatives# ; #Declarations# ⟫, #hasSkip, hasskip.#[hasskip]]
 →

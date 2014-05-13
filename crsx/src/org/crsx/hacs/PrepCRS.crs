@@ -69,7 +69,12 @@ Prep2[{#ND}NSM[#Names], #ModuleName#, #Declarations, #Prefix]
 
 {#ND}Prep-Declarations[%rawDeclarations⟪ sort #SortName# #Repeat# #SortAbstraction# ; #Declarations2# ⟫, #Prefix, #LastSort]
 →
-%rawDeclarations⟪ sort #SortName# #Repeat# %SortAbstraction« {#ND}Prep-SortAbstraction[#SortAbstraction#, #Prefix, #SortName#] »  ; %Declarations« {#ND}Prep-Declarations[#Declarations2#, #Prefix, #SortName#] » ⟫
+%rawDeclarations⟪ sort #SortName# #Repeat# %SortAbstraction« {#ND}Prep-SortAbstraction[#SortAbstraction#, #Prefix, #SortName#] » ; %Declarations« {#ND}Prep-Declarations[#Declarations2#, #Prefix, #SortName#] » ⟫
+;
+
+{#ND}Prep-Declarations[%rawDeclarations⟪ text #SortAlternatives# ; #Declarations2# ⟫, #Prefix, #LastSort]
+→
+%rawDeclarations⟪ text %SortAlternatives« Map[a . {#ND}Prep-SortAlternative[a, #Prefix, "Text"], #SortAlternatives#] » ; %Declarations« {#ND}Prep-Declarations[#Declarations2#, #Prefix, "Text"] » ⟫
 ;
 
 {#ND}Prep-Declarations[%rawDeclarations⟪ #SortAlternatives# ; #Declarations2# ⟫, #Prefix, #LastSort]

@@ -89,6 +89,12 @@ N-resolve[%rawDeclarations⟪ sort #SortName# #Repeat# #SortAbstraction# ; #Decl
 %rawDeclarations⟪ sort #SortName# #Repeat# #SortAbstraction# ; %Declarations« N-resolve[#Declarations#] » ⟫
 ;
 
+Resolve-Text:
+N-resolve[%rawDeclarations⟪ text #SortAlternatives# ; #Declarations# ⟫]
+→
+%rawDeclarations⟪ text #SortAlternatives# ; %Declarations« N-resolve[#Declarations#] » ⟫
+;
+
 Resolve-NakedAlternative:
 N-resolve[%rawDeclarations⟪ #SortAlternatives# ; #Declarations# ⟫]
 →
@@ -181,6 +187,14 @@ N-Declarations1[%rawDeclarations⟪ sort #SortName# #Repeat# #SortAbstraction# ;
 →
 {#ND}
 N-SortAbstraction[#SortAbstraction#, #ModuleName, SortNameWithRepeat1[SortName1[#SortName#], #Repeat#], #Names, ok¹ s ss.N-then-Declarations1[ok¹, #Declarations#, #ModuleName, s, ss, ok2¹ s2 ss2.#[ok2¹,s2,ss2]]]
+;
+
+Declarations-text:
+{#ND}
+N-Declarations1[%rawDeclarations⟪ text #SortAlternatives# ; #Declarations# ⟫, #ModuleName, #LastSortName, #Names, ok¹ s ss.#[ok¹,s,ss]]
+→
+{#ND}
+N-SortAbstraction[%rawSortAbstraction⟪ #SortAlternatives# ⟫, #ModuleName, "Text", #Names, ok¹ s ss.N-then-Declarations1[ok¹, #Declarations#, #ModuleName, s, ss, ok2¹ s2 ss2.#[ok2¹,s2,ss2]]]
 ;
 
 Declarations-alternatives:

@@ -2517,14 +2517,14 @@ net.sf.crsx.Sink N_RawPresorted_Type$WithEOF(net.sf.crsx.Sink sink, net.sf.crsx.
  *  |   <a href="#T_RAW_TOKEN_Int">RAW_TOKEN_Int</a><font color="red">$</font>   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  )?  <br>
  *  |   <a href="#T_RAW_TOKEN_Float">RAW_TOKEN_Float</a><font color="red">$</font>   (   <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  )?  <br>
  *  |   <a href="#T_RAW_TOKEN_Unif">RAW_TOKEN_Unif</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_COMMA">RAW_COMMA</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a>     <a href="#T_RAW_RPAREN">RAW_RPAREN</a>  <br>
- *  |   <a href="#T_RAW_TOKEN_Test">RAW_TOKEN_Test</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>    <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">^x_54</font>    <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a> <font color="red">[x_54]</font>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a> 
+ *  |   <a href="#T_RAW_TOKEN_Test">RAW_TOKEN_Test</a><font color="red">$</font>    <a href="#T_RAW_LPAREN">RAW_LPAREN</a>    <a href="#T_RAW_LBRACKET">RAW_LBRACKET</a>    <a href="#T_RAW_VARIABLE">RAW_VARIABLE</a><font color="red">^x_43</font>    <a href="#T_RAW_RBRACKET">RAW_RBRACKET</a>   <a href="#N_Raw_Type">&lang;Raw_Type&rang;</a> <font color="red">[x_43]</font>    <a href="#T_RAW_RPAREN">RAW_RPAREN</a> 
  */
 net.sf.crsx.Sink N_RawPresorted_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.ExtensibleMap<String, net.sf.crsx.Variable> env) :
 {
 	Token t = null;
+	net.sf.crsx.Variable v_x_43 = null;
 	String s_RAW_VARIABLE = null;
-	net.sf.crsx.Variable v_x_54 = null;
-	String s_x_54 = null;
+	String s_x_43 = null;
 	net.sf.crsx.Variable v_RAW_VARIABLE = null;
 }
 {
@@ -2826,8 +2826,8 @@ net.sf.crsx.Sink N_RawPresorted_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.Ext
 	 ( 
 	t=<T_RAW_VARIABLE>
 	{
-		s_x_54 = t.toString();
-		v_x_54 = sink.makeVariable(s_x_54,true);
+		s_x_43 = t.toString();
+		v_x_43 = sink.makeVariable(s_x_43,true);
 	}
 	 ) 
 	 ( 
@@ -2836,11 +2836,11 @@ net.sf.crsx.Sink N_RawPresorted_Type(net.sf.crsx.Sink sink, net.sf.crsx.util.Ext
 	 ( 
 	{
 		{
-			net.sf.crsx.Variable[] bs1 = {v_x_54};
+			net.sf.crsx.Variable[] bs1 = {v_x_43};
 			sink = sink .binds(bs1) ;
 		}
 	}
-	sink=N_Raw_Type(sink, env.extend(s_x_54, v_x_54))
+	sink=N_Raw_Type(sink, env.extend(s_x_43, v_x_43))
 	 ) 
 	 ( 
 	 <T_RAW_RPAREN>
