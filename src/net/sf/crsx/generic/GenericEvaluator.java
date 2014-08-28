@@ -1227,7 +1227,8 @@ class GenericEvaluator extends FixedGenericConstruction
                 {
                 	try
                 	{
-                		int index = Integer.decode(Util.symbol(sub(1)));
+                		int index=Double.valueOf(Util.symbol(sub(1))).intValue();
+                		//int index = Integer.decode(Util.symbol(sub(1)));
                 		Term list = sub(2);
                 		if (index < 0) break What;
                 		while (index-- > 0)
@@ -1259,7 +1260,8 @@ class GenericEvaluator extends FixedGenericConstruction
                     }                	
                 	try
                 	{
-                		int index = length - Integer.decode(Util.symbol(sub(1)));
+                		int index = length - Double.valueOf(Util.symbol(sub(1))).intValue();
+                		// int index = length - Integer.decode(Util.symbol(sub(1)));
                 		list = sub(2);
                 		if (index < 0) break What;
                 		while (--index > 0)
